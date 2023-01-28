@@ -8,9 +8,9 @@ import Homenavigat2 from '../Home_navigatconti2/Home-navigat2';
 
 const Auth_home2 =()=>{
   // const [Userlogin,setUserlogin]=useState(false)
-  const Userlogin=useSelector(state => state.authReducer.user);
+  const Userlogin=useSelector(state => state.authReducer.user?.token);
    
-
+  console.log(Userlogin,'..................')
 
 
 return(

@@ -1,11 +1,12 @@
 
-import { View ,Text,Image, TextInput,FlatList,StyleSheet,ScrollView,Keyboard, ImageBackground, TouchableOpacity,Modal,Pressable,Button} from 'react-native';
+import { View ,Text,Image, TextInput,FlatList,StyleSheet,ScrollView,
+  Keyboard, ImageBackground, TouchableOpacity,Modal,Pressable,Button,Dimensions, StatusBar} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React,{useState,useEffect,useRef} from 'react';
 import Icond from 'react-native-vector-icons/Ionicons';
 import Iconh from 'react-native-vector-icons/Feather';
 import Iconc from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icondil from 'react-native-vector-icons/AntDesign';
+import Iconacount from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icondrop from 'react-native-vector-icons/AntDesign';
 import Iconfont from 'react-native-vector-icons/FontAwesome';
 import {connect} from "react-redux"
@@ -27,20 +28,18 @@ import {
   UIActivityIndicator,
   WaveIndicator,
 } from 'react-native-indicators';
+import {useSelector} from "react-redux"
 
-// const DATA = [
-//   {
-//    img:"https://assets-news.housing.com/news/wp-content/uploads/2022/03/15102726/Vastu-for-flats-in-apartments.jpg",
-//   },
-//  {
-//    img:require('../assets/room.png'),
-//  },
-//  {
-//   img:require('../assets/balldin.jpg'),
-// },
-//  ];
+
+
 
 const Flatlist2 =(props)=>{
+
+
+  const All_data_response_user=useSelector(state => state.authReducer.user);
+   
+  console.log(All_data_response_user,'..................homeeeeeee.......////')
+   
 
   const logout=()=>{
     console.log("logOut")
@@ -93,8 +92,34 @@ const Flatlist2 =(props)=>{
         keyboardDidShowListener.remove();
       };
     }, [props]);
+  
 
+    const [helo,sethelo]=useState('')
+    useEffect(() => {
+      fetch(`https://flexrental.developer-um.xyz/api/listning`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then(async response => {
+        try {
+          const data = await response.json();
+          // const DATA = data
+         const res = data.listnings;
+         sethelo(res)
 
+          console.log(
+            'LISTINING DATA USE EFFECT IN "home_screen_1.js ',
+            res
+          );
+          // SetListinig_data(res)
+        } catch (error) {
+          console.log('Error happened here!');
+          console.error(error);
+        }
+      });
+    }, []);
 
 
 
@@ -119,7 +144,7 @@ const Flatlist2 =(props)=>{
         
         .then((responsejson)=>{
           setloder(true)
-            console.log(responsejson)
+            // console.log(responsejson)
             setFilterdatar(responsejson)
             setMasterdata(responsejson)
             setloder(false)
@@ -159,32 +184,48 @@ const Flatlist2 =(props)=>{
     },[])
 
 
-    const images =[ { uri :"https://assets-news.housing.com/news/wp-content/uploads/2022/03/15102726/Vastu-for-flats-in-apartments.jpg",
-
-     uri :"https://thumbor.forbes.com/thumbor/fit-in/x/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg",
-    uri:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhdXRpZnVsJTIwaG91c2V8ZW58MHx8MHx8&w=1000&q=80"
-    
-    
-    
-    },
-
-  
-  
-  
-  ]
    
 
       const ItemView=({item})=>{
+
+        console.log(item.cover_photo,".................")
         return(
           <>
-          <View style={styles.continarview}>
+          <View style={{ height:Dimensions.get("screen").height/2.3, width:"100%", borderWidth:1,alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor:"black"
+      //  backgroundColor: 'white',
+      // borderRadius:20
+    }}>
          
+         <View style={{ height:Dimensions.get("screen").height/4.2, width:Dimensions.get("window").width/1.3, borderWidth:1,alignItems: 'center',borderRadius:10}} >
+         <Image    
+    resizeMode="cover"
+    // source={images}
+    source={{uri:`https://flexrental.developer-um.xyz/storage/${item.cover_photo}`}}
+    // require("../assets/room.png")
+    style={{width:"100%",height:"100%",borderRadius:10}}
+    />
+          
+           
+         </View>
+         <View style={{ height:"45%", width:"90%", borderWidth:1,alignItems: 'center',justifyContent:"center",backgroundColor:"black"}} >
+          <Text style={{color:"white",fontWeight:"bold",fontSize:Dimensions.get("screen").height/50}}>I want to sell my house </Text>
+          <Text style={{color:"#00bfff",fontWeight:"bold",fontSize:Dimensions.get("screen").height/50}}>$30/Night </Text>
+          <Text style={{color:"gray",fontWeight:"bold",fontSize:Dimensions.get("screen").height/70}}>Karachi pakistan</Text>
+         
+         <TouchableOpacity
+         onPress={()=>{props.navigation.navigate("Imageview2",{item})}}
+          style={{width:"48%",height:"27%",backgroundColor:"#00bfff",margin:7,borderRadius:9,
+        justifyContent:"center",alignItems:"center"
+        }}>
+         <Text style={{color:"#ffffff",fontWeight:"bold",fontSize:Dimensions.get("screen").height/60}}>more information </Text>
+         </TouchableOpacity>
+
+</View>
   
-          {/* <Text style={{color:"#9f0500",fontWeight:"700"}}>{item.id}</Text>
-          <Text style={{color:"#9f0500",fontWeight:"700"}}>Price:{item.price}</Text>
-          <Text style={{color:"#9f0500",fontWeight:"700",fontSize:12}}>{item.title.toUpperCase()}</Text> */}
-          {/* <Pressable  style={styles.continarview}> */}
-         
+        
+{/*          
          <Pressable  style={{width:"100%",height:200,alignItems:"center",borderRadius:40,justifyContent:"space-between",
               shadowColor: '#000',
               shadowOffset: { width: 5, height: 5 },
@@ -255,7 +296,6 @@ const Flatlist2 =(props)=>{
       
       }}>
 
-       {/* <Iconmap name="map-marker" size={18} color="#00bfff" /> */}
        <Image 
        
        resizeMode="contain"
@@ -271,21 +311,9 @@ const Flatlist2 =(props)=>{
        </Pressable>
 
        </View>
- 
-
-
-
-
-
-  {/* <Text style={{color:"black",fontWeight:"700"}}>{item.id}</Text>
-          <Text style={{color:"black",fontWeight:"700"}}>Price:{item.price}</Text>
-          <Text style={{color:"black",fontWeight:"700",fontSize:12}}>{item.title.toUpperCase()}</Text> */}
-
-
 
                   </ImageBackground>
                   </Pressable>
-                  {/* </Pressable> */}
                
   
   <View     style={{width:"100%",height:"35%",justifyContent:"center",alignItems:"center",}}> 
@@ -324,7 +352,7 @@ const Flatlist2 =(props)=>{
     </TouchableOpacity>
   </View>
 
-  </View>
+  </View> */}
 
 
 
@@ -409,53 +437,85 @@ const Flatlist2 =(props)=>{
 
   
     const navigationView = () => (
-      <View style={{height:"100%",width:"95%",backgroundColor:"white",alignItems:"center"}}>
-        {/* <Iconc name="account-circle-outline" size={80} color="black"  style={{top:30}} /> */}
+      <View style={{height:"100%",width:"100%",backgroundColor:"#00bfff",alignItems:"center"}}>
+
+      <View style={{height:"40%",width:"100%",backgroundColor:"#00bfff",alignItems:"center",justifyContent:"center"}} >
+        <View style={{height:"55%",width:"55%",borderWidth:3,alignItems:"center",borderRadius:100,margin:10,borderColor:"#ffffff"}} >
         
-        <View   style={{width:"78%",height:"35%" ,justifyContent:"center",alignItems:"center",top:10}}>
-        
-       <TouchableOpacity  onPress={()=>{filessave(),setproimg(false)}}
-         style={{width:"100%",height:"100%" ,justifyContent:"center",alignItems:"center" }}
-       >
-        <TouchableOpacity  style={{width:"55%",height:"15%",backgroundColor:"gray" ,alignItems:"center",justifyContent:"center",top:13}}
-         onPress={()=>{setproimg(true)}}
-        
-        >
-          <Text style={{color:"white",fontWeight:"bold"}} > REMOVE PROFILE</Text></TouchableOpacity>
-        { proimg ?
-        <Image
-        
-        style={{width:"100%",height:"100%" ,justifyContent:"center",alignItems:"center",top:10}}
-
-        source={
-        //  {uri:saveimage}
-      require('../assets/profiles.jpg')
-
-        // proimg
-        }
-      
-      />:
-        <Image
-        
-        style={{width:"80%",height:"70%" ,justifyContent:"center",alignItems:"center",borderRadius:200,top:20}}
-        resizeMode="cover"
-
-        source={
-         {uri:saveimage}
-      // require('../assets/profiles.jpg')
-
-        // proimg
-        }
-      
-      />
-    }
-
-       </TouchableOpacity>
-
-       </View>
-       <TouchableOpacity >
-       <Text style={{fontWeight:"900",fontSize:25,color:"black",top:30}}> USER  PROFILE </Text>
-       </TouchableOpacity>
+        <Image    
+    resizeMode="contain"
+    // source={images}
+    source={require("../assets/user_profile.jpg")}
+    style={{width:"100%",height:"100%",borderRadius:100}}
+    />
+        </View>
+        <Text style={{color:"#ffffff",fontSize:Dimensions.get("screen").height/40,margin:10,fontWeight:"900"}}>Profile</Text>
+        </View>    
+        <View style={{height:"60%",width:"100%",backgroundColor:"#FFFFFF",alignItems:"center"}} >
+        <View style={{height:"20%",width:"100%",backgroundColor:"#FFFFFF",
+        alignItems:"center",justifyContent:"center",borderColor:"#00bfff"}}>
+           <View style={{height:"45%",width:"95%",backgroundColor:"#FFFFFF",justifyContent:"center"}}>
+             <Text style={{color:"black",fontSize:Dimensions.get("screen").height/55,fontWeight:"bold"}} >Name</Text>
+           </View>
+           <View style={{height:"40%",width:"95%",backgroundColor:"#FFFFFF",alignItems:"center",justifyContent:"center",
+          flexDirection:"row",justifyContent:"space-between"
+          }}>
+           <Text style={{color:"black",fontSize:Dimensions.get("screen").height/65,fontWeight:"bold"}} >{All_data_response_user.user.first_name}</Text>
+           <Iconacount name="account" size={Dimensions.get("screen").height/32} color="#00bfff" />
+         </View>
+        </View>
+        <View style={{height:"20%",width:"100%",backgroundColor:"#FFFFFF",
+        alignItems:"center",justifyContent:"center",borderColor:"#00bfff"}}>
+           <View style={{height:"45%",width:"95%",backgroundColor:"#FFFFFF",justifyContent:"center"}}>
+             <Text style={{color:"black",fontSize:Dimensions.get("screen").height/55,fontWeight:"bold"}} >Email</Text>
+           </View>
+           <View style={{height:"40%",width:"95%",backgroundColor:"#FFFFFF",alignItems:"center",justifyContent:"center",
+          flexDirection:"row",justifyContent:"space-between"
+          }}>
+           <Text style={{color:"black",fontSize:Dimensions.get("screen").height/65,fontWeight:"bold"}} >{All_data_response_user.user.email}</Text>
+           <Iconacount name="email" size={Dimensions.get("screen").height/35} color="#00bfff" />
+         </View>
+        </View>
+        <View style={{height:"20%",width:"100%",backgroundColor:"#FFFFFF",
+        alignItems:"center",justifyContent:"center",borderColor:"#00bfff"}}>
+           <View style={{height:"45%",width:"95%",backgroundColor:"#FFFFFF",justifyContent:"center"}}>
+             <Text style={{color:"black",fontSize:Dimensions.get("screen").height/55,fontWeight:"bold"}} >Number</Text>
+           </View>
+           <View style={{height:"40%",width:"95%",backgroundColor:"#FFFFFF",alignItems:"center",justifyContent:"center",
+          flexDirection:"row",justifyContent:"space-between"
+          }}>
+           <Text style={{color:"black",fontSize:Dimensions.get("screen").height/65,fontWeight:"bold"}} >{All_data_response_user.user.phone}</Text>
+           <Iconacount name="cellphone-check" size={Dimensions.get("screen").height/35} color="#00bfff" />
+         </View>
+        </View>
+        <View style={{height:"20%",width:"100%",backgroundColor:"#FFFFFF",
+        alignItems:"center",justifyContent:"center",borderColor:"#00bfff"}}>
+           <View style={{height:"45%",width:"95%",backgroundColor:"#FFFFFF",justifyContent:"center"}}>
+             <Text style={{color:"black",fontSize:Dimensions.get("screen").height/55,fontWeight:"bold"}} >Flex_rental</Text>
+           </View>
+           <View style={{height:"40%",width:"95%",backgroundColor:"#FFFFFF",alignItems:"center",justifyContent:"center",
+          flexDirection:"row",justifyContent:"space-between"
+          }}>
+           <Text style={{color:"black",fontSize:Dimensions.get("screen").height/65,fontWeight:"bold"}} >Profile</Text>
+           <Iconacount name="professional-hexagon" size={Dimensions.get("screen").height/35} color="#00bfff" />
+         </View>
+        </View>
+        <View style={{height:"20%",width:"100%",backgroundColor:"#FFFFFF",
+        alignItems:"center",justifyContent:"center",borderColor:"#00bfff"}}>
+           <View style={{height:"45%",width:"95%",backgroundColor:"#FFFFFF",justifyContent:"center"}}>
+             <Text style={{color:"black",fontSize:Dimensions.get("screen").height/55,fontWeight:"bold"}} >Flex_rental</Text>
+           </View>
+           <View style={{height:"40%",width:"95%",backgroundColor:"#FFFFFF",alignItems:"center",justifyContent:"center",
+          flexDirection:"row",justifyContent:"space-between"
+          }}>
+            <TouchableOpacity onPress={()=>{logout()}}>
+           <Text style={{color:"black",fontSize:Dimensions.get("screen").height/65,fontWeight:"bold"}} >LogOut</Text>
+           </TouchableOpacity>
+           <Iconacount name="logout" size={Dimensions.get("screen").height/35} color="#00bfff" />
+         </View>
+        </View>
+        </View>      
+       
       </View>
     );
 
@@ -470,41 +530,33 @@ return(
     
     
     >
-    <ScrollView  contentContainerStyle={{justifyContent:"center",alignItems:"center",flex:1}} scrollEnabled={true}>
-
-    <View  style={{width:"100%",height:"100%",backgroundColor:"white",alignItems:"center"}}>
-    <View  style={{width:"92%",height:50,backgroundColor:"white",justifyContent:"center",flexDirection:"row",alignItems:"center"}} >
+    <ScrollView  contentContainerStyle={{justifyContent:"center",alignItems:"center",flex:1,backgroundColor: 'black',}} scrollEnabled={true}>
+    <StatusBar  backgroundColor={"black"}/>
+    <View  style={{width:"100%",height:"100%",backgroundColor:"black",alignItems:"center"}}>
+    <View  style={{width:"92%",height:50,backgroundColor:"black",justifyContent:"center",flexDirection:"row",alignItems:"center"}} >
     
-    <View style={{width:"78%",height:"100%",backgroundColor:"white",flexDirection:"row"}}>
+    <View style={{width:"78%",height:"100%",backgroundColor:"black",flexDirection:"row"}}>
 
-    <View style={{width:"20%",height:"100%",backgroundColor:"white",justifyContent:"center",alignItems:"center"}} >
-        <Image  
-        resizeMode="contain"
-        // source={images}
-        source={require("../assets/Splash_logo.png")}
-        style={{width:"83%",height:"76%"}}
-        
-        />
+    <View style={{width:"28%",height:"100%",backgroundColor:"black",justifyContent:"center",alignItems:"center"}} >
+    <Image    
+    resizeMode="contain"
+    // source={images}
+    source={require("../assets/new_flex_rental_icon.png")}
+    style={{width:"100%",height:"100%"}}
+    />
          </View>
-         <View style={{width:"40%",height:"100%",backgroundColor:"white",flexDirection:"row",justifyContent:"center",alignItems:"center",}} >
-        <Text  style={{fontWeight:"900" ,color:"black",fontSize:17}}>Flex    </Text>
-        <Text  style={{ color:"black",fontSize:15}}> Rentals</Text>
+         <View style={{width:"40%",height:"100%",backgroundColor:"black",flexDirection:"row",justifyContent:"center",alignItems:"center",}} >
+      
          </View>
 
     </View>
     
     
-    <View style={{width:"22%",height:"100%",backgroundColor:"white",justifyContent:"center",justifyContent:"flex-end",flexDirection:"row",}}>
-{/*      
-    <Image  
-        resizeMode="contain"
-        // source={images}
-        source={require("../assets/veiw.png")}
-        style={{width:44,height:44,borderRadius:100,top:4}}
-        
-        /> */}
+    <View style={{width:"22%",height:"100%",backgroundColor:"black",justifyContent:"center",justifyContent:"flex-end",
+    flexDirection:"row",alignItems:"center"}}>
+
         <TouchableOpacity    onPress={() => drawer.current.openDrawer()}>
-        <Icondrop name="bars" size={37} color="#00bfff" />
+        <Icondrop name="bars" size={Dimensions.get("screen").height/28} color="#00bfff" />
         
         </TouchableOpacity>
 
@@ -515,21 +567,22 @@ return(
     
      
       
-   <View  style={{width:"92%",height:60,backgroundColor:"white",justifyContent:"center",alignItems:"center",}} >
+   <View  style={{width:"92%",height:60,backgroundColor:"black",justifyContent:"center",alignItems:"center",}} >
    {/* <View style={{width:"100%",height:10}}> */}
 
 
 
 {/* </View> */}
-   <View style={{width:"95%",height:"55%",backgroundColor:"white",justifyContent:"center",flexDirection:"row",alignItems:"center",borderWidth:0.5,
-   borderLeftColor:"white",borderRightColor:"white",borderTopColor:"white",
+   <View style={{width:"95%",height:"63%",backgroundColor:"white",justifyContent:"center",flexDirection:"row",alignItems:"center",borderWidth:0.5,
+   borderLeftColor:"black",borderRightColor:"black",borderTopColor:"black",borderRadius:5
     
 
 }} >
 
    {/* <ion-icon name="locate"></ion-icon> */}
    <Icon name="my-location" size={20} color="#00bfff" />
-   <View style={{width:"80%",height:30,backgroundColor:"white",justifyContent:"center",borderLeftColor:"white",borderRightColor:"white",
+   <View style={{width:"75%",height:Dimensions.get("screen").height/32,backgroundColor:"white",
+   justifyContent:"center",borderLeftColor:"white",borderRightColor:"whit",
    borderTopColor:"white"
 
 
@@ -558,7 +611,7 @@ return(
 
    
    <FlatList
-       data={Filterdata}
+       data={helo}
        keyExtractor={(item, index) => index.toString()}
        style={{height:100,width:320,}}
       //  style={{justifyContent:"center"}}
@@ -783,9 +836,9 @@ const styles = StyleSheet.create({
       
     },
     continarview:{
-      height:310,
+      // height:,
       width:"100%",
-      // borderWidth:1,
+      borderWidth:1,
 
       alignItems: 'center',
       // justifyContent: 'center',
@@ -822,3 +875,54 @@ const styles = StyleSheet.create({
     removeUser
   }
   export default connect(mapStateToProps,mapDispatchToProps) (Flatlist2);
+
+
+
+
+
+
+  // drawer work
+  {/* <View   style={{width:"78%",height:"35%" ,justifyContent:"center",alignItems:"center",top:10}}>
+        
+       <TouchableOpacity  onPress={()=>{filessave(),setproimg(false)}}
+         style={{width:"100%",height:"100%" ,justifyContent:"center",alignItems:"center" }}
+       >
+        <TouchableOpacity  style={{width:"55%",height:"15%",backgroundColor:"gray" ,alignItems:"center",justifyContent:"center",top:13}}
+         onPress={()=>{setproimg(true)}}
+        
+        >
+          <Text style={{color:"white",fontWeight:"bold"}} > REMOVE PROFILE</Text></TouchableOpacity>
+        { proimg ?
+        <Image
+        
+        style={{width:"100%",height:"100%" ,justifyContent:"center",alignItems:"center",top:10}}
+
+        source={
+        //  {uri:saveimage}
+      require('../assets/profiles.jpg')
+
+        // proimg
+        }
+      
+      />:
+        <Image
+        
+        style={{width:"80%",height:"70%" ,justifyContent:"center",alignItems:"center",borderRadius:200,top:20}}
+        resizeMode="cover"
+
+        source={
+         {uri:saveimage}
+      // require('../assets/profiles.jpg')
+
+        // proimg
+        }
+      
+      />
+    }
+
+       </TouchableOpacity>
+
+       </View>
+       <TouchableOpacity >
+       <Text style={{fontWeight:"900",fontSize:25,color:"black",top:30}}> USER  PROFILE </Text>
+       </TouchableOpacity> */}

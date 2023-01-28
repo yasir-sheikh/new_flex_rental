@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View ,Image,ImageBackground, TouchableOpacity, ScrollView,Dimensions, Settings,dotActive,FlatList,Modal, Pressable} from 'react-native';
-import React,{useState} from 'react';
+import { StyleSheet, Text, View ,Image,ImageBackground, TouchableOpacity, ScrollView,Dimensions, Settings,dotActive,FlatList,Modal, Pressable, StatusBar} from 'react-native';
+import React,{useState,useEffect} from 'react';
 import {FlatListSlider} from 'react-native-flatlist-slider';
  import Icon from 'react-native-vector-icons/Ionicons';
 import Iconf from 'react-native-vector-icons/FontAwesome5';
+import Icondot from 'react-native-vector-icons/Octicons';
 import Iconm from 'react-native-vector-icons/MaterialCommunityIcons';
 import CalendarPicker from 'react-native-calendar-picker';
 import SelectList from 'react-native-dropdown-select-list';
 import * as Animatable from 'react-native-animatable';
+import Image_view_flatlist from './Image_view_flatlst';
 
 const DATA = [
   {
@@ -19,6 +21,49 @@ const DATA = [
   img:require('../assets/balldin.jpg'),
 },
  ];
+ const text_objact = [
+  {
+    "userId": 1,
+    "id": 1,
+    "title": "sunt aut facere ",
+    "body": " molestiae ut ut ",
+    "pro": " molestiae ut ut "
+  },
+  {  
+    "userId": 1,
+    "id": 2,
+    "title": "qui est esse",
+    "body": "est rerum ",
+    "pro": "est thns "
+  },
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "ea mole",
+    "body": "et iusto ",
+    "pro": "et iusto "
+  },
+  {
+    "userId": 1,
+    "id": 4,
+    "title": "eum et",
+    "body": "ullam ",
+    "uk": "ukk "
+  },
+  {
+    "userId": 1,
+    "id": 5,
+    "title": "nesciunt ",
+    "body": "dolor ",
+    "uk": "dolor "
+  },
+  {
+    "userId": 1,
+    "id": 6,
+    "title": "dolorem eum magni eos aperiam quia",
+    "body": " doloremque molestiae"
+  },
+ ]
 const WIDTH=Dimensions.get("screen").width;
 const screen = Dimensions.get("screen");
 
@@ -35,8 +80,10 @@ const screen = Dimensions.get("screen");
     ];
 
 
-function Imageview2(props) {
-  const [imgActive,setimgActive]=useState(0)
+function Imageview2({route,navigation}) {
+  console.log(route.params.item,'//////////')
+  // const item = props.route.params;
+  const [imgActive,setimgActive]=useState()
 
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
@@ -44,6 +91,29 @@ function Imageview2(props) {
     const [checkAvail, setCheckAvalmodal] = useState({open: false});
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
     const [selected, setSelected] = useState('');
+
+    const [Listning_data, SetListinig_data] = useState('');
+    useEffect(() => {
+      fetch(`https://flexrental.developer-um.xyz/api/listning`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then(async response => {
+        try {
+          const data = await response.json();
+          // const DATA = data
+       
+          // SetListinig_data(item)
+        } catch (error) {
+          console.log('Error happened here!');
+          console.error(error);
+        }
+      });
+    }, []);
+
+    
   const ImagesOK = () => {
     return (
       <>
@@ -80,10 +150,12 @@ function Imageview2(props) {
   return (
    <>
    
-
+<ScrollView   
+ contentContainerStyle={{backgroundColor:"black"}}
+>
   <View style={styles.container}>
   
-
+      <StatusBar  translucent backgroundColor={"transparent"}/>
           <View style={{width:WIDTH, height:Dimensions.get("screen").height/2.2,}}>
          
 
@@ -98,16 +170,6 @@ function Imageview2(props) {
           onPress={item => alert(JSON.stringify(item))}
           contentContainerStyle={{
             alignItems:"center"
-            // borderWidth:1,
-            // borderBottomLeftRadius:50,
-            // borderBottomRightRadius: 50,
-            // shadowOpacity: 8,
-            // shadowColor: 'black',
-            // shadowOpacity: 0.26,
-            // shadowOffset: {width: 8, height: 2},
-            // shadowRadius: 50,
-            // elevation: 5,
-            // backgroundColor: 'white',
             
           }}
         />
@@ -120,24 +182,20 @@ function Imageview2(props) {
           
      <View
           style={{
-            height: '13%',
+            height: Dimensions.get("screen").height/4.5 ,
             width: '100%',
             position: 'absolute',
-            // flexDirection: 'row',
-            // justifyContent: "space-between",
+            // borderWidth:1,
             alignItems: 'center',
             justifyContent:"center",
-            // borderWidth:1
           }}>
             <View 
                style={{
-                height: '90%',
+                height: Dimensions.get("screen").height/9,
                 width: '90%',
-                // position: 'absolute',
                 flexDirection: 'row',
                 justifyContent: "space-between",
-                alignItems: 'center',
-                // justifyContent:"center",
+               
                 // borderWidth:1
               }} >
           <Icon
@@ -153,6 +211,7 @@ function Imageview2(props) {
               flexDirection: 'row',
               width: '25%',
               justifyContent: "space-between",
+              // borderWidth:1
             }}>
             <Icon name="heart-outline" color={'white'} size={WIDTH / 12} />
             <Iconf name="share-square" color={'white'} size={WIDTH / 14} />
@@ -175,7 +234,7 @@ function Imageview2(props) {
         }}>
         <View
           style={{
-            height: '13%',
+            height: Dimensions.get("screen").height/11,
             width: '100%',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -187,6 +246,7 @@ function Imageview2(props) {
               height: '100%',
               width: '40%',
               justifyContent: 'space-around',
+              // borderWidth:1
             }}>
             <Text
               style={{
@@ -201,7 +261,7 @@ function Imageview2(props) {
             </Text>
           </View>
           <TouchableOpacity  
-          onPress={()=>{props.navigation.navigate("Map")}}
+          onPress={()=>{navigation.navigate("Map")}}
           >
             <Text
               style={{
@@ -215,7 +275,7 @@ function Imageview2(props) {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{height: '20%', width: '100%', justifyContent: 'center',}}>
+        <View style={{height: Dimensions.get("screen").height/13, width: '100%', justifyContent: 'center'}}>
           <FlatList
             // showsVerticalScrollIndicator={true}
             data={data_2}
@@ -243,6 +303,7 @@ function Imageview2(props) {
                   elevation: 5,
                   margin: 5,
                   backgroundColor: 'white',
+                  // borderWidth:1
                 }}>
                 <Iconm name={item.img} size={WIDTH / 10} color={'black'} />
                 <Text
@@ -258,118 +319,12 @@ function Imageview2(props) {
           />
         </View>
 
-        <View style={{height: '48%', width: '100%', paddingHorizontal: 20,}}>
-          <ScrollView    contentContainerStyle={{height: '100%', width: '100%',justifyContent:"center"}}>
-            <Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
-              Features
-            </Text>
-            <View>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: WIDTH / 30,
-                  color: 'black',
-                  opacity: 0.7,
-                }}>
-                4 bad rooms
-              </Text>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: WIDTH / 30,
-                  color: 'black',
-                  opacity: 0.7,
-                }}>
-                3 launch
-              </Text>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: WIDTH / 30,
-                  color: 'black',
-                  opacity: 0.7,
-                }}>
-                1 drawing room
-              </Text>
-            </View>
-            <View>
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: WIDTH / 28,
-                  color: 'black',
-                }}>
-                Garden and car parking
-              </Text>
-              <Text
-                style={{color: 'black', fontSize: WIDTH / 35, opacity: 0.6}}>
-                Garden and car parking Garden and car parking Garden and car
-                parking Garden and car parking Garden and car parking Garden and
-                car parking Garden and car parking Garden and car parking Garden
-                and car parking Garden and car parking z
-              </Text>
-            </View>
-          </ScrollView>
-        </View>
-        <View
-          style={{
-            height: '17.8%',
-            width: '100%',
-            flexDirection: 'row',
-            alignItems: 'center',
-            shadowOpacity: 3,
-            shadowColor: 'black',
-            shadowOpacity: 0.26,
-            shadowOffset: {width: 6, height: 6},
-            shadowRadius: 10,
-            elevation: 20,
-            // margin: 5,
-            backgroundColor: 'white',
-            // borderWidth:1
-          }}>
-          <View
-            style={{
-              width: '60%',
-              height: '100%',
-              borderBottomEndRadius: WIDTH / 4,
-              backgroundColor: "#00bfff",
-              alignItems: 'center',
-              justifyContent: 'center',
-              shadowOpacity: 3,
-              shadowColor: 'black',
-              shadowOpacity: 0.26,
-              shadowOffset: {width: 4, height: 2},
-              shadowRadius: 10,
-              elevation: 5,
-              // margin: 5,
-              // backgroundColor: 'white',
-            }}>
-            <Text
-              style={{
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: WIDTH / 16,
-              }}>
-              $120/Night
-            </Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              setCheckAvalmodal({open: true});
-            }}>
-            <Text
-              style={{
-                fontSize: WIDTH / 20,
-                color: 'black',
-                textAlign: 'center',
-                fontWeight: 'bold',
-              }}>
-              Check Avaibility
-            </Text>
-          </TouchableOpacity>
-        </View>
+       
+        <Image_view_flatlist    item={route.params.item}/>
+       
+        
       </View>
-
+    
       <Modal
         visible={checkAvail.open}
         transparent
@@ -688,7 +643,66 @@ function Imageview2(props) {
 
       
   </View>
-   
+   </ScrollView>
+
+
+   <View
+          style={{
+            height: '9%',
+            width: '100%',
+            flexDirection: 'row',
+            alignItems: 'center',
+            shadowOpacity: 3,
+            shadowColor: 'black',
+            shadowOpacity: 0.26,
+            shadowOffset: {width: 6, height: 6},
+            shadowRadius: 10,
+            elevation: 20,
+            // margin: 5,
+            backgroundColor: 'white',
+            // borderWidth:1
+          }}>
+          <View
+            style={{
+              width: '60%',
+              height: '100%',
+              borderBottomEndRadius: WIDTH / 4,
+              backgroundColor: "#00bfff",
+              alignItems: 'center',
+              justifyContent: 'center',
+              shadowOpacity: 3,
+              shadowColor: 'black',
+              shadowOpacity: 0.26,
+              shadowOffset: {width: 4, height: 2},
+              shadowRadius: 10,
+              elevation: 5,
+              // margin: 5,
+              // backgroundColor: 'white',
+            }}>
+            <Text
+              style={{
+                color: 'white',
+                fontWeight: 'bold',
+                fontSize: WIDTH / 16,
+              }}>
+              $120/Night
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              setCheckAvalmodal({open: true});
+            }}>
+            <Text
+              style={{
+                fontSize: WIDTH / 20,
+                color: 'black',
+                textAlign: 'center',
+                fontWeight: 'bold',
+              }}>
+              Check Avaibility
+            </Text>
+          </TouchableOpacity>
+        </View>
    
    </>
   );
@@ -703,10 +717,10 @@ function Imageview2(props) {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     width:"100%",
-    height:"100%"
-    // backgroundColor: '#ffc107',
+    height:"100%",
+    backgroundColor: 'wh',
     // alignItems: 'center',
     // justifyContent: 'center',
   },

@@ -1,9 +1,20 @@
-import { View ,Text, TouchableOpacity, ImageBackground,ScrollView,Keyboard, Dimensions} from "react-native"
+import { View ,Text, TouchableOpacity, ImageBackground,ScrollView,Keyboard, Dimensions,Image} from "react-native"
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput } from 'react-native-paper';
 import { useState,useEffect } from "react";
 import CheckBox from '@react-native-community/checkbox';
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators';
 
 const SignUp2 =(props)=>{
 
@@ -12,25 +23,30 @@ const SignUp2 =(props)=>{
     const [onpen_eyes,setopen_eyes]= useState(true)
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+    const [Loders, setLoders] = useState(false)
 
 
 
     const [email, setemail] = useState('');
     const [Name, setName] = useState('');
     const [Pass, setPass] = useState('');
+    const [Num, setNum] = useState('');
     const [LastName, setLastName] = useState('');
    
    //  const [isEnabled, SetIsEnabled] = useState(true);
     const Form_Handle = async () => {
      //  setisloading(true);
+     setLoders(true)
       console.log('Login');
-      const URL = 'https://wigg.developer-um.xyz/api/signup';
+      const URL = `https://flexrental.developer-um.xyz/api/signup`;
       const formdata = new FormData();
       formdata.append('email', email);
       formdata.append('first_name', Name);
       formdata.append('last_name', LastName);
       formdata.append('password', Pass);
-   
+      formdata.append('phone', Num);
+      formdata.append('role', "customer");
+           console.log(formdata,'................')
       await fetch(URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -43,18 +59,19 @@ const SignUp2 =(props)=>{
         .then(response => response.json())
         .then(result => {
           console.log('User in DB created', result);
-          if (result.message == 'User Successfully Added') {
-            // props.Updated_Land_Owners(Math.random())
-            props.navigation.navigate('Login2');
-           //  setisloading(false);
-            console.log(result);
-          } else {
-            alert(result.errors.email);
-            // setisloading(false);
-            console.log('error==============', result.errors.email);
+          setLoders(false)
+          if(result?.status==true){
+            alert("user created successfully")
+            setLoders(false)
+            props.navigation.navigate('Login');
           }
+          else{
+            alert("this email already exist")
+          }
+        
         })
-        .catch(error => console.log('error', error));
+        .catch(error => setLoders(false),
+          console.log('error', error));
     };
    
 
@@ -68,12 +85,14 @@ const SignUp2 =(props)=>{
         'keyboardDidShow',
         () => {
           setKeyboardVisible(true);
+          setscrol(0)
         },
       );
       const keyboardDidHideListener = Keyboard.addListener(
         'keyboardDidHide',
         () => {
           setKeyboardVisible(false);
+          setscrol(1)
         },
       );
       // if (! isKeyboardVisible) {
@@ -90,39 +109,48 @@ const SignUp2 =(props)=>{
       };
     }, [props]);
 
-const images = { uri :"https://assets-news.housing.com/news/wp-content/uploads/2022/03/15102726/Vastu-for-flats-in-apartments.jpg"}
+const [scrol,setscrol]=useState(1)
 
 return(
 
 
 
   
- <ScrollView   contentContainerStyle={{flex:1}} scrollEnabled={true} > 
+ <ScrollView   contentContainerStyle={{flex:scrol,backgroundColor:"black"}} scrollEnabled={true} > 
 
-<View   style={{backgroundColor:"white",alignItems:"center",justifyContent:"center",width:"100%",height:"100%"}}>
+<View   style={{backgroundColor:"black",alignItems:"center",justifyContent:"center",width:"100%",height:"100%"}}>
 
-  <View style={{width:"90%",height:Dimensions.get("screen").height/5.9,justifyContent:"center",alignItems:"center",}}>
-    <View style={{width:"90%",height:"40%",justifyContent:"center",alignItems:"center"}}> 
-    <Icon name="account-multiple-plus-outline" size={40} color="#00bfff" />
-
+  <View style={{width:"90%",height:Dimensions.get("screen").height/7,justifyContent:"center",alignItems:"center",
+  borderWidth:1,backgroundColor:"black"}}>
+    <View style={{width:"60%",height:"80%",justifyContent:"center",alignItems:"center",borderWidth:1,backgroundColor:"black"}}> 
+    {/* <Icon name="account-multiple-plus-outline" size={40} color="#00bfff" /> */}
+    {
+    Loders ?
+     <SkypeIndicator    color='white'  />:
+    <Image    
+    resizeMode="contain"
+    // source={images}
+    source={require("../assets/new_flex_rental_icon.png")}
+    style={{width:"100%",height:"100%"}}
+    />
+    }
     </View>
 
-    <View style={{width:"90%",height:"40%",justifyContent:"center",alignItems:"center"}}> 
-    <Text style={{fontWeight:"bold",fontSize:23,color:"#00bfff"}}>Create Acount</Text>
-
-    </View>
-
+  
   </View>
 
      
-     <View  style={{width:"90%",height:Dimensions.get("screen").height/2.1, justifyContent:"center",alignItems:"center",}}> 
-      <View  style={{width:"90%",height:10,justifyContent:"center",}} > 
+     <View  style={{width:"90%",height:Dimensions.get("screen").height/1.9, justifyContent:"center",alignItems:"center",
+     }}> 
      
-       
+    
+
+     
+  <Text style={{fontSize:Dimensions.get("screen").height/50,color:"white",fontWeight:"bold"}}>Create account</Text>
+
       
-      </View>
+
          
-         <View  style={{width:"90%",height:"20%",justifyContent:"center", }} > 
      <TextInput 
      
      mode="outlined"
@@ -130,16 +158,11 @@ return(
      label="Name"
     //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setName(textdata)}}
-     placeholder=" Enter Your Name" style={{height:"80%",width:"100%"}} />
+     placeholder=" Enter Your Name" style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
       
-      </View>
 
-      <View  style={{width:"90%",height:5,justifyContent:"center",}} > 
-     
       
-     </View>
 
-<View  style={{width:"90%",height:"20%",justifyContent:"center",}} > 
      <TextInput 
      
      mode="outlined"
@@ -147,16 +170,11 @@ return(
      label="Last NAME"
     //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setLastName(textdata)}}
-     placeholder=" Enter Your LastName" style={{height:"80%",width:"100%"}} />
+     placeholder=" Enter Your LastName" style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
       
-      </View>
 
-      <View  style={{width:"90%",height:5,justifyContent:"center",}} > 
      
-      
-     </View>
 
-      <View  style={{width:"90%",height:"20%",justifyContent:"center", }} > 
      <TextInput 
      
      mode="outlined"
@@ -164,48 +182,38 @@ return(
      label="Email"
     //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setemail(textdata)}}
-     placeholder=" Enter Your Password" style={{height:"80%",width:"100%"}} />
+     placeholder=" Enter Your Password" style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
       
-      </View>
-      <View  style={{width:"90%",height:5,justifyContent:"center"}} > 
      
-      
-     </View>
-      {/* <View  style={{width:"90%",height:"8%",justifyContent:"center",}} > 
-    
-      
-      </View> */}
-      <View  style={{width:"90%",height:"20%",justifyContent:"center", flexDirection:"row",alignItems:"center"}} > 
-
-      <View style={{width:"100%",height:"90%",justifyContent:"center", flexDirection:"row",alignItems:"center", }}>
+     
         
+      <TextInput 
+       mode="outlined"
+      //  value={textpass}
+       label="Number"
+       onChangeText={(textdata)=>{setNum(textdata)}}
+      placeholder="Enter Your number"  secureTextEntry={onpen_eyes} style={{height:Dimensions.get("screen").height/17
+      ,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
+
       <TextInput 
        mode="outlined"
       //  value={textpass}
        label="Password"
        onChangeText={(textdata)=>{setPass(textdata)}}
        right={<TextInput.Icon onPress={()=>{setonpen_eyes(false)}}   icon="eye" />}
-      placeholder="Enter Your Password"  secureTextEntry={onpen_eyes} style={{height:"80%",width:"100%",}} />
-
-      {/* <Icon name="eye-off" size={20} color="#c0c0c0" /> */}
-
-    
-      </View>
-      </View>
+      placeholder="Enter Your Password"  secureTextEntry={onpen_eyes} style={{height:Dimensions.get("screen").height/17
+      ,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
          
      </View>
 
-{/* {!isKeyboardVisible? <TouchableOpacity style={{width:"100%",height:"23%",justifyContent:"center",alignItems:"center",}}   
-          onPress={!isKeyboardVisible ? () => { props.navigation.navigate('Login') } : null}
-     
-     > */}
 
-{ ! isKeyboardVisible ?  <View  style={{width:"100%",height:"23%",justifyContent:"center",alignItems:"center",}} > 
+
+  <View  style={{width:"100%",height:"23%",justifyContent:"center",alignItems:"center",backgroundColor:"black"}} > 
 
      <ImageBackground
 
      resizeMode="cover"
-     source={require("../assets/Login_main.png")}
+     source={require("../assets/login_last.png")}
      style={{width:"100%",height:"100%",alignItems:"center",}}
      
      >
@@ -219,22 +227,23 @@ return(
     value={toggleCheckBox}
     onValueChange={(newValue) => setToggleCheckBox(newValue)}
     box
-    // tintColors="black"
+    tintColors="white"
     
   />
   
-  <Text style={{color:"black",fontSize:12,fontWeight:"bold"}}>I agree to & Conditions</Text>
+  <Text style={{color:"white",fontSize:12,fontWeight:"bold"}}>I agree to & Conditions</Text>
 
 </View>
 
  
 <View  style={{width:80,height:100,bottom:32,justifyContent:"center",alignItems:"center",}}>
 
+
  <TouchableOpacity   style={{width:60,height:60,justifyContent:"center",alignItems:"center",
 }}
 onPress={()=>{Form_Handle()}}
 >
-<View style={{width:60,height:60,backgroundColor:"#00bfff",justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
+<View style={{width:60,height:60,backgroundColor:"#ffffff",justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
 shadowColor: '#000',
 shadowOffset: { width: 3, height: 1 },
 shadowOpacity: 0.8,
@@ -249,7 +258,7 @@ elevation: 5
 
 </View>
 </TouchableOpacity>
-<Text style={{color:"black" ,fontWeight:"bold"}}>
+<Text style={{color:"white" ,fontWeight:"bold"}}>
   Sign Up
 </Text>
 
@@ -260,7 +269,7 @@ elevation: 5
 
      </ImageBackground>
 
-    </View>: null}
+    </View>
     
     {/* </TouchableOpacity>:null} */}
 

@@ -1,5 +1,5 @@
 
-import { View ,Text, TouchableOpacity, ImageBackground,ScrollView,Keyboard,Dimensions} from "react-native"
+import { View ,Text, TouchableOpacity, ImageBackground,ScrollView,Keyboard,Dimensions,Image, StatusBar} from "react-native"
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput } from 'react-native-paper';
@@ -41,12 +41,16 @@ const Login2 =(Props)=>{
         'keyboardDidShow',
         () => {
           setKeyboardVisible(true);
+       setscrol(0)
+
         },
       );
       const keyboardDidHideListener = Keyboard.addListener(
         'keyboardDidHide',
         () => {
           setKeyboardVisible(false);
+       setscrol(1)
+
         },
       );
       // if (! isKeyboardVisible) {
@@ -70,14 +74,17 @@ const Login2 =(Props)=>{
     const[data_save,setdata_save]=useState("")
 
     const logins = () => {
-    let formData = new FormData()
+    setLoders(true)
+
+    const formData = new FormData()
     formData.append("email",email)
     formData.append("password",password)
-    setLoders(true)
+    formData.append('role', "customer");
        
-    fetch('https://wigg.developer-um.xyz/api/login',{
+    fetch(`https://flexrental.developer-um.xyz/api/login`,{
   
         method: 'POST',
+        // mode: 'no-cors',
         headers: {  "Content-Type": "multipart/form-data",
         "Accept": "application/json"
         
@@ -85,76 +92,79 @@ const Login2 =(Props)=>{
     },
         body: formData
     })
+    
     .then(Response=> Response.json())
     // setdata_save( Response.json())
     .then(json=>{
         console.log("heloojson",json)
   
-        setdata_save(json)
-        // console.log(data_save,"hhhhhh>>>>>>>>>>>>>>>>>>>>>")
-        if(json.status =="false"){
-           
-            alert("hhh")
-           
-        }else{
-           
+        // setdata_save(json)
+        setLoders(false)
+        if(json.status==false){
+          alert(json?.message)
         }
+         
+        console.log(json.token,"tokenn")
         
-        dispatch(updateUser(json.token))
+        dispatch(updateUser(json))
         setLoders(false)
     })
   
     .catch(e=>{
-        alert("Login Error")
+        // alert(e,"Login Error")
         
-        setLoders(true)
+        // setLoders(true)
     })
   
-    console.log(data_save,"datattttttttttt")
+    // console.log(data_save,"datattttttttttt")
       
      };
-  
-// const images = { uri :"https://assets-news.housing.com/news/wp-content/uploads/2022/03/15102726/Vastu-for-flats-in-apartments.jpg"}
+     const [scrol,setscrol]=useState(1)
+
 
 return(
-  <ScrollView   contentContainerStyle={{justifyContent:"center",alignItems:"center",width:"100%",height:"100%"}}
+  <ScrollView   
+  scrollEnabled={true}
+  contentContainerStyle={{backgroundColor:"black",flex:scrol}}
 
  >
-<View   style={{backgroundColor:"white",alignItems:"center",justifyContent:"center",width:"100%",height:"100%"}}>
+  <StatusBar backgroundColor={"black"}/>
+ 
+<View   style={{backgroundColor:"black",alignItems:"center",justifyContent:"center",flex:1}}>
+ 
 
-  <View style={{width:"90%",height:Dimensions.get("screen").height/4.8,justifyContent:"center",alignItems:"center",}}>
-    <View style={{width:"90%",height:"27%",justifyContent:"center",alignItems:"center",top:"10%"}}> 
-    <Icon name="account" size={50} color="#00bfff" />
 
+
+    <View style={{width:"70%",height:Dimensions.get("screen").height/4,justifyContent:"center",alignItems:"center",
+  // borderWidth:1
+  }}> 
+   <View  style={{width:"70%",height:"80%",justifyContent:"center",alignItems:"center",
+  // borderWidth:1
+  }}>
+    <Image    
+    resizeMode="contain"
+    // source={images}
+    source={require("../assets/new_flex_rental_icon.png")}
+    style={{width:"100%",height:"100%"}}
+    />
     </View>
+    {
+    Loders ?
+     <SkypeIndicator    color='white'  />:
+    <Text style={{fontWeight:"bold",fontSize:Dimensions.get("screen").height/35,color:"#ffffff"}}>Log In Acount</Text>
 
-    <View style={{width:"90%",height:"25%",justifyContent:"center",alignItems:"center",top:"10%",}}> 
-    {/* <Icon name="account" size={30} color="#900" /> */}
-    <Text style={{fontWeight:"bold",fontSize:28,color:"#00bfff"}}>Log In Acount</Text>
 
-    </View>
+     }
 
+   
+    
 
   </View>
 
-     <View style={{width:"90%",height:Dimensions.get("screen").height/2.4,justifyContent:"center",alignItems:"center",}}>
+     <View style={{width:"90%",height:Dimensions.get("screen").height/2.4,justifyContent:"center",alignItems:"center",backgroundColor:"black"}}>
      <View  style={{width:"100%",height:"100%",justifyContent:"center",alignItems:"center",}}> 
-     <View style={{width:"100%",height:"5%",justifyContent:"center",alignItems:"center",}}> 
-
-     {
-    Loders ?
-     <SkypeIndicator    color='#00bfff' />:Loders
-
-     }
-     </View>
-      <View  style={{width:"90%",height:30,justifyContent:"center",}} > 
-     {/* <Text>
-      Email
-     </Text> */}
-      {/* <DotIndicator color='white'   /> */}
-      
-      </View>
-      <View  style={{width:"90%",height:"20%",justifyContent:"center",}} > 
+     
+  
      <TextInput 
      
      mode="outlined"
@@ -162,44 +172,37 @@ return(
      label="Email"
     //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setemail(textdata)}}
-     placeholder=" Enter Your Password" style={{height:"80%",width:"100%"}} />
+     placeholder=" Enter Your Password" 
+     style={{height:Dimensions.get("screen").height/15,width:Dimensions.get("window").width/1.2,backgroundColor:"#ffffff",margin:5}} />
       
-      </View>
-      <View  style={{width:"90%",height:22,justifyContent:"center",}} > 
-     {/* <Text>
-      Password
-     </Text> */}
       
-      </View>
-      <View  style={{width:"90%",height:"20%",justifyContent:"center", flexDirection:"row",alignItems:"center"}} > 
 
-      <View style={{width:"100%",height:"90%",justifyContent:"center", flexDirection:"row",alignItems:"center"}}>
+     
         
       <TextInput 
        mode="outlined"
        value={password}
        label="Password"
        onChangeText={(textdata)=>{setpassword(textdata)}}
-       right={<TextInput.Icon  onPress={()=>{setonpen_eyes(false)}}  icon="eye" />}
-      placeholder="Enter Your Password"  secureTextEntry={onpen_eyes} style={{height:"80%",width:"100%",}} />
+       right={<TextInput.Icon  onPress={()=>{setonpen_eyes(false)}}  icon="eye" color={"black"} />}
+      placeholder="Enter Your Password"  secureTextEntry={onpen_eyes}
+       style={{height:Dimensions.get("screen").height/15,width:Dimensions.get("window").width/1.2,backgroundColor:"#ffffff"}} />
 
 
     
-      </View>
-      </View>
          
      </View>
      </View>
     {/* { ! isKeyboardVisible ? */}
     
-    <View  style={{width:"100%",height:"26%",justifyContent:"center",alignItems:"center",}} > 
+    <View  style={{width:"100%",height:Dimensions.get("screen").height/6,justifyContent:"center",alignItems:"center",backgroundColor:"black"}} > 
 
      <ImageBackground
 
      resizeMode="cover"
     //  source={images}
-    source={require("../assets/Login_main.png")}
-     style={{width:"100%",height:"100%",alignItems:"center"}}
+    source={require("../assets/login_last.png")}
+     style={{width:"100%",height:Dimensions.get("screen").height/5,alignItems:"center",backgroundColor:"black"}}
      
      >
       
@@ -210,7 +213,7 @@ return(
       <View  style={{width:"60%",height:"100%",justifyContent:"center",}} >
        
        <TouchableOpacity  onPress={()=>{Props.navigation.navigate("SignUp")}}>
-       <Text style={{color:"black" ,fontWeight:"bold"}} >
+       <Text style={{color:"white" ,fontWeight:"bold"}} >
         Forgot Password ?
        </Text>
        </TouchableOpacity>
@@ -227,12 +230,12 @@ return(
     
     
     >
-      <View style={{width:60,height:60,backgroundColor:"#00bfff",justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
-    shadowColor: '#000',
-    shadowOffset: { width: 3, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,  
-    elevation: 5
+      <View style={{width:60,height:60,backgroundColor:"#ffffff",justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
+    shadowColor: '#ffffff',
+    shadowOffset: { width: 5, height: 3},
+    shadowOpacity: 0.5,
+    // shadowRadius: 2,  
+    elevation: 20
     
     
     }}>
@@ -242,7 +245,7 @@ return(
       
       </View>
       </TouchableOpacity>
-      <Text style={{color:"black" ,fontWeight:"bold"}}>
+      <Text style={{color:"white" ,fontWeight:"bold"}}>
         Sign IN
       </Text>
 

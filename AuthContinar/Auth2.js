@@ -7,6 +7,7 @@ import SignUp2 from '../SignupContinar/Signup2';
 const Stack = createNativeStackNavigator();
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Dimensions } from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -24,9 +25,10 @@ return(
 
 initialRouteName="Login2"
 screenOptions={{
-  tabBarActiveTintColor: 'black',
-  tabBarLabelStyle: { fontSize: 12 ,fontWeight:"bold",},
-  tabBarItemStyle: { width: 80,top:10,justifyContent:"center" ,alignItems:"center",height:70,borderBottomColor:"black",}
+  tabBarActiveTintColor: 'white',
+  tabBarLabelStyle: { fontSize: Dimensions.get("screen").height/57 ,fontWeight:"900",},
+  tabBarItemStyle: { width:Dimensions.get("screen").width/2,justifyContent:"center" ,alignItems:"center",height:Dimensions.get("screen").height/14
+  ,borderBottomColor:"#ffffff",borderWidth:1,backgroundColor:"black"}
   // tabBarStyle: { backgroundColor: 'powderblue' },
 }}
 

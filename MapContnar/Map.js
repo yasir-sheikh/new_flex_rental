@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';  
-import { StyleSheet, View ,Text, Button, TouchableOpacity,Switch,Alert} from 'react-native';  
+import { StyleSheet, View ,Text, Button, TouchableOpacity,Switch,Alert, StatusBar} from 'react-native';  
 // import MapView from 'react-native-maps';  
 import { Marker } from 'react-native-maps';  
 import MapView, { PROVIDER_GOOGLE,Callout ,Polyline} from 'react-native-maps'
@@ -205,7 +205,7 @@ export default function Map  ()  {
       ]
     }
   ]
-  const [Drak,setDrak]=useState(false)
+  const [Drak,setDrak]=useState(true)
 
 
 
@@ -234,12 +234,12 @@ export default function Map  ()  {
 
   const usefoce = useIsFocused()
 
-  const[helostat,sethelostat]=useState({ location:null})
+  // const[helostat,sethelostat]=useState({ location:null})
 
   // _requestLocation = (teste = '') => {
 
   useEffect(()=>{
-    sethelostat({location: null});
+    // sethelostat({location: null});
 
     GetLocation.getCurrentPosition({
       enableHighAccuracy: true,
@@ -255,23 +255,23 @@ export default function Map  ()  {
         const {code, message} = ex;
         console.warn(code, message);
         if (code === 'CANCELLED') {
-          Alert.alert('Location cancelled by user or by another request');
+          // Alert.alert('Location cancelled by user or by another request');
         }
         if (code === 'UNAVAILABLE') {
-          Alert.alert('Location service is disabled or unavailable');
+          // Alert.alert('Location service is disabled or unavailable');
         }
         if (code === 'TIMEOUT') {
-          Alert.alert('Location request timed out');
+          // Alert.alert('Location request timed out');
         }
         if (code === 'UNAUTHORIZED') {
-          Alert.alert('Authorization denied');
+          // Alert.alert('Authorization denied');
         }
         sethelostat(true)
        
       });
     },[usefoce])
   // };
-console.log(helostat,"jjjjjjj")
+// console.log(helostat,"jjjjjjj")
 
   
 const [stylesss,setstyle]=useState(constommapaStale)
@@ -303,6 +303,7 @@ if(Drak==true){
       
       
       >  
+      <StatusBar translucent backgroundColor={"transparent"}/>
       <Animatable.View  style={styles.MainContainer}
            animation="fadeInLeft"
            //  itesrationCount={5}
@@ -326,9 +327,7 @@ if(Drak==true){
 />
 
 
-{helostat ? (
-          <Text >{JSON.stringify(helostat, 1, 2)}</Text>
-        ) : helostat}
+
 </View>
 
 
