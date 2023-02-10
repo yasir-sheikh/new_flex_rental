@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';  
-import { StyleSheet, View ,Text, Button, TouchableOpacity,Switch,Alert, StatusBar} from 'react-native';  
+import { StyleSheet, View ,Text, Button, TouchableOpacity,Switch,Alert, StatusBar,Image} from 'react-native';  
 // import MapView from 'react-native-maps';  
 import { Marker } from 'react-native-maps';  
+import MapViewDirections from 'react-native-maps-directions';
 import MapView, { PROVIDER_GOOGLE,Callout ,Polyline} from 'react-native-maps'
 import Icondil from 'react-native-vector-icons/FontAwesome';
 import * as Animatable from 'react-native-animatable';
@@ -12,6 +13,7 @@ import GetLocation from 'react-native-get-location'
 
 
 
+const APIKEY = 'AIzaSyCIcPl9NQywQ8QwPlpq9Me_frvG4swcVJ8'
 
 
 export default function Map  ()  {  
@@ -223,7 +225,7 @@ export default function Map  ()  {
     })
     .catch(error => {
         const { code, message } = error;
-        console.warn(code, message);
+        // console.warn(code, message);
     })
 
 
@@ -238,42 +240,42 @@ export default function Map  ()  {
 
   // _requestLocation = (teste = '') => {
 
-  useEffect(()=>{
-    // sethelostat({location: null});
+  // useEffect(()=>{
+  //   // sethelostat({location: null});
 
-    GetLocation.getCurrentPosition({
-      enableHighAccuracy: true,
-      timeout: 150000,
-    })
-      .then(location => {
-        sethelostat(
-          location,
-          // loading: false,
-        );
-      })
-      .catch(ex => {
-        const {code, message} = ex;
-        console.warn(code, message);
-        if (code === 'CANCELLED') {
-          // Alert.alert('Location cancelled by user or by another request');
-        }
-        if (code === 'UNAVAILABLE') {
-          // Alert.alert('Location service is disabled or unavailable');
-        }
-        if (code === 'TIMEOUT') {
-          // Alert.alert('Location request timed out');
-        }
-        if (code === 'UNAUTHORIZED') {
-          // Alert.alert('Authorization denied');
-        }
-        sethelostat(true)
+  //   GetLocation.getCurrentPosition({
+  //     enableHighAccuracy: true,
+  //     // timeout: 150000,
+  //   })
+  //     .then(location => {
+  //       sethelostat(
+  //         location,
+  //         // loading: false,
+  //       );
+  //     })
+  //     .catch(ex => {
+  //       const {code, message} = ex;
+  //       console.warn(code, message);
+  //       if (code === 'CANCELLED') {
+  //         // Alert.alert('Location cancelled by user or by another request');
+  //       }
+  //       if (code === 'UNAVAILABLE') {
+  //         // Alert.alert('Location service is disabled or unavailable');
+  //       }
+  //       if (code === 'TIMEOUT') {
+  //         // Alert.alert('Location request timed out');
+  //       }
+  //       if (code === 'UNAUTHORIZED') {
+  //         // Alert.alert('Authorization denied');
+  //       }
+  //       sethelostat(true)
        
-      });
-    },[usefoce])
+  //     });
+  //   },[usefoce])
   // };
 // console.log(helostat,"jjjjjjj")
 
-  
+const [animate,setanimate]=useState('fadeInUpBig')
 const [stylesss,setstyle]=useState(constommapaStale)
 useEffect(()=>{
 if(Drak==true){
@@ -290,11 +292,14 @@ if(Drak==true){
      longitude: 69.3451,
      
 })
+const destination = {latitude: 24.9096167, longitude: 67.0254472};
+
 
     console.log("Dark",Drak,constommapaStale,)
     return (  
 <>
-{/* { Drak ? */}
+<StatusBar  backgroundColor={"black"}/>
+
 
       <View 
       
@@ -303,32 +308,14 @@ if(Drak==true){
       
       
       >  
-      <StatusBar translucent backgroundColor={"transparent"}/>
-      <Animatable.View  style={styles.MainContainer}
-           animation="fadeInLeft"
-           //  itesrationCount={5}
-            direction="alternate"
-            easing="ease-out"
+      <View  style={styles.MainContainer}
+           
             
       
       
       >
 {/* <Button title='ONNSS' onPress={()=>{setDrak(false)}}/> */}
-<View style={{flexDirection:"row",height:20,width:"100%",justifyContent:"center",alignItems:"center",}}>
-<Switch
-  // onPress={}
-  // onPress={()=>{setDrak(false)}}
-  onValueChange={(state)=>{setDrak(previousState => !previousState);}}
 
-  trackColor={{ false: "#767577", true: "#81b0ff" }}
-  thumbColor={Drak ? "#f5dd4b" : "#f4f3f4"}
-  value={Drak}
-
-/>
-
-
-
-</View>
 
 
 {/* 
@@ -354,6 +341,7 @@ if(Drak==true){
             draggable={true}
             pinColor="red"
             onDragStart={(e)=>{
+              setanimate("")
               console.log("helo map", e.nativeEvent.coordinate)
             }}
             onDragEnd={(e)=>{
@@ -362,12 +350,38 @@ if(Drak==true){
                   longitude: e.nativeEvent.coordinate.longitude
               })
               console.log("helo map", )
+              setanimate("rubberBand")
             }} 
 
           >
 
 
-<Icondil name="map-pin" size={40} color="red" />
+{/* <Icondil name="map-pin" size={40} color="red" /> */}
+<MapViewDirections
+    origin={'place_id:ChIJW5i0tJC1j4ARoUGtkogTaUU'}
+    destination={destination}
+    apikey={APIKEY}
+    strokeWidth={3}
+    strokeColor="red"
+  />
+
+<Animatable.View
+animation={animate} 
+// duration={600}
+delay={400}
+iterationCount={animate=="fadeInDown"?2:1}
+direction={"alternate"} style={{width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:100,borderColor:"white",
+// borderWidth:3,
+
+
+}}>
+
+         <Image
+           style={{width:"100%",height:"100%",}}
+           source={require("../assets/placeholder-filled-point.png")}
+           resizeMode="contain"
+        />
+    </Animatable.View>
     
 
 <Callout  
@@ -394,12 +408,26 @@ if(Drak==true){
 
   
 
-        </Animatable.View>
+        </View>
 
 
 
+{/* 
+        <View style={{flexDirection:"row",height:"5%",width:"100%",justifyContent:"center",alignItems:"center",}}>
+<Switch
+  // onPress={}
+  // onPress={()=>{setDrak(false)}}
+  onValueChange={(state)=>{setDrak(previousState => !previousState);}}
+
+  trackColor={{ false: "#767577", true: "#81b0ff" }}
+  thumbColor={Drak ? "#f5dd4b" : "#f4f3f4"}
+  value={Drak}
+
+/>
 
 
+
+</View> */}
 
 
       </View>
@@ -410,7 +438,8 @@ if(Drak==true){
   
 const styles = StyleSheet.create({  
   MainContainer: {  
- flex:1 
+ flex:1 ,
+ justifyContent:"center"
   },  
   mapStyle: {  
    width:"100%",

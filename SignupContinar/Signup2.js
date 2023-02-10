@@ -3,6 +3,8 @@ import { View ,Text, TouchableOpacity, ImageBackground,ScrollView,Keyboard, Dime
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput } from 'react-native-paper';
 import { useState,useEffect } from "react";
+import * as Animatable from 'react-native-animatable';
+import { blue_color,white_color } from '../Constants_continar/Constant.js';
 import CheckBox from '@react-native-community/checkbox';
 import {
   BallIndicator,
@@ -20,6 +22,7 @@ const SignUp2 =(props)=>{
 
     // const [text, setText] =useState('');
     // const [textpass, setTextpass] =useState('');
+    
     const [onpen_eyes,setopen_eyes]= useState(true)
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     const [isKeyboardVisible, setKeyboardVisible] = useState(false);
@@ -84,14 +87,14 @@ const SignUp2 =(props)=>{
       const keyboardDidShowListener = Keyboard.addListener(
         'keyboardDidShow',
         () => {
-          setKeyboardVisible(true);
+          setKeyboardVisible(null);
           setscrol(0)
         },
       );
       const keyboardDidHideListener = Keyboard.addListener(
         'keyboardDidHide',
         () => {
-          setKeyboardVisible(false);
+          setKeyboardVisible('pulse');
           setscrol(1)
         },
       );
@@ -118,12 +121,17 @@ return(
   
  <ScrollView   contentContainerStyle={{flex:scrol,backgroundColor:"black"}} scrollEnabled={true} > 
 
-<View   style={{backgroundColor:"black",alignItems:"center",justifyContent:"center",width:"100%",height:"100%"}}>
+<Animatable.View  
+  animation={isKeyboardVisible}
+        //  itesrationCount={5}
+         direction="alternate"
+         easing="ease-out"
+
+style={{backgroundColor:"black",alignItems:"center",justifyContent:"center",width:"100%",height:"100%"}}>
 
   <View style={{width:"90%",height:Dimensions.get("screen").height/7,justifyContent:"center",alignItems:"center",
   borderWidth:1,backgroundColor:"black"}}>
     <View style={{width:"60%",height:"80%",justifyContent:"center",alignItems:"center",borderWidth:1,backgroundColor:"black"}}> 
-    {/* <Icon name="account-multiple-plus-outline" size={40} color="#00bfff" /> */}
     {
     Loders ?
      <SkypeIndicator    color='white'  />:
@@ -140,11 +148,13 @@ return(
   </View>
 
      
-     <View  style={{width:"90%",height:Dimensions.get("screen").height/1.9, justifyContent:"center",alignItems:"center",
+     <View 
+ 
+     style={{width:"90%",height:Dimensions.get("screen").height/1.9, justifyContent:"center",alignItems:"center",
      }}> 
      
     
-
+   
      
   <Text style={{fontSize:Dimensions.get("screen").height/50,color:"white",fontWeight:"bold"}}>Create account</Text>
 
@@ -153,55 +163,57 @@ return(
          
      <TextInput 
      
-     mode="outlined"
-    //  value={text}
+     mode="flat"
      label="Name"
-    //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setName(textdata)}}
-     placeholder=" Enter Your Name" style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
+    //  placeholder=" Enter Your Name"
+      style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
       
 
       
 
      <TextInput 
      
-     mode="outlined"
-    //  value={text}
+     mode="flat"
      label="Last NAME"
-    //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setLastName(textdata)}}
-     placeholder=" Enter Your LastName" style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
+    //  placeholder=" Enter Your LastName"
+      style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
       
 
      
 
      <TextInput 
      
-     mode="outlined"
+     mode="flat"
     //  value={text}
      label="Email"
     //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setemail(textdata)}}
-     placeholder=" Enter Your Password" style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
+    //  placeholder=" Enter Your Password" 
+     style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
       
      
      
         
       <TextInput 
-       mode="outlined"
+       mode="flat"
       //  value={textpass}
        label="Number"
        onChangeText={(textdata)=>{setNum(textdata)}}
-      placeholder="Enter Your number"  secureTextEntry={onpen_eyes} style={{height:Dimensions.get("screen").height/17
+      // placeholder="Enter Your number"  
+      secureTextEntry={onpen_eyes} style={{height:Dimensions.get("screen").height/17
       ,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
 
       <TextInput 
-       mode="outlined"
+       mode="flat"
       //  value={textpass}
        label="Password"
        onChangeText={(textdata)=>{setPass(textdata)}}
-       right={<TextInput.Icon onPress={()=>{setonpen_eyes(false)}}   icon="eye" />}
-      placeholder="Enter Your Password"  secureTextEntry={onpen_eyes} style={{height:Dimensions.get("screen").height/17
+       right={<TextInput.Icon    icon="eye" />}
+      // placeholder="Enter Your Password" 
+       secureTextEntry={onpen_eyes}
+        style={{height:Dimensions.get("screen").height/17
       ,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
          
      </View>
@@ -243,7 +255,7 @@ return(
 }}
 onPress={()=>{Form_Handle()}}
 >
-<View style={{width:60,height:60,backgroundColor:"#ffffff",justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
+<View style={{width:60,height:60,backgroundColor:blue_color,justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
 shadowColor: '#000',
 shadowOffset: { width: 3, height: 1 },
 shadowOpacity: 0.8,
@@ -253,7 +265,7 @@ elevation: 5
 
 }}>
   
-<Icon name="arrow-right-thin" size={40} color="black" />
+<Icon name="arrow-right-thin" size={40} color={white_color} />
 
 
 </View>
@@ -271,9 +283,8 @@ elevation: 5
 
     </View>
     
-    {/* </TouchableOpacity>:null} */}
 
-</View>
+</Animatable.View>
 </ScrollView>
 
 

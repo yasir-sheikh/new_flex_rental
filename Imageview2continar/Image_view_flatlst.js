@@ -1,12 +1,9 @@
 
 import { StyleSheet, Text, View ,FlatList, ScrollView} from 'react-native'
 import React from 'react'
-// import { height, width } from '../../Constants/constant'
-import { useEffect } from 'react'
 import { Dimensions } from 'react-native'
 
 const width = Dimensions.get("screen").width
-const height = Dimensions.get("screen").height
 
 const Image_view_flatlist = ({item}) => {
 console.log("item",typeof item?.facilities)
@@ -17,7 +14,7 @@ const styles = StyleSheet.create({
     padding:5,
     alignSelf:"center",
     margin:5,
-    backgroundColor:"white",
+    backgroundColor:"black",
     shadowOpacity: 3,
     shadowColor: 'black',
     shadowOpacity: 0.26,
@@ -37,7 +34,7 @@ const styles = StyleSheet.create({
     <View style={{flex:1,}} >
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 Facilities
 </Text>
 <FlatList 
@@ -48,7 +45,7 @@ Facilities
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -58,7 +55,7 @@ Facilities
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 scenic_view 
 </Text>
 <FlatList
@@ -69,7 +66,7 @@ scenic_view
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -79,7 +76,7 @@ scenic_view
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 heating_n_cooling  
 </Text>
 <FlatList
@@ -90,7 +87,7 @@ heating_n_cooling
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -100,7 +97,7 @@ heating_n_cooling
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 home_safety   
 </Text>
 <FlatList
@@ -111,7 +108,7 @@ home_safety
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -121,7 +118,7 @@ home_safety
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 bathroom    
 </Text>
 <FlatList
@@ -132,7 +129,7 @@ bathroom
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -142,7 +139,7 @@ bathroom
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 laundary     
 </Text>
 <FlatList
@@ -153,7 +150,7 @@ laundary
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -163,7 +160,7 @@ laundary
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 kitchen      
 </Text>
 <FlatList
@@ -174,7 +171,7 @@ kitchen
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -184,7 +181,7 @@ kitchen
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 entertainment       
 </Text>
 <FlatList
@@ -195,7 +192,7 @@ entertainment
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -205,7 +202,7 @@ entertainment
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color:'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color:'white'}}>
 outdoor       
 </Text>
 <FlatList
@@ -216,7 +213,7 @@ outdoor
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -226,7 +223,7 @@ outdoor
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 parking        
 </Text>
 <FlatList
@@ -237,7 +234,7 @@ parking
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color:'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -247,7 +244,7 @@ parking
 </View>
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 cancellation_policy         
 </Text>
 <FlatList
@@ -258,7 +255,7 @@ cancellation_policy
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}
@@ -271,7 +268,7 @@ cancellation_policy
 
 <View
 style={styles.View}>
-<Text style={{fontWeight: 'bold', fontSize: 25, color: 'black'}}>
+<Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>
 outdoor       
 </Text>
 <FlatList
@@ -282,7 +279,7 @@ outdoor
       style={{
         fontWeight: 'bold',
         fontSize: width / 30,
-        color: 'black',
+        color: 'white',
         opacity: 0.7,
       }}>
     🔘 {item}

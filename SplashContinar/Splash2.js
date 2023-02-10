@@ -20,12 +20,11 @@ return(
 </View>
 <View style={{width:"100%",height:"47%",alignItems:"center",justifyContent:"center",backgroundColor:"black"}} >
 
-<View style={{width:"70%",height:"50%",backgroundColor:"black"}}>
+<View style={{width:"60%",height:"50%",backgroundColor:"black"}}>
 <ImageBackground   
 
 
 resizeMode="contain"
-// source={images}
 source={require("../assets/new_flex_rental_icon.png")}
 style={{width:"100%",height:"100%"}}
 
@@ -40,9 +39,10 @@ style={{width:"100%",height:"100%"}}
  
 </View>
 
+
 </View>
 <View style={{width:"100%",height:"30%",backgroundColor:"black"}} >
-<ImageBackground   
+{/* <ImageBackground   
 
 
 resizeMode="cover"
@@ -54,25 +54,11 @@ style={{width:"100%",height:"100%"}}
  
 
 
-</ImageBackground>
+</ImageBackground> */}
 
 </View>
 
-{/* <Text  style={{Button:400}} > Splash</Text> */}
-{/* <Button title="home" onPress={()=>{Props.navigation.navigate("Login")}} /> */}
 
-{/* <ImageBackground   
-
-
-resizeMode="cover"
-source={images}
-style={{width:"100%",height:"100%"}}
-
->
- 
-
-
-</ImageBackground> */}
 
 </View>
 

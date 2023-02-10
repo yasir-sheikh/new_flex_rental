@@ -10,7 +10,7 @@ const Auth_home2 =()=>{
   // const [Userlogin,setUserlogin]=useState(false)
   const Userlogin=useSelector(state => state.authReducer.user?.token);
    
-  console.log(Userlogin,'..................')
+  // console.log(Userlogin,'..................')
 
 
 return(
@@ -19,7 +19,6 @@ return(
 
 <>
 
-{/* <Home_navigation/> */}
 {Userlogin ? <Homenavigat2/>: <Splashauth/>
 
 

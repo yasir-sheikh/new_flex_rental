@@ -1,11 +1,14 @@
 
-import { View ,Text, TouchableOpacity, ImageBackground,ScrollView,Keyboard,Dimensions,Image, StatusBar} from "react-native"
+import { View ,Text, TouchableOpacity, ImageBackground,ScrollView,Keyboard,Dimensions,Image,
+   StatusBar,SafeAreaView} from "react-native"
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput } from 'react-native-paper';
 import { useState,useEffect } from "react";
 import {updateUser} from "../Main_Ridux/redux/actions/Authacion"
 import { useDispatch } from "react-redux";
+import { blue_color,white_color } from '../Constants_continar/Constant.js';
+import * as Animatable from 'react-native-animatable';
 import {
   BallIndicator,
   BarIndicator,
@@ -32,7 +35,7 @@ const Login2 =(Props)=>{
     const dispatch=useDispatch()
 
 
-    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+    const [isKeyboardVisible, setKeyboardVisible] = useState("");
 
     useEffect(() => {
       
@@ -40,7 +43,7 @@ const Login2 =(Props)=>{
       const keyboardDidShowListener = Keyboard.addListener(
         'keyboardDidShow',
         () => {
-          setKeyboardVisible(true);
+          setKeyboardVisible('pulse');
        setscrol(0)
 
         },
@@ -48,7 +51,7 @@ const Login2 =(Props)=>{
       const keyboardDidHideListener = Keyboard.addListener(
         'keyboardDidHide',
         () => {
-          setKeyboardVisible(false);
+          setKeyboardVisible(null);
        setscrol(1)
 
         },
@@ -128,6 +131,8 @@ return(
   contentContainerStyle={{backgroundColor:"black",flex:scrol}}
 
  >
+  {/* <SafeAreaView> */}
+
   <StatusBar backgroundColor={"black"}/>
  
 <View   style={{backgroundColor:"black",alignItems:"center",justifyContent:"center",flex:1}}>
@@ -151,7 +156,7 @@ return(
     {
     Loders ?
      <SkypeIndicator    color='white'  />:
-    <Text style={{fontWeight:"bold",fontSize:Dimensions.get("screen").height/35,color:"#ffffff"}}>Log In Acount</Text>
+    <Text style={{fontWeight:"bold",fontSize:Dimensions.get("screen").height/35,color:"#ffffff"}}>LogIn Account</Text>
 
 
      }
@@ -161,18 +166,26 @@ return(
 
   </View>
 
-     <View style={{width:"90%",height:Dimensions.get("screen").height/2.4,justifyContent:"center",alignItems:"center",backgroundColor:"black"}}>
+     <Animatable.View
+      animation={isKeyboardVisible}
+      //  itesrationCount={5}
+       direction="alternate"
+       easing="ease-out"
+     
+     style={{width:"90%",height:Dimensions.get("screen").height/2.4,justifyContent:"center",alignItems:"center",
+     backgroundColor:"black",
+     }}>
      <View  style={{width:"100%",height:"100%",justifyContent:"center",alignItems:"center",}}> 
      
   
      <TextInput 
      
-     mode="outlined"
+     mode="flat"
      value={email}
      label="Email"
     //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setemail(textdata)}}
-     placeholder=" Enter Your Password" 
+    //  placeholder=" Enter Your Password" 
      style={{height:Dimensions.get("screen").height/15,width:Dimensions.get("window").width/1.2,backgroundColor:"#ffffff",margin:5}} />
       
       
@@ -180,19 +193,20 @@ return(
      
         
       <TextInput 
-       mode="outlined"
+       mode="flat"
        value={password}
        label="Password"
        onChangeText={(textdata)=>{setpassword(textdata)}}
        right={<TextInput.Icon  onPress={()=>{setonpen_eyes(false)}}  icon="eye" color={"black"} />}
-      placeholder="Enter Your Password"  secureTextEntry={onpen_eyes}
+      // placeholder="Enter Your Password" 
+       secureTextEntry={onpen_eyes}
        style={{height:Dimensions.get("screen").height/15,width:Dimensions.get("window").width/1.2,backgroundColor:"#ffffff"}} />
 
 
     
          
      </View>
-     </View>
+     </Animatable.View>
     {/* { ! isKeyboardVisible ? */}
     
     <View  style={{width:"100%",height:Dimensions.get("screen").height/6,justifyContent:"center",alignItems:"center",backgroundColor:"black"}} > 
@@ -212,7 +226,7 @@ return(
 
       <View  style={{width:"60%",height:"100%",justifyContent:"center",}} >
        
-       <TouchableOpacity  onPress={()=>{Props.navigation.navigate("SignUp")}}>
+       <TouchableOpacity  >
        <Text style={{color:"white" ,fontWeight:"bold"}} >
         Forgot Password ?
        </Text>
@@ -230,17 +244,17 @@ return(
     
     
     >
-      <View style={{width:60,height:60,backgroundColor:"#ffffff",justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
+      <View style={{width:60,height:60,backgroundColor:blue_color,justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
     shadowColor: '#ffffff',
     shadowOffset: { width: 5, height: 3},
     shadowOpacity: 0.5,
-    // shadowRadius: 2,  
+    shadowRadius: 10,  
     elevation: 20
     
     
     }}>
         
-      <Icon name="arrow-right-thin" size={40} color="black" />
+      <Icon name="arrow-right-thin" size={Dimensions.get("screen").height/18} color={white_color} />
 
       
       </View>
@@ -260,6 +274,7 @@ return(
     {/* // : null } */}
 
 </View>
+
 </ScrollView>
 
 
