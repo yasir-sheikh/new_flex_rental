@@ -25,50 +25,41 @@ import {
 
 const Login2 =(Props)=>{
 
-  // const screen = Dimensions.get("screen");
-    // const [text, setText] =useState('');
-    // const [textpass, setTextpass] =useState('');
+  
     const [onpen_eyes,setonpen_eyes]= useState(true)
-    // const[Loders,setLoders]=useState(false)
 
 
     const dispatch=useDispatch()
 
 
-    const [isKeyboardVisible, setKeyboardVisible] = useState("");
+    // const [isKeyboardVisible, setKeyboardVisible] = useState("");
 
-    useEffect(() => {
+    // useEffect(() => {
       
   
-      const keyboardDidShowListener = Keyboard.addListener(
-        'keyboardDidShow',
-        () => {
-          setKeyboardVisible('pulse');
-       setscrol(0)
+    //   const keyboardDidShowListener = Keyboard.addListener(
+    //     'keyboardDidShow',
+    //     () => {
+    //       setKeyboardVisible('pulse');
+    //    setscrol(0)
 
-        },
-      );
-      const keyboardDidHideListener = Keyboard.addListener(
-        'keyboardDidHide',
-        () => {
-          setKeyboardVisible(null);
-       setscrol(1)
+    //     },
+    //   );
+    //   const keyboardDidHideListener = Keyboard.addListener(
+    //     'keyboardDidHide',
+    //     () => {
+    //       setKeyboardVisible(null);
+    //    setscrol(1)
 
-        },
-      );
-      // if (! isKeyboardVisible) {
-      //   // setanimate("fadeOut")
-      //   setKeyboardVisible(false)
-      //   // setalternate(1)
-      // } else {
-      //   // setanimate("fadeInLeft")
-      // }
+    //     },
+    //   );
+    
       
-      return () => {
-        keyboardDidHideListener.remove();
-        keyboardDidShowListener.remove();
-      };
-    }, [Props]);
+    //   return () => {
+    //     keyboardDidHideListener.remove();
+    //     keyboardDidShowListener.remove();
+    //   };
+    // }, [Props]);
 
     const [Loders, setLoders] = useState(false)
     const [email,setemail]=useState("")
@@ -122,62 +113,85 @@ const Login2 =(Props)=>{
     // console.log(data_save,"datattttttttttt")
       
      };
-     const [scrol,setscrol]=useState(1)
 
 
 return(
-  <ScrollView   
-  scrollEnabled={true}
-  contentContainerStyle={{backgroundColor:"black",flex:scrol}}
+  
 
- >
-  {/* <SafeAreaView> */}
-
-  <StatusBar backgroundColor={"black"}/>
  
 <View   style={{backgroundColor:"black",alignItems:"center",justifyContent:"center",flex:1}}>
+<StatusBar backgroundColor={"black"}/>
+
+<ScrollView   
+  scrollEnabled={true}
+  showsVerticalScrollIndicator={false}
+  contentContainerStyle={{
+         backgroundColor:"black",
+         width:Dimensions.get("window").width/1
+        }}
+
+ >
  
-
-
-
-    <View style={{width:"70%",height:Dimensions.get("screen").height/4,justifyContent:"center",alignItems:"center",
-  // borderWidth:1
-  }}> 
-   <View  style={{width:"70%",height:"80%",justifyContent:"center",alignItems:"center",
-  // borderWidth:1
+ <View style={{
+          width:'100%',
+          height:Dimensions.get("screen").height/4.5,
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          alignItems:"center",
+          justifyContent:"space-around"}}>
+             <View  style={{
+          width:"50%",
+          height:"50%",
+          justifyContent:"center",
+          alignItems:"center",
+          borderColor:'white',
+          // borderWidth:1
   }}>
     <Image    
-    resizeMode="contain"
-    // source={images}
-    source={require("../assets/new_flex_rental_icon.png")}
-    style={{width:"100%",height:"100%"}}
+      resizeMode="contain"
+      source={require("../assets/new_flex_rental_icon.png")}
+      style={{width:"100%",
+      height:"100%"}}
     />
     </View>
+
     {
     Loders ?
-     <SkypeIndicator    color='white'  />:
-    <Text style={{fontWeight:"bold",fontSize:Dimensions.get("screen").height/35,color:"#ffffff"}}>LogIn Account</Text>
+     <SkypeIndicator  
+       color='white'  />:
+         
+    <Text style={{
+      color:white_color,
+      fontSize:Dimensions.get("screen").height/37,
+      fontWeight:"bold"
+    }}>Login to your Account</Text>
+  }
+ </View>
 
-
-     }
-
-   
-    
-
-  </View>
-
-     <Animatable.View
-      animation={isKeyboardVisible}
-      //  itesrationCount={5}
-       direction="alternate"
-       easing="ease-out"
-     
-     style={{width:"90%",height:Dimensions.get("screen").height/2.4,justifyContent:"center",alignItems:"center",
-     backgroundColor:"black",
-     }}>
-     <View  style={{width:"100%",height:"100%",justifyContent:"center",alignItems:"center",}}> 
-     
-  
+ <View style={{
+          width:'100%',
+          height:Dimensions.get("screen").height/3.5,
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          alignItems:"center",
+          justifyContent:"space-around"}}>
+           
+ <View style={{
+          width:'85%',
+          height:"100%",
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          // alignItems:"center",
+          justifyContent:"space-evenly"}} > 
+        
+        <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>Email</Text>
      <TextInput 
      
      mode="flat"
@@ -186,96 +200,90 @@ return(
     //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setemail(textdata)}}
     //  placeholder=" Enter Your Password" 
-     style={{height:Dimensions.get("screen").height/15,width:Dimensions.get("window").width/1.2,backgroundColor:"#ffffff",margin:5}} />
-      
-      
+     style={{
+      height:Dimensions.get("screen").height/17,
+      width:'100%',
+      backgroundColor:"#ffffff"}} />
 
+       <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>Password:</Text>
      
-        
-      <TextInput 
-       mode="flat"
-       value={password}
-       label="Password"
-       onChangeText={(textdata)=>{setpassword(textdata)}}
-       right={<TextInput.Icon  onPress={()=>{setonpen_eyes(false)}}  icon="eye" color={"black"} />}
-      // placeholder="Enter Your Password" 
-       secureTextEntry={onpen_eyes}
-       style={{height:Dimensions.get("screen").height/15,width:Dimensions.get("window").width/1.2,backgroundColor:"#ffffff"}} />
+     <TextInput 
+      mode="flat"
+      value={password}
+      label="Password"
+      onChangeText={(textdata)=>{setpassword(textdata)}}
+      right={<TextInput.Icon  onPress={()=>{setonpen_eyes(false)}} 
+       icon="eye" color={"black"} />}
+     // placeholder="Enter Your Password" 
+      secureTextEntry={onpen_eyes}
+      style={{height:Dimensions.get("screen").height/17,
+      width:'100%',
+      backgroundColor:"#ffffff"}} />
 
+ </View>
 
-    
-         
-     </View>
-     </Animatable.View>
-    {/* { ! isKeyboardVisible ? */}
-    
-    <View  style={{width:"100%",height:Dimensions.get("screen").height/6,justifyContent:"center",alignItems:"center",backgroundColor:"black"}} > 
+ </View>
+ <View style={{
+          width:'100%',
+          height:Dimensions.get("screen").height/3.1,
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          alignItems:"center",
+          justifyContent:"space-evenly"
+          }}>
 
-     <ImageBackground
+            <TouchableOpacity 
+            onPress={()=>{logins()}}
+              style={{
+          width:'50%',
+          height:'18%',
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          alignItems:"center",
+          backgroundColor:blue_color,
+          borderRadius:7
+          }}>
+   <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>
+              SIGN IN
+            </Text>
+            </TouchableOpacity>
+            <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>
+              New to Flex Rental
+            </Text>
+            <TouchableOpacity 
+            onPress={()=>{Props.navigation.navigate('SignUp')}}
+            >
+            <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold",
+         textDecorationLine:"underline ",
+       }}>
+              CREATE AN ACCOUNT
+            </Text>
+            </TouchableOpacity>
 
-     resizeMode="cover"
-    //  source={images}
-    source={require("../assets/login_last.png")}
-     style={{width:"100%",height:Dimensions.get("screen").height/5,alignItems:"center",backgroundColor:"black"}}
-     
-     >
-      
-
-
-      <View  style={{width:"80%",height:85,justifyContent:"space-between",flexDirection:"row",}} > 
-
-      <View  style={{width:"60%",height:"100%",justifyContent:"center",}} >
-       
-       <TouchableOpacity  >
-       <Text style={{color:"white" ,fontWeight:"bold"}} >
-        Forgot Password ?
-       </Text>
-       </TouchableOpacity>
-
-      </View>
-
-       
-      <View  style={{width:80,height:100,bottom:32,justifyContent:"center",alignItems:"center",}}>
-
-       <TouchableOpacity   style={{width:60,height:60,justifyContent:"center",alignItems:"center",    
-    }}
-    onPress={logins}
-
-    
-    
-    >
-      <View style={{width:60,height:60,backgroundColor:blue_color,justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
-    shadowColor: '#ffffff',
-    shadowOffset: { width: 5, height: 3},
-    shadowOpacity: 0.5,
-    shadowRadius: 10,  
-    elevation: 20
-    
-    
-    }}>
-        
-      <Icon name="arrow-right-thin" size={Dimensions.get("screen").height/18} color={white_color} />
-
-      
-      </View>
-      </TouchableOpacity>
-      <Text style={{color:"white" ,fontWeight:"bold"}}>
-        Sign IN
-      </Text>
-
-      </View>
-   
-
-</View>
-
-     </ImageBackground>
-
-    </View>
-    {/* // : null } */}
-
-</View>
+          </View>
 
 </ScrollView>
+
+
+</View>
+
 
 
 )
@@ -284,3 +292,7 @@ return(
 
 }
 export default Login2
+
+
+
+// "@stripe/stripe-react-native": "^0.20.0",

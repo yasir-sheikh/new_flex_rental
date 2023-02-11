@@ -10,6 +10,8 @@ import Clander_view from '../Clander_view_continar/Clander_view';
 import Clander_view_out from '../Clander_view_continar/Clander_view_out';
 import Profile_main from '../Profile_main_continar/Profile_main';
 import Personal_infoo from '../Personal_info_continar/Personal_infoo';
+import Hosting from '../Hosting_Continar/Hosting';
+import Try_host from '../Try_host_continar/Try_host';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +35,8 @@ return(
   <Stack.Screen name="Clander_view_out" component={Clander_view_out} />
   <Stack.Screen name="Profile_main" component={Profile_main} />
   <Stack.Screen name="Personal_infoo" component={Personal_infoo} />
+  <Stack.Screen name="Hosting" component={Hosting} />
+  <Stack.Screen name="Try_host" component={Try_host} />
 
    
 

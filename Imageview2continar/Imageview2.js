@@ -57,10 +57,20 @@ function Imageview2({route,navigation}) {
     const [checkAvail, setCheckAvalmodal] = useState({open: false});
     const [modal_item, setmodal_item] = useState({item_open: false});
     // const [isKeyboardVisible, setKeyboardVisible] = useState(false);
-    const [selected, setSelected] = useState('');
+    const [up_date_state_date_out, setup_date_state_date_out] = useState(false);
 
     //  console.log(selectedStartDate,'.............../////........>>>>>>>>')
+
     useEffect(()=>{
+
+
+      if(save_date_redux_out_2){
+        setup_date_state_date_out(true)
+      }else{
+        setup_date_state_date_out(false)
+      }
+      
+     
 
       if(date_redux){
         setup_date_state_date(true)
@@ -119,7 +129,7 @@ function Imageview2({route,navigation}) {
 >
   <View style={styles.container}>
   
-      <StatusBar  translucent backgroundColor={"transparent"}/>
+      <StatusBar   backgroundColor={"black"}/>
           <View 
           style={{
             width:Dimensions.get("screen").width,
@@ -454,7 +464,7 @@ function Imageview2({route,navigation}) {
                           navigation.navigate("Clander_view_out")
                         }}>
                         
-                           {  up_date_state_date ?
+                           {  up_date_state_date_out ?
                         <Text
                               style={{
                                 color: 'white',

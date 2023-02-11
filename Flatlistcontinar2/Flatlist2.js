@@ -113,20 +113,14 @@ const Flatlist2 = ({navigation, ...props}) => {
         setKeyboardVisible('fadeInUpBig');
       },
     );
-    // if (! isKeyboardVisible) {
-    //   // setanimate("fadeOut")
-    //   setKeyboardVisible(false)
-    //   // setalternate(1)
-    // } else {
-    //   // setanimate("fadeInLeft")
-    // }
+  
 
     return () => {
       keyboardDidHideListener.remove();
       keyboardDidShowListener.remove();
     };
   }, [props]);
-  // const save_image_redux = () => {
+ 
   //   var options = {
   //     storageOptions: {
   //       path: 'image',
@@ -218,7 +212,7 @@ const Flatlist2 = ({navigation, ...props}) => {
         // setloder(false)
       })
       .catch(
-        error => setloder(true),
+        // error => setloder(true),
         //  console.error(error)
       );
   };
@@ -241,7 +235,7 @@ const Flatlist2 = ({navigation, ...props}) => {
   };
 
   useEffect(() => {
-    apibutn();
+    // apibutn();
     // profiles();
     return () => {};
   }, []);
@@ -250,9 +244,7 @@ const Flatlist2 = ({navigation, ...props}) => {
     return <View style={{height: 5, width: '100%', padding: 10}} />;
   };
 
-  
-
-  useEffect(() => {
+  const listingApI = () => {
     setloder(true);
     fetch(`https://flexrental.developer-um.xyz/api/listning`, {
       method: 'GET',
@@ -265,12 +257,18 @@ const Flatlist2 = ({navigation, ...props}) => {
         const data = await response.json();
         setloder(false);
         const res = data.listnings;
+        // console.log(data.listnings,'LLLLLLLLLLLLLISTTTTTTTTTTTTTTTTT................')
         dispatch(api_store_redux_data(res));
+
       } catch (error) {
+        setloder(true);
         console.log('Error happened here!');
         console.error(error);
       }
     });
+  }
+  useEffect(() => {
+  listingApI()
   }, []);
 
 

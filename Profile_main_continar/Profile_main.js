@@ -19,7 +19,6 @@ import {
   } from 'react-native';
   import Icon from 'react-native-vector-icons/MaterialIcons';
   import React, {useState, useEffect, useRef, useCallback} from 'react';
-  import Iconacount from 'react-native-vector-icons/MaterialCommunityIcons';
   import {
     updateUser,
     api_store_redux_data,
@@ -323,10 +322,12 @@ const Profile_main = ({navigation,...props}) => {
             // borderColor: white_color,
             borderWidth:1
           }}>
+            <TouchableOpacity onPress={()=>{navigation.navigate("Hosting")}}>
           <Text style={{color:white_color,
             fontSize:Dimensions.get("screen").height/45,
             fontWeight:"bold"
           }} >Switch To Hosting</Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{

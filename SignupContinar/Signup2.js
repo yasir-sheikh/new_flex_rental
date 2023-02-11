@@ -81,36 +81,36 @@ const SignUp2 =(props)=>{
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
       
   
-      const keyboardDidShowListener = Keyboard.addListener(
-        'keyboardDidShow',
-        () => {
-          setKeyboardVisible(null);
-          setscrol(0)
-        },
-      );
-      const keyboardDidHideListener = Keyboard.addListener(
-        'keyboardDidHide',
-        () => {
-          setKeyboardVisible('pulse');
-          setscrol(1)
-        },
-      );
-      // if (! isKeyboardVisible) {
-      //   // setanimate("fadeOut")
-      //   setKeyboardVisible(false)
-      //   // setalternate(1)
-      // } else {
-      //   // setanimate("fadeInLeft")
-      // }
+    //   const keyboardDidShowListener = Keyboard.addListener(
+    //     'keyboardDidShow',
+    //     () => {
+    //       setKeyboardVisible(null);
+    //       setscrol(0)
+    //     },
+    //   );
+    //   const keyboardDidHideListener = Keyboard.addListener(
+    //     'keyboardDidHide',
+    //     () => {
+    //       setKeyboardVisible('pulse');
+    //       setscrol(1)
+    //     },
+    //   );
+    //   // if (! isKeyboardVisible) {
+    //   //   // setanimate("fadeOut")
+    //   //   setKeyboardVisible(false)
+    //   //   // setalternate(1)
+    //   // } else {
+    //   //   // setanimate("fadeInLeft")
+    //   // }
       
-      return () => {
-        keyboardDidHideListener.remove();
-        keyboardDidShowListener.remove();
-      };
-    }, [props]);
+    //   return () => {
+    //     keyboardDidHideListener.remove();
+    //     keyboardDidShowListener.remove();
+    //   };
+    // }, [props]);
 
 const [scrol,setscrol]=useState(1)
 
@@ -118,174 +118,195 @@ return(
 
 
 
-  
- <ScrollView   contentContainerStyle={{flex:scrol,backgroundColor:"black"}} scrollEnabled={true} > 
+  <View   style={{backgroundColor:"black",alignItems:"center",justifyContent:"center",flex:1}}>
+{/* <StatusBar backgroundColor={"black"}/> */}
 
-<Animatable.View  
-  animation={isKeyboardVisible}
-        //  itesrationCount={5}
-         direction="alternate"
-         easing="ease-out"
+<ScrollView   
+  scrollEnabled={true}
+  showsVerticalScrollIndicator={false}
+  contentContainerStyle={{
+         backgroundColor:"black",
+         width:Dimensions.get("window").width/1
+        }}
 
-style={{backgroundColor:"black",alignItems:"center",justifyContent:"center",width:"100%",height:"100%"}}>
-
-  <View style={{width:"90%",height:Dimensions.get("screen").height/7,justifyContent:"center",alignItems:"center",
-  borderWidth:1,backgroundColor:"black"}}>
-    <View style={{width:"60%",height:"80%",justifyContent:"center",alignItems:"center",borderWidth:1,backgroundColor:"black"}}> 
-    {
-    Loders ?
-     <SkypeIndicator    color='white'  />:
+ >
+ 
+ <View style={{
+          width:'100%',
+          height:Dimensions.get("screen").height/8,
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          alignItems:"center",
+          justifyContent:"space-around"}}>
+             <View  style={{
+          width:"62%",
+          height:"62%",
+          justifyContent:"center",
+          alignItems:"center",
+          borderColor:'white',
+          // borderWidth:1
+  }}>
     <Image    
-    resizeMode="contain"
-    // source={images}
-    source={require("../assets/new_flex_rental_icon.png")}
-    style={{width:"100%",height:"100%"}}
+      resizeMode="contain"
+      source={require("../assets/new_flex_rental_icon.png")}
+      style={{width:"100%",
+      height:"100%"}}
     />
-    }
     </View>
 
-  
-  </View>
-
-     
-     <View 
- 
-     style={{width:"90%",height:Dimensions.get("screen").height/1.9, justifyContent:"center",alignItems:"center",
-     }}> 
-     
-    
-   
-     
-  <Text style={{fontSize:Dimensions.get("screen").height/50,color:"white",fontWeight:"bold"}}>Create account</Text>
-
-      
-
+    {
+    Loders ?
+     <SkypeIndicator  
+       color='white' size={30}  />:
          
+    <Text style={{
+      color:white_color,
+      fontSize:Dimensions.get("screen").height/40,
+      fontWeight:"bold"
+    }}>Personal Information</Text>
+  }
+ </View>
+
+ <View style={{
+          width:'100%',
+          height:Dimensions.get("screen").height/1.8,
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          alignItems:"center",
+          justifyContent:"space-around"}}>
+           
+ <View style={{
+          width:'85%',
+          height:"100%",
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          // alignItems:"center",
+          justifyContent:"space-evenly"}} > 
+        
+        <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>Name</Text>
      <TextInput 
      
      mode="flat"
      label="Name"
-    onChangeText={(textdata)=>{setName(textdata)}}
-    //  placeholder=" Enter Your Name"
-      style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
-      
-
-      
-
+         onChangeText={(textdata)=>{setName(textdata)}}
+     style={{
+      height:Dimensions.get("screen").height/17,
+      width:'100%',
+      backgroundColor:"#ffffff"}} />
+       <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>Last Nmae</Text>
      <TextInput 
      
      mode="flat"
+     
      label="Last NAME"
     onChangeText={(textdata)=>{setLastName(textdata)}}
-    //  placeholder=" Enter Your LastName"
-      style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
-      
-
-     
-
+     style={{
+      height:Dimensions.get("screen").height/17,
+      width:'100%',
+      backgroundColor:"#ffffff"}} />
+       <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>Email</Text>
      <TextInput 
      
      mode="flat"
-    //  value={text}
-     label="Email"
-    //  ={(textdata)=>{setText(textdata)}}
-    onChangeText={(textdata)=>{setemail(textdata)}}
-    //  placeholder=" Enter Your Password" 
-     style={{height:Dimensions.get("screen").height/17,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
+    label="Email"
+        onChangeText={(textdata)=>{setemail(textdata)}}
+     style={{
+      height:Dimensions.get("screen").height/17,
+      width:'100%',
+      backgroundColor:"#ffffff"}} />
+       <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>Phone Number</Text>
+     <TextInput 
+     
+     mode="flat"
+     label="Number"
+      onChangeText={(textdata)=>{setNum(textdata)}}
+     style={{
+      height:Dimensions.get("screen").height/17,
+      width:'100%',
+      backgroundColor:"#ffffff"}} />
       
-     
-     
-        
-      <TextInput 
-       mode="flat"
-      //  value={textpass}
-       label="Number"
-       onChangeText={(textdata)=>{setNum(textdata)}}
-      // placeholder="Enter Your number"  
-      secureTextEntry={onpen_eyes} style={{height:Dimensions.get("screen").height/17
-      ,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
 
-      <TextInput 
-       mode="flat"
-      //  value={textpass}
-       label="Password"
+       <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>Password:</Text>
+     
+     <TextInput 
+      mode="flat"
+      // value={password}
+      label="Password"
        onChangeText={(textdata)=>{setPass(textdata)}}
-       right={<TextInput.Icon    icon="eye" />}
-      // placeholder="Enter Your Password" 
-       secureTextEntry={onpen_eyes}
-        style={{height:Dimensions.get("screen").height/17
-      ,width:"90%",margin:5,backgroundColor:"#ffffff"}} />
-         
-     </View>
+      right={<TextInput.Icon  onPress={()=>{setonpen_eyes(false)}} 
+       icon="eye" color={"black"} />}
+     // placeholder="Enter Your Password" 
+      secureTextEntry={onpen_eyes}
+      style={{height:Dimensions.get("screen").height/17,
+      width:'100%',
+      backgroundColor:"#ffffff"}} />
 
+ </View>
 
+ </View>
+ <View style={{
+          width:'100%',
+          height:Dimensions.get("screen").height/7,
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          alignItems:"center",
+          justifyContent:"space-evenly"
+          }}>
 
-  <View  style={{width:"100%",height:"23%",justifyContent:"center",alignItems:"center",backgroundColor:"black"}} > 
+            <TouchableOpacity 
+            onPress={()=>{Form_Handle()}}
+              style={{
+          width:'50%',
+          height:'40%',
+          // borderWidth:1,
+          borderColor:'white',
+          justifyContent:"center",
+          alignItems:"center",
+          backgroundColor:blue_color,
+          borderRadius:7
+          }}>
+   <Text style={{
+         color:white_color,
+         fontSize:Dimensions.get("screen").height/45,
+         fontWeight:"bold"
+       }}>
+              SIGN IN
+            </Text>
+            </TouchableOpacity>
+           
 
-     <ImageBackground
+          </View>
 
-     resizeMode="cover"
-     source={require("../assets/login_last.png")}
-     style={{width:"100%",height:"100%",alignItems:"center",}}
-     
-     >
-      <View  style={{width:"80%",height:85,justifyContent:"space-between",flexDirection:"row",}} > 
-
-<View  style={{width:"60%",height:"70%",flexDirection:"row",alignItems:"center"}} >
- 
- 
-<CheckBox
-    disabled={false}
-    value={toggleCheckBox}
-    onValueChange={(newValue) => setToggleCheckBox(newValue)}
-    box
-    tintColors="white"
-    
-  />
-  
-  <Text style={{color:"white",fontSize:12,fontWeight:"bold"}}>I agree to & Conditions</Text>
-
-</View>
-
- 
-<View  style={{width:80,height:100,bottom:32,justifyContent:"center",alignItems:"center",}}>
-
-
- <TouchableOpacity   style={{width:60,height:60,justifyContent:"center",alignItems:"center",
-}}
-onPress={()=>{Form_Handle()}}
->
-<View style={{width:60,height:60,backgroundColor:blue_color,justifyContent:"center",alignItems:"center",bottom:10,borderRadius:33,
-shadowColor: '#000',
-shadowOffset: { width: 3, height: 1 },
-shadowOpacity: 0.8,
-shadowRadius: 2,  
-elevation: 5
-
-
-}}>
-  
-<Icon name="arrow-right-thin" size={40} color={white_color} />
-
-
-</View>
-</TouchableOpacity>
-<Text style={{color:"white" ,fontWeight:"bold"}}>
-  Sign Up
-</Text>
-
-</View>
-
-
-</View>
-
-     </ImageBackground>
-
-    </View>
-    
-
-</Animatable.View>
 </ScrollView>
+
+
+</View>
+  
+
 
 
 
