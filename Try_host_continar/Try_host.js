@@ -19,9 +19,7 @@ import {
   } from 'react-native';
   import Icon from 'react-native-vector-icons/MaterialIcons';
   import React, {useState, useEffect, useRef, useCallback} from 'react';
-  import Iconacount from 'react-native-vector-icons/MaterialCommunityIcons';
   import {blue_color, white_color} from '../Constants_continar/Constant.js';
-
 
 
 
@@ -36,6 +34,7 @@ const Try_host = ({navigation,...props}) => {
         backgroundColor: blue_color,
         alignItems: 'center',
       }}>
+
       <View
         style={{
           height: '40%',
@@ -101,7 +100,7 @@ const Try_host = ({navigation,...props}) => {
           }}>
             
             <TouchableOpacity 
-              onPress={()=>{navigation.navigate('Flatlist2')}}
+              onPress={()=>{navigation.navigate('Listing')}}
               style={{
                 height: '35%',
                 width: '45%',
@@ -169,3 +168,76 @@ const Try_host = ({navigation,...props}) => {
 
 
   export default Try_host;
+
+
+// import React, {useRef, useEffect} from 'react';
+// import {Animated, ScrollView, Text, View} from 'react-native';
+
+// const FadeInView = props => {
+//   const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+
+//   // useEffect(() => {
+//   //   Animated.timing(fadeAnim, {
+//   //     toValue: 1,
+//   //     duration: 1000,
+//   //     useNativeDriver: true,
+//   //   }).start();
+//   // }, [fadeAnim]);
+
+//   return (
+//     <Animated.View // Special animatable View
+//       style={{
+//         ...props.style,
+//         opacity: fadeAnim, // Bind opacity to animated value
+//       }}>
+//       {props.children}
+//     </Animated.View>
+//   );
+// };
+
+// // You can then use your `FadeInView` in place of a `View` in your components:
+// const Try_host =() => {
+//   return (
+//     <ScrollView scrollEnabled={true}
+//     onScroll={(e)=>{
+//      console.log(e.nativeEvent.contentOffset.y)
+//      if(e.nativeEvent.contentOffset.y){
+//       // Animated.timing().start();
+//         fadeAnim // Initial value for opacity: 0
+
+
+//      }else{
+      
+//      }
+//     }}
+//     >
+//     <View
+//       style={{
+//         height:500,
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//       }}>
+//       <FadeInView
+//         style={{
+//           width: 250,
+//           height: 50,
+//           backgroundColor: 'powderblue',
+//         }}>
+//         <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>
+//           Fading in
+//         </Text>
+//       </FadeInView>
+//     </View>
+//     <View
+//       style={{
+//         height:500,
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//       }}>
+     
+//     </View>
+//     </ScrollView>
+//   );
+// };
+
+// export default Try_host

@@ -1,6 +1,7 @@
 
-import { View ,Text, TouchableOpacity, ImageBackground,ScrollView,Keyboard,Dimensions,Image,
-   StatusBar,SafeAreaView} from "react-native"
+import { View ,Text, TouchableOpacity, ImageBackground,
+  ScrollView,Keyboard,Dimensions,Image,
+  StatusBar,SafeAreaView} from "react-native"
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput } from 'react-native-paper';
@@ -65,7 +66,7 @@ const Login2 =(Props)=>{
     const [email,setemail]=useState("")
     const [password,setpassword]=useState("")
     const [ShowPas,setShowPass]=useState(false)
-    const[data_save,setdata_save]=useState("")
+    const[data_save_text,setdata_save_text]=useState("")
 
     const logins = () => {
     setLoders(true)
@@ -95,7 +96,11 @@ const Login2 =(Props)=>{
         // setdata_save(json)
         setLoders(false)
         if(json.status==false){
-          alert(json?.message)
+          // alert(json?.message)
+          setdata_save_text(json?.message)
+        }else{
+          console.log('helo')
+          setdata_save_text(false)
         }
          
         console.log(json.token,"tokenn")
@@ -186,17 +191,20 @@ return(
           justifyContent:"center",
           // alignItems:"center",
           justifyContent:"space-evenly"}} > 
+
+     
+            <Text style={{
+              color:white_color,
+              fontSize:Dimensions.get("screen").height/45,
+              fontWeight:"bold"
+            }}>Email</Text>
         
-        <Text style={{
-         color:white_color,
-         fontSize:Dimensions.get("screen").height/45,
-         fontWeight:"bold"
-       }}>Email</Text>
+     <View>
      <TextInput 
      
      mode="flat"
      value={email}
-     label="Email"
+     label= "Email"
     //  ={(textdata)=>{setText(textdata)}}
     onChangeText={(textdata)=>{setemail(textdata)}}
     //  placeholder=" Enter Your Password" 
@@ -204,12 +212,24 @@ return(
       height:Dimensions.get("screen").height/17,
       width:'100%',
       backgroundColor:"#ffffff"}} />
+      { data_save_text ?
+          <Text style={{
+            color:'red',
+            fontSize:Dimensions.get("screen").height/80,
+           //  fontWeight:"bold"
+           margin:2
+          }}>{data_save_text }</Text>:null
+      }
+   
+
+      </View>
 
        <Text style={{
          color:white_color,
          fontSize:Dimensions.get("screen").height/45,
          fontWeight:"bold"
        }}>Password:</Text>
+       <View>
      
      <TextInput 
       mode="flat"
@@ -223,6 +243,18 @@ return(
       style={{height:Dimensions.get("screen").height/17,
       width:'100%',
       backgroundColor:"#ffffff"}} />
+
+      { data_save_text ?
+       <Text style={{
+        color:'red',
+        fontSize:Dimensions.get("screen").height/80,
+       //  fontWeight:"bold"
+       margin:2
+      }}>{data_save_text }</Text>:null
+      }
+
+      
+      </View>
 
  </View>
 

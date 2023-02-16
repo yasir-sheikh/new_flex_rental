@@ -48,7 +48,7 @@ import { View ,Text,Image, TextInput,FlatList,StyleSheet,ScrollView,
   // borderRadius:20
 }}>
      
-     <TouchableOpacity
+     <Pressable
       onPress={()=>{navigation.navigate("Imageview2",{item})}}
      style={{ height:Dimensions.get("screen").height/4.1, width:Dimensions.get("window").width/1.2,alignItems: 'center',borderRadius:15}} >
      <Image    
@@ -58,7 +58,7 @@ style={{width:"100%",height:"100%",borderRadius:15}}
 />
       
        
-     </TouchableOpacity>
+     </Pressable>
      <View style={{ height:"45%", width:"90%", borderWidth:1,justifyContent:"center",backgroundColor:"black"}} >
       <Text style={{color:"white",fontWeight:"bold",fontSize:Dimensions.get("screen").height/50}}>{item.title} </Text>
       <Text style={{color:"#00bfff",fontWeight:"bold",fontSize:Dimensions.get("screen").height/50}}>${item.rate_per_night}/Night </Text>

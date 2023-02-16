@@ -33,8 +33,9 @@ import {
   } from 'react-native-image-picker';
   import {blue_color, white_color} from '../Constants_continar/Constant.js';
   import {useSelector} from 'react-redux';
- 
+  import * as Animatable from 'react-native-animatable';
   import {removeUser,removeImage} from '../Main_Ridux/redux/actions/Authacion';
+  import { BlurView } from "@react-native-community/blur";
 
 
 
@@ -49,17 +50,21 @@ const Profile_main = ({navigation,...props}) => {
   // console.log(image_get_redux,'reduxx resssssssss////////////////.........')
 
     const logout = () => {
-        console.log('logOut');
+      setloder(true)
+      setTimeout(() => {
         props.removeUser();
+      },2000);
+        console.log('logOut');
+        
         
       };
       const [date, setDate] = useState(new Date());
       const [open, setOpen] = useState(false);
-      const [open_modal, setopen_modal] = useState({open_modals: false});
+      const [open_modal, setopen_modal] = useState({open_modal_view: false});
       const [Filterdata, setFilterdatar] = useState([]);
       const [Masterdata, setMasterdata] = useState([]);
       const [Search, setSearch] = useState('');
-      const [loder, setloder] = useState(true);
+      const [loder, setloder] = useState(false);
       const [save_image_type,setsave_image_type]=useState([])
       const [celender,setcelender]=useState(false)
       const [selected,setSelected]=useState("")
@@ -383,7 +388,7 @@ const Profile_main = ({navigation,...props}) => {
             // borderColor: white_color,
             borderWidth:1
           }}>
-            <TouchableOpacity onPress={()=>{logout()}}>
+            <TouchableOpacity onPress={()=>{setopen_modal({open_modal_view:true})}}>
             <Text style={{
             color:white_color,
             fontSize:Dimensions.get("screen").height/50,
@@ -419,7 +424,47 @@ const Profile_main = ({navigation,...props}) => {
 
         </View>
 
+  {/* M O D A L ... A C C O U N T ... D E L E T E */}
 
+  <Modal 
+          animationType="fade"
+          transparent visible={open_modal.open_modal_view}  
+           
+          //  onRequestClose={()=>{ setopen_modal({open_modal_view: false})}}
+          
+          >
+    <BlurView
+          style={styles.absolute}
+          blurType="light"
+          blurAmount={5}
+          reducedTransparencyFallbackColor="white"
+          // onPointerCancel
+          
+        />
+            <Pressable
+            // onPress={()=>{setopen_modal({open_modal_view:false})}}
+            style={{flex:1,justifyContent:"center",alignItems:"center"}}>
+           <View
+              // animation='bounceInRight'
+              //  itesrationCount={5}
+           
+           
+           style={{width:'80%',height:"10%",
+           backgroundColor:"white",borderRadius:20,
+           justifyContent:"center",alignItems:"center",justifyContent:"space-evenly"}}>
+            
+            { loder ?
+               <ActivityIndicator size={25} color="black"/>:
+          <Text style={{color:"black",fontWeight:"900"}}>DELETE ACCOUNT ?</Text>
+
+            }
+          
+          <Text style={{color:"#eb144c",fontWeight:"900"}} onPress={()=>{logout()}}>CONFROM DELETE      <Text style={{color:"black",fontWeight:"900"}} onPress={()=>{ setopen_modal({open_modal_view: false})}} >CANCEL</Text> </Text>
+
+           </View>
+            </Pressable>
+            
+          </Modal>
 
       </View>
     </View>
@@ -427,7 +472,16 @@ const Profile_main = ({navigation,...props}) => {
 
 }
 
-
+const styles = StyleSheet.create({
+ absolute: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0
+  },
+ 
+});
    
 
   const mapStateToProps = (state) => ({

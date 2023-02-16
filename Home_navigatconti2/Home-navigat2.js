@@ -12,7 +12,7 @@ import Profile_main from '../Profile_main_continar/Profile_main';
 import Personal_infoo from '../Personal_info_continar/Personal_infoo';
 import Hosting from '../Hosting_Continar/Hosting';
 import Try_host from '../Try_host_continar/Try_host';
-
+import Listing from '../Listing_continar/Listing';
 const Stack = createNativeStackNavigator();
 
 const Homenavigat2 =()=>{
@@ -37,6 +37,7 @@ return(
   <Stack.Screen name="Personal_infoo" component={Personal_infoo} />
   <Stack.Screen name="Hosting" component={Hosting} />
   <Stack.Screen name="Try_host" component={Try_host} />
+  <Stack.Screen name="Listing" component={Listing} />
 
    
 

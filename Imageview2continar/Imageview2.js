@@ -17,6 +17,7 @@ import {
   save_date_pikar
 
 } from '../Main_Ridux/redux/actions/Authacion';
+import { BlurView } from "@react-native-community/blur";
 import {useDispatch} from 'react-redux';
 
 
@@ -58,6 +59,8 @@ function Imageview2({route,navigation}) {
     const [modal_item, setmodal_item] = useState({item_open: false});
     // const [isKeyboardVisible, setKeyboardVisible] = useState(false);
     const [up_date_state_date_out, setup_date_state_date_out] = useState(false);
+    const [like_hrart,setlike_hrart]=useState(false)
+    const [animate,setanimate]=useState('')
 
     //  console.log(selectedStartDate,'.............../////........>>>>>>>>')
 
@@ -79,6 +82,7 @@ function Imageview2({route,navigation}) {
       }
       
      })
+     
     
   const ImagesOK = ({item}) => {
 
@@ -125,11 +129,12 @@ function Imageview2({route,navigation}) {
    
 <ScrollView   
  contentContainerStyle={{backgroundColor:"black"}}
- 
+ showsVerticalScrollIndicator={false}
 >
   <View style={styles.container}>
   
-      <StatusBar   backgroundColor={"black"}/>
+      <StatusBar   backgroundColor={"black"} />
+
           <View 
           style={{
             width:Dimensions.get("screen").width,
@@ -168,21 +173,21 @@ function Imageview2({route,navigation}) {
           }}>
             <View 
                style={{
-                height: Dimensions.get("screen").height/9,
-                width: '90%',
+                height: Dimensions.get("screen").height/6,
+                width: '92%',
                 flexDirection: 'row',
                 justifyContent: "space-between",
                
                 // borderWidth:1
               }} >
+                <TouchableOpacity >
           <Icon
             name="arrow-back"
             color={'white'}
             size={ Dimensions.get("screen").width / 12}
-            onPress={() => {
-              // props.navigation.navigate('Home_screen_tab');
-            }}
+            onPress={()=>{navigation.goBack()}}
           />
+          </TouchableOpacity>
           <View
             style={{
               flexDirection: 'row',
@@ -190,8 +195,29 @@ function Imageview2({route,navigation}) {
               justifyContent: "space-between",
               // borderWidth:1
             }}>
-            <Icon name="heart-outline" color={'white'} size={ Dimensions.get("screen").width / 12} />
+              <TouchableOpacity>
+              <Animatable.View
+animation={animate} 
+// duration={600}
+delay={400}
+iterationCount={animate=="fadeInDown"?2:1}
+direction={"alternate"} 
+
+>
+            <Icon name="heart" color={like_hrart ? 'red' :'white'} size={ Dimensions.get("screen").width / 12} onPress={()=>{
+          if(! like_hrart){
+            setlike_hrart(true)
+            setanimate("rubberBand")
+          }else{
+            setlike_hrart(false)
+            setanimate("swing")
+          }
+            }} />
+            </Animatable.View>
+            </TouchableOpacity>
+            
             <Iconf name="share-square" color={'white'} size={ Dimensions.get("screen").width / 14} />
+
           </View>
           </View>
         </View>
@@ -315,11 +341,19 @@ function Imageview2({route,navigation}) {
           // setSelectedEndDate(null);
           // setSelectedStartDate(null);
         }}>
+              <BlurView
+          style={styles.absolute}
+          blurType="light"
+          blurAmount={5}
+          reducedTransparencyFallbackColor="white"
+          // onPointerCancel
+          
+        />
         <Pressable
         
           style={{
             height: Dimensions.get('screen').height,
-            backgroundColor: 'rgba(0,0,0,0.4)',
+           
             width: '100%',
             justifyContent: 'center',
           }}>
@@ -358,7 +392,7 @@ function Imageview2({route,navigation}) {
               shadowOffset: {width: 4, height: 2},
               shadowRadius: 10,
               elevation: 5,
-              backgroundColor: 'white',
+              backgroundColor: 'black',
               borderRadius: 20,
             }}>
               <>
@@ -430,7 +464,6 @@ function Imageview2({route,navigation}) {
                            </Text>
                         }
                              
-                      
                         
                       
                         <Icon
@@ -496,7 +529,7 @@ function Imageview2({route,navigation}) {
                           width: '90%',
                           alignSelf: 'center',
                           borderWidth: 2,
-                          color: 'black',
+                          color: 'white',
                           borderRadius: 10,
                           borderColor:blue_color,
                           height:Dimensions.get("screen").height/17,
@@ -530,12 +563,12 @@ function Imageview2({route,navigation}) {
                           <Text
                             style={{
                               fontSize:  Dimensions.get("screen").height /45,
-                              color: 'black',
+                              color: white_color,
                               fontWeight: 'bold',
                             }}>
                             Rate per Night
                           </Text>
-                          <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: 'black'}}>
+                          <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: white_color}}>
                             ${store_rout?.rate_per_night}
                           </Text>
                         </View>
@@ -551,12 +584,12 @@ function Imageview2({route,navigation}) {
                           <Text
                             style={{
                               fontSize:  Dimensions.get("screen").height / 45,
-                              color: 'black',
+                              color: white_color,
                               fontWeight: 'bold',
                             }}>
                             Cleaning fee
                           </Text>
-                          <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: 'black'}}>
+                          <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: white_color}}>
                             ${store_rout?.cleaning_fee}
                           </Text>
                         </View>
@@ -572,12 +605,12 @@ function Imageview2({route,navigation}) {
                           <Text
                             style={{
                               fontSize:  Dimensions.get("screen").height/ 45,
-                              color: 'black',
+                              color: white_color,
                               fontWeight: 'bold',
                             }}>
                             security_deposit
                           </Text>
-                          <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: 'black'}}>
+                          <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: white_color}}>
                             ${store_rout?.security_deposit}
                           </Text>
                         </View>
@@ -593,12 +626,12 @@ function Imageview2({route,navigation}) {
                           <Text
                             style={{
                               fontSize:  Dimensions.get("screen").height / 45,
-                              color: 'black',
+                              color: white_color,
                               fontWeight: 'bold',
                             }}>
                             Taxes
                           </Text>
-                          <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: 'black'}}>
+                          <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: white_color}}>
                             $4
                           </Text>
                         </View>
@@ -617,16 +650,17 @@ function Imageview2({route,navigation}) {
                         <Text
                           style={{
                             fontSize:  Dimensions.get("screen").height / 45,
-                            color: 'black',
+                            color: white_color,
                             fontWeight: 'bold',
                           }}>
                           Total
                         </Text>
-                        <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: 'black'}}>
+                        <Text style={{fontSize:  Dimensions.get("screen").height / 45, color: white_color}}>
                           $
                           {store_rout?.rate_per_night +
                             store_rout?.cleaning_fee +
-                            store_rout?.security_deposit}
+                            store_rout?.security_deposit 
+                            }
                         </Text>
                       </View>
                       <Pressable
@@ -736,7 +770,7 @@ function Imageview2({route,navigation}) {
             // borderWidth:1
           }}>
           <TouchableOpacity
-              // onPress={()=>{navigation.navigate("Payment_screen",{store_rout})}}
+              onPress={()=>{Alert.alert(` ${store_rout.rate_per_night}/Night`,'soon')}}
 
             style={{
               width: '60%',
@@ -822,7 +856,15 @@ const styles = StyleSheet.create({
     margin:5,
     color:"white",
     fontSize:20
-  }
+  },
+    absolute: {
+       position: "absolute",
+       top: 0,
+       left: 0,
+       bottom: 0,
+       right: 0
+     },
+    
  
 });
 export default Imageview2

@@ -287,12 +287,12 @@ if(Drak==true){
   const toggleSwitch = () =>setDrak (previousState => !previousState);
   const [Drak_1,setDrak_1]=useState(false)
   const [userLucation,setuserLucation]=useState(true)
-  const [ Pin,setPin]=useState({
-    latitude: 30.3753,
-     longitude: 69.3451,
+//   const [ Pin,setPin]=useState({
+//     latitude: 30.3753,
+//      longitude: 69.3451,
      
-})
-const destination = {latitude: 24.9096167, longitude: 67.0254472};
+// })
+const destination = {latitude: 30.3753, longitude: 69.3451};
 
 
     console.log("Dark",Drak,constommapaStale,)
@@ -337,32 +337,35 @@ const destination = {latitude: 24.9096167, longitude: 67.0254472};
           }}>  
            
           <Marker  
-            coordinate={Pin}
+            coordinate={destination}
             draggable={true}
+            
             pinColor="red"
             onDragStart={(e)=>{
               setanimate("")
               console.log("helo map", e.nativeEvent.coordinate)
             }}
             onDragEnd={(e)=>{
-              setPin({
-                  latitude: e.nativeEvent.coordinate.latitude,
-                  longitude: e.nativeEvent.coordinate.longitude
-              })
+              // setPin({
+              //     latitude: e.nativeEvent.coordinate.latitude,
+              //     longitude: e.nativeEvent.coordinate.longitude
+              // })
               console.log("helo map", )
               setanimate("rubberBand")
             }} 
-
+             
           >
 
 
 {/* <Icondil name="map-pin" size={40} color="red" /> */}
 <MapViewDirections
-    origin={'place_id:ChIJW5i0tJC1j4ARoUGtkogTaUU'}
+    origin={destination}
     destination={destination}
     apikey={APIKEY}
-    strokeWidth={3}
-    strokeColor="red"
+    // strokeWidth={3}
+    // strokeColor="red"
+    strokeWidth={4}
+    strokeColor="white"
   />
 
 <Animatable.View

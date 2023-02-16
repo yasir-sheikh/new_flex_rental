@@ -171,7 +171,10 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
             // borderColor: white_color,
             borderWidth:1
           }}>
-            <TouchableOpacity style={{flexDirection:"row",}}>
+            <TouchableOpacity style={{flexDirection:"row",}}
+            onPress={()=>{navigation.navigate('Try_host')}}
+            
+            >
 
             <Iconacount name="plus" size={Dimensions.get("screen").height/33} color={white_color} />
           <Text style={{
@@ -280,7 +283,7 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
           }}>
 
               <TouchableOpacity 
-              onPress={()=>{navigation.navigate('Try_host')}}
+              onPress={()=>{navigation.navigate('Flatlist2')}}
               style={{
                 height: '65%',
                 width: '60%',

@@ -45,6 +45,7 @@ import {
   remove,
 } from 'react-native-image-picker';
 import {blue_color, white_color} from '../Constants_continar/Constant.js';
+import { BlurView } from "@react-native-community/blur";
 import {
   BallIndicator,
   BarIndicator,
@@ -85,10 +86,16 @@ const Flatlist2 = ({navigation, ...props}) => {
   const [selected,setSelected]=useState("")
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
-  const [searched_Data,set_search_data]=useState(null)
+  const [up_date_state_date_out,setup_date_state_date_out]=useState(false)
   // var newstate = image_get_redux.user[0].image
   useEffect(()=>{
 
+    if(save_date_redux_out_2){
+      setup_date_state_date_out(true)
+    }else{
+      setup_date_state_date_out(false)
+    }
+         
     if(date_redux){
       setup_date_state_date(true)
     }else{
@@ -257,7 +264,7 @@ const Flatlist2 = ({navigation, ...props}) => {
         const data = await response.json();
         setloder(false);
         const res = data.listnings;
-        // console.log(data.listnings,'LLLLLLLLLLLLLISTTTTTTTTTTTTTTTTT................')
+        // console.log(data.listnings[0].cnic_back,'LLLLLLLLLLLLLISTTTTTTTTTTTTTTTTT................')
         dispatch(api_store_redux_data(res));
 
       } catch (error) {
@@ -717,7 +724,7 @@ const Flatlist2 = ({navigation, ...props}) => {
                 />
             }
               </TouchableOpacity>
-            
+            {/* H E A T H E R .. I N P U T */}
           </View>
           <View
             style={{
@@ -776,7 +783,7 @@ const Flatlist2 = ({navigation, ...props}) => {
                   justifyContent: 'center',
                 }}>
                 <TextInput
-                  placeholder="Search"
+                  placeholder="Search location"
                   placeholderTextColor={'black'}
                   style={{height:Dimensions.get("screen").height/20,color:"black"}}
                   onChangeText={text => Searchfilter(text)}
@@ -998,7 +1005,7 @@ const Flatlist2 = ({navigation, ...props}) => {
            onRequestClose={()=>{ setopen_modal({open_modals: false});}}
           
           >
-            <ScrollView>
+            <ScrollView   showsVerticalScrollIndicator={false}>
             <View style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.5)'}}>
               <TouchableOpacity
                 style={{width: '100%', height:Dimensions.get("screen").height/2.6}}
@@ -1009,7 +1016,15 @@ const Flatlist2 = ({navigation, ...props}) => {
                   setSelectedStartDate(null);
                 }}>
               </TouchableOpacity>
-             
+
+              <BlurView
+          style={styles.absolute}
+          blurType="light"
+          blurAmount={1}
+          reducedTransparencyFallbackColor="white"
+          // onPointerCancel
+          
+        />
               <Animatable.View
                 style={{
                   width: '100%',
@@ -1026,7 +1041,7 @@ const Flatlist2 = ({navigation, ...props}) => {
                   style={{
                     width: '100%',
                     height: Dimensions.get("screen").height/1.9,
-                    backgroundColor: blue_color,
+                    backgroundColor: 'black',
                     borderTopLeftRadius: 38,
                     borderTopRightRadius: 38,
                     alignItems: 'center',
@@ -1042,6 +1057,10 @@ const Flatlist2 = ({navigation, ...props}) => {
                       borderTopLeftRadius: 40,
                       borderTopRightRadius: 40,
                       justifyContent: 'center',
+                      flexDirection:"row",
+                      justifyContent:"center",
+                      alignItems:"center",
+                      justifyContent:"space-between"
                     }}>
                     <Text
                       style={{
@@ -1051,6 +1070,13 @@ const Flatlist2 = ({navigation, ...props}) => {
                       }}>
                       Filter by{' '}
                     </Text>
+                    <TouchableOpacity  onPress={()=>{setopen_modal({open_modals: false})}}>
+                    <Text   style={{
+                        color: white_color,
+                        fontSize:18,
+                        fontWeight: 'bold',
+                      }} >Cancel</Text>
+                      </TouchableOpacity>
                   </View>
                   <View
                     style={{
@@ -1105,18 +1131,24 @@ const Flatlist2 = ({navigation, ...props}) => {
                   </View>
                 <ScrollView
                   contentContainerStyle={{height: Dimensions.get("screen").height/1, width: '100%'}}
+                  showsVerticalScrollIndicator={false}
                   >
                     <TouchableOpacity
-                       style={{alignSelf: 'flex-end',margin:10}}>
+                       style={{alignSelf: 'flex-end',margin:10}}
+                       >
                 
                   </TouchableOpacity>
-                  <View style={{height: '52%', width: '100%'}}>
+                  <View style={{height: '52%', width: '100%',}}>
                     <View
                       style={{
                         height: '35%',
                         flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'space-evenly',
+                        justifyContent: 'space-between',
+                        // width:'100%',
+                        // justifyContent:"center",
+                        // borderWidth:1,borderColor:"red"
+
                       }}>
                       <TouchableOpacity
                         style={{
@@ -1133,6 +1165,7 @@ const Flatlist2 = ({navigation, ...props}) => {
                           shadowOffset: {width: 4, height: 2},
                           shadowRadius: 10,
                           elevation: 10,
+                          justifyContent:"center"
                           // borderWidth:1
                         }}
                         onPress={() => {
@@ -1143,22 +1176,23 @@ const Flatlist2 = ({navigation, ...props}) => {
                         }}>
                         <Text
                           style={{
-                            color: blue_color,
-                            fontSize: Dimensions.get("screen").width / 25,
-                            fontWeight: 'bold',
+                            color: 'black',
+                            fontSize: Dimensions.get("screen").width / 29,
+                            fontWeight: 'bold',margin:5
                           }}>
                               {  up_date_state_date ?
                         <Text
                               style={{
-                                color: blue_color,
-                                fontSize:  Dimensions.get("screen").width / 25,
+                                color: 'black',
+                                fontSize:  Dimensions.get("screen").width / 29,
                                 fontWeight: 'bold',
+                                margin:5
                               }}>
                             {date_redux}
                             </Text>:
                              <Text
                              style={{
-                               color: blue_color,
+                               color: 'black',
                                fontSize:  Dimensions.get("screen").width / 29,
                                fontWeight: 'bold',
                              }}>
@@ -1170,7 +1204,7 @@ const Flatlist2 = ({navigation, ...props}) => {
                         <Icond
                           name={'calendar-outline'}
                           size={Dimensions.get('screen').width / 20}
-                          color={blue_color}
+                          color={'black'}
                           // style={{alignSelf: 'center', right: 40}}
                         />
                       </TouchableOpacity>
@@ -1178,7 +1212,7 @@ const Flatlist2 = ({navigation, ...props}) => {
                         style={{
                           flexDirection: 'row',
                           backgroundColor: white_color,
-                          width: '38%',
+                          width: '40%',
                           borderRadius: 15,
                           alignItems: 'center',
                           height: Dimensions.get("screen").width/10,
@@ -1189,6 +1223,7 @@ const Flatlist2 = ({navigation, ...props}) => {
                           shadowOffset: {width: 4, height: 2},
                           shadowRadius: 10,
                           elevation: 10,
+                          justifyContent:"center"
                         }}
                         onPress={() => {
                           // setcelender(true);
@@ -1198,23 +1233,24 @@ const Flatlist2 = ({navigation, ...props}) => {
                         <Text
                           style={{
                             color: blue_color,
-                            fontSize: Dimensions.get("screen").width / 28,
+                            fontSize: Dimensions.get("screen").width / 29,
                             fontWeight: 'bold',
                           }}>
-                              {  up_date_state_date ?
+                              {  up_date_state_date_out ?
                         <Text
                               style={{
-                                color: blue_color,
-                                fontSize:  Dimensions.get("screen").width / 25,
+                                color: 'black',
+                                fontSize:  Dimensions.get("screen").width / 29,
                                 fontWeight: 'bold',
                               }}>
                             {save_date_redux_out_2}
                             </Text>:
                              <Text
                              style={{
-                               color: blue_color,
+                               color: 'black',
                                fontSize:  Dimensions.get("screen").width / 29,
                                fontWeight: 'bold',
+                               
                              }}>
                              Check out date
                         </Text>}
@@ -1223,7 +1259,8 @@ const Flatlist2 = ({navigation, ...props}) => {
                         <Icond
                           name={'calendar-outline'}
                           size={Dimensions.get('screen').width / 20}
-                          color={blue_color}
+                          color={'black'}
+                          style={{margin:3}}
                           // style={{alignSelf: 'center', right: 40}}
                         />
                       </TouchableOpacity>
@@ -1248,7 +1285,7 @@ const Flatlist2 = ({navigation, ...props}) => {
                         return (
                           <Icondrop
                             name={isOpened ? 'caretup' : 'caretdown'}
-                            color={blue_color}
+                            color={'black'}
                             size={16}
                           />
                         );
@@ -1288,9 +1325,15 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     backgroundColor: 'white',
     // borderRadius:20
+  }, absolute: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0
   },
   dropdown1BtnStyle: {
-    width: '90%',
+    width: Dimensions.get('window').width/1.2,
     height: 50,
     backgroundColor: '#ffffff',
     // paddingHorizontal: 0,
