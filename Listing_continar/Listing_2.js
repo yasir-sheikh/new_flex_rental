@@ -36,16 +36,12 @@ import { TextInput } from 'react-native-paper';
     WaveIndicator,
   } from 'react-native-indicators';
   
-  import {useSelector} from 'react-redux';
+  
   
   // const WIDTH=Dimensions.get("screen").width;
   // const width = Dimensions.get("screen").width;
-  const Listing = ({navigation, ...props}) => {
+  const Listing_2 = ({navigation, ...props}) => {
   
-
-    const items = useSelector(state => state.authReducer.item_data);
-    console.log(items,"................reduxx////////////////////xxxxxxxxxx.")
-
    const [select, setselect] = useState(null)
     // var newstate = image_get_redux.user[0].image
    console.log('select========',select)
@@ -76,37 +72,20 @@ import { TextInput } from 'react-native-paper';
       {
         "userId": 1,
         "id": 1,
-        "title": "House ",
+        "title": "A Entir Place ",
         "completed": false,
-        'url': 'https://flexrental.developer-hi.xyz/static/media/apart.15c89c6cdf629b620648.jpg'
+        'url': 'https://flexrental.developer-hi.xyz/static/media/bedroom.cdffd9acb899230b369f.jpg'
       },
       {
         "userId": 1,
         "id": 2,
-        "title": "Apartment/Condo ",
+        "title": "A Private Room ",
         "completed": false,
-        'url': 'https://flexrental.developer-hi.xyz/static/media/house.f57f52c92960c14b592d.jpg'
+        'url': 'https://flexrental.developer-hi.xyz/static/media/place.3f171ddb6b0cd2515006.jpg'
           
         
       },
-      {
-        "userId": 1,
-        "id": 3,
-        "title": "Town House",
-        "completed": false,
-        'url': 'https://flexrental.developer-hi.xyz/static/media/town.5316613cafc2637b5b37.jpg'
-        
-
-      },
-      {
-        "userId": 1,
-        "id": 4,
-        "title": "Hotel",
-        "completed": true,
-        'url': 'https://flexrental.developer-hi.xyz/static/media/hotel.b7bebb584278cf86200a.jpg'
-        
-        
-      },
+     
     ]
     const [ondesiled,setondesiled]=useState(true)
   
@@ -221,7 +200,7 @@ import { TextInput } from 'react-native-paper';
             fontSize:Dimensions.get("screen").height/60,
             color:white_color,
             fontWeight:"bold"
-          }}  >Lorem ipusm dolor amet consetetur sadipscing elir,sed?</Text>
+          }}  >2. What Kind Of Space Will Guest Have ?</Text>
            </View>
      { box_data.map((item,index)=> {
       console.log(item.url,'.............')
@@ -231,7 +210,7 @@ import { TextInput } from 'react-native-paper';
 <TouchableOpacity  
 onPress={() =>{setselect(index == select ? null : index)}}
 style={{
-height:Dimensions.get("screen").height/14,
+height:Dimensions.get("screen").height/13,
 width:'100%',
 backgroundColor: index == select ? "#666666": "black"
 ,borderWidth:1,
@@ -249,8 +228,8 @@ justifyContent:"space-between"
  fontWeight:"bold",
  margin:15
 }}>{item.title}</Text>
-{/* 
-<Icondone name= { index == select ? 'done': ""}
+
+{/* <Icondone name= { index == select ? 'done': ""}
 size={25} color="white"  /> */}
 
 <Image
@@ -277,7 +256,7 @@ size={25} color="white"  /> */}
       justifyContent:"center",
       alignItems:"center"}} >
         <TouchableOpacity  
-        onPress={()=>{navigation.navigate("Listing_2")}}
+        onPress={()=>{navigation.navigate("Map_Adress")}}
         disabled={ondesiled}
         style={{height:'60%',
       width:'60%',
@@ -383,4 +362,4 @@ size={25} color="white"  /> */}
 
   });
   
-  export default  Listing 
+  export default  Listing_2

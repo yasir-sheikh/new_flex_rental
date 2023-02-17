@@ -66,6 +66,15 @@ const updateUser = (user) => {
               
             };
           };
+          const Listin_item = (item_data) => {
+            console.log('.........itemDATa.............',item_data)
+              return {
+                type: 'ITEM_DATA',
+                item_data,
+                
+                
+              };
+            };
   
       const removeImage = () => {
         return {
@@ -89,5 +98,6 @@ const updateUser = (user) => {
 
 
   
-  export {updateUser, removeUser,api_store_redux_data,image_redux,removeImage,item_redux,save_date_pikar,save_date_pikar_out};
+  export {updateUser, removeUser,api_store_redux_data,image_redux,removeImage,
+    item_redux,save_date_pikar,save_date_pikar_out,Listin_item};
   

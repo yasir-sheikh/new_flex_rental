@@ -123,13 +123,19 @@ const Try_host = ({navigation,...props}) => {
           backgroundColor: 'black',
           alignItems: 'center',
           justifyContent: 'center',
-          justifyContent:"space-evenly"
-          // borderWidth:1
+          justifyContent:"space-evenly",
+          // borderWidth:1,
+          borderColor: white_color,
         }}>
        
         
        
-        
+       <Image    
+    resizeMode="contain"
+    // source={images}
+    source={require("../assets/house.jpg")}
+    style={{width:"60%",height:"40%",borderRadius:10}}
+    />
        
         <View
           style={{
@@ -138,7 +144,8 @@ const Try_host = ({navigation,...props}) => {
             alignItems: 'center',
             justifyContent: 'center',
             // borderColor: white_color,
-            justifyContent:"flex-end"
+            justifyContent:"flex-end",
+            borderWidth:1
           }}>
 
               <TouchableOpacity 

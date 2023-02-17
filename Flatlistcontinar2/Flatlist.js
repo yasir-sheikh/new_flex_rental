@@ -31,12 +31,25 @@ import { View ,Text,Image, TextInput,FlatList,StyleSheet,ScrollView,
     WaveIndicator,
   } from 'react-native-indicators';
   import {useSelector} from "react-redux"
-
+  import {
+    updateUser,
+    api_store_redux_data,
+    image_redux,
+    Listin_item
+  } from '../Main_Ridux/redux/actions/Authacion';
+  import {useDispatch} from 'react-redux';
 
 
    const  Flatlists =({item,navigation})=>{
              
-    // console.log(item.selfie,".................")
+    const items = useSelector(state => state.authReducer.item_data);
+    // console.log(items.cover_photo,"................reduxxxxxxxxxxxx.")
+  // const dispatch = useDispatch()
+
+  //   useEffect(()=>{
+  //     dispatch(Listin_item(item));
+  //   },[])
+    // console.log(,".................")
 
   
     return(

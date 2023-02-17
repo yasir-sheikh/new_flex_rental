@@ -41,10 +41,19 @@ const  date_out ={
 
 
 }
+const  item ={
+
+  
+  user:null,
+  item_data:null
 
 
 
-const reducer = (state = {...data,...images,...items,...date,...date_out}, action) => {
+}
+
+
+
+const reducer = (state = {...data,...images,...items,...date,...date_out,...item}, action) => {
   // console.log("userrfvvvvvvvvvvvvvvvvv",action)
     switch (action.type) {
       case 'UPDATE_USER': {
@@ -73,7 +82,16 @@ const reducer = (state = {...data,...images,...items,...date,...date_out}, actio
           ...state,
           redux_image:action.redux_image
         }
+        case 'ITEM_DATA': 
+           
+        // console.log(save_date_redux,'reduser..........')
+        return{
+          ...state,
+          item_data:action.item_data
+
+        }
         case 'SAVE_DATE': 
+        
 
         // console.log(save_date_redux,'reduser..........')
         return{

@@ -32,6 +32,7 @@ import {
   updateUser,
   api_store_redux_data,
   image_redux,
+  Listin_item
 } from '../Main_Ridux/redux/actions/Authacion';
 import {useDispatch} from 'react-redux';
 import * as Animatable from 'react-native-animatable';
@@ -69,7 +70,9 @@ const Flatlist2 = ({navigation, ...props}) => {
   const image_get_redux = useSelector(state => state.authReducer.redux_image);
   const date_redux = useSelector(state => state.authReducer.save_date_redux)
   const save_date_redux_out_2 = useSelector(state => state.authReducer.save_date_redux_out)
- 
+   const items = useSelector(state => state.authReducer.item_data);
+    // console.log(items,"................reduxxxxxxxxxxxx.")
+  const dispatch_item = useDispatch()
 
   const dispatch = useDispatch();
 

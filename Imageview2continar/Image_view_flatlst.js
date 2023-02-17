@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, View ,FlatList, ScrollView} from 'react-native'
+import { StyleSheet, Text, View ,FlatList, ScrollView, TouchableOpacity} from 'react-native'
 import React from 'react'
 import { Dimensions } from 'react-native'
 
@@ -41,6 +41,7 @@ Facilities
   data={ item?.facilities}
   keyExtractor={key => key}
   renderItem={({item,index}) => (
+    
     <Text
       style={{
         fontWeight: 'bold',
