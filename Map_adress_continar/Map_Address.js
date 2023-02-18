@@ -406,7 +406,9 @@ direction={"alternate"} style={{width:40,height:40,alignItems:"center",justifyCo
              alignItems:"center",
             //  justifyContent:"space-between",
              }}>
-                <TouchableOpacity style={{
+                <TouchableOpacity
+                onPress={()=>{navigation.navigate("Select_listing")}}
+                style={{
                     width:"70%",
                     height:'70%',
                     borderWidth:2,

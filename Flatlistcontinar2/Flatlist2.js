@@ -71,7 +71,7 @@ const Flatlist2 = ({navigation, ...props}) => {
   const date_redux = useSelector(state => state.authReducer.save_date_redux)
   const save_date_redux_out_2 = useSelector(state => state.authReducer.save_date_redux_out)
    const items = useSelector(state => state.authReducer.item_data);
-    // console.log(items,"................reduxxxxxxxxxxxx.")
+    console.log(items?.facilities,"................reduxxxxxxxxxxxx.")
   const dispatch_item = useDispatch()
 
   const dispatch = useDispatch();

@@ -15,6 +15,8 @@ import Try_host from '../Try_host_continar/Try_host';
 import Listing from '../Listing_continar/Listing';
 import Listing_2 from '../Listing_continar/Listing_2';
 import Map_Adress from '../Map_adress_continar/Map_Address';
+import Select_listing from '../Select_listing_continar/Select_listing';
+import Multiple_upload_image from '../Multiple_uplod_image_continar/Multiple_upload_image';
 const Stack = createNativeStackNavigator();
 
 const Homenavigat2 =()=>{
@@ -42,6 +44,9 @@ return(
   <Stack.Screen name="Listing" component={Listing} />
   <Stack.Screen name="Listing_2" component={Listing_2} />
   <Stack.Screen name="Map_Adress" component={Map_Adress} />
+  <Stack.Screen name="Select_listing" component={Select_listing} />
+  <Stack.Screen name="Multiple_upload_image" component={Multiple_upload_image} />
+  
 
    
 

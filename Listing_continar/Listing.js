@@ -47,7 +47,6 @@ import { TextInput } from 'react-native-paper';
     console.log(items,"................reduxx////////////////////xxxxxxxxxx.")
 
    const [select, setselect] = useState(null)
-    // var newstate = image_get_redux.user[0].image
    console.log('select========',select)
   
     const [isKeyboardVisible, setKeyboardVisible] = useState('');
@@ -224,7 +223,7 @@ import { TextInput } from 'react-native-paper';
           }}  >Lorem ipusm dolor amet consetetur sadipscing elir,sed?</Text>
            </View>
      { box_data.map((item,index)=> {
-      console.log(item.url,'.............')
+      // console.log(item.url,'.............')
     return (
      
 

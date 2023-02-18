@@ -42,13 +42,13 @@ import { View ,Text,Image, TextInput,FlatList,StyleSheet,ScrollView,
 
    const  Flatlists =({item,navigation})=>{
              
-    const items = useSelector(state => state.authReducer.item_data);
+    // const items = useSelector(state => state.authReducer.item_data);
     // console.log(items.cover_photo,"................reduxxxxxxxxxxxx.")
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  //   useEffect(()=>{
-  //     dispatch(Listin_item(item));
-  //   },[])
+    useEffect(()=>{
+      dispatch(Listin_item(item));
+    },[])
     // console.log(,".................")
 
   
