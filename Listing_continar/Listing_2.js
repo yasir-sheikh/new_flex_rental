@@ -24,6 +24,8 @@ import {
 import Icondone from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import { TextInput } from 'react-native-paper';
+import Iconright from 'react-native-vector-icons/Entypo';
+import Iconc from 'react-native-vector-icons/MaterialCommunityIcons';
   import {
     BallIndicator,
     BarIndicator,
@@ -88,8 +90,6 @@ import { TextInput } from 'react-native-paper';
      
     ]
     const [ondesiled,setondesiled]=useState(true)
-  
-  
     useEffect(()=>{
       if(select==null){
         setondesiled(true)
@@ -228,10 +228,6 @@ justifyContent:"space-between"
  fontWeight:"bold",
  margin:15
 }}>{item.title}</Text>
-
-{/* <Icondone name= { index == select ? 'done': ""}
-size={25} color="white"  /> */}
-
 <Image
                     resizeMode="contain"
                     // source={images}
@@ -258,17 +254,15 @@ size={25} color="white"  /> */}
         <TouchableOpacity  
         onPress={()=>{navigation.navigate("Map_Adress")}}
         disabled={ondesiled}
-        style={{height:'60%',
+        style={{height:'62%',
       width:'60%',
-      backgroundColor:! ondesiled ? blue_color:'gray',
       justifyContent:"center",
       alignItems:"center",
       borderRadius:10}} >
-          <Text style={{
-            fontSize:Dimensions.get("screen").height/43,
-            color:white_color,
-            fontWeight:"bold"
-          }}>NEXT</Text>
+               <Iconright name= 'arrow-with-circle-right'
+        //    onPress={() => {setcounter_1(counter_1 + 5)}}
+size={55} color={ ! ondesiled ? white_color:'gray'}  /> 
+ {/* <Text style={{margin:9}}>NEXT</Text> */}
         </TouchableOpacity>
          </View>
       
@@ -298,7 +292,7 @@ size={25} color="white"  /> */}
                   justifyContent: 'space-between',
                 }}>
                 <TouchableOpacity
-                // onPress={()=>{navigation.navigate("Payment_screen")}}
+                onPress={()=>{navigation.navigate("Flatlist2")}}
                   style={{
                     width: 56,
                     height: 56,
@@ -308,7 +302,9 @@ size={25} color="white"  /> */}
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Iconburgar name="bars" size={32} color="white" />
+                  <Iconright name= 'arrow-left'
+        //    onPress={() => {setcounter_1(counter_1 + 5)}}
+                   size={40} color={ 'white'}  /> 
                 </TouchableOpacity>
                 <View style={{width: '37%', height: '100%'}}></View>
                 <TouchableOpacity
@@ -324,7 +320,8 @@ size={25} color="white"  /> */}
                     borderWidth:2,
                     borderColor:white_color
                   }}>
-                  <Iconburgar name="bars" size={32} color="white" />
+                  {/* <Iconburgar name="bars" size={32} color="white" /> */}
+                  <Iconc name="account-outline" size={45} color="white" />
                 </TouchableOpacity>
               </View>
             </Animatable.View>

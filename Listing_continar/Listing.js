@@ -23,6 +23,7 @@ import {
   import Iconburgar from 'react-native-vector-icons/AntDesign';
 import Icondone from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
+import Iconc from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TextInput } from 'react-native-paper';
   import {
     BallIndicator,
@@ -35,6 +36,7 @@ import { TextInput } from 'react-native-paper';
     UIActivityIndicator,
     WaveIndicator,
   } from 'react-native-indicators';
+  import Iconright from 'react-native-vector-icons/Entypo';
   
   import {useSelector} from 'react-redux';
   
@@ -278,17 +280,20 @@ size={25} color="white"  /> */}
         <TouchableOpacity  
         onPress={()=>{navigation.navigate("Listing_2")}}
         disabled={ondesiled}
-        style={{height:'60%',
+        style={{height:'62%',
       width:'60%',
-      backgroundColor:! ondesiled ? blue_color:'gray',
+      // backgroundColor:! ondesiled ? blue_color:'gray',
       justifyContent:"center",
       alignItems:"center",
       borderRadius:10}} >
-          <Text style={{
+          {/* <Text style={{
             fontSize:Dimensions.get("screen").height/43,
             color:white_color,
             fontWeight:"bold"
-          }}>NEXT</Text>
+          }}>NEXT</Text> */}
+          <Iconright name= 'arrow-with-circle-right'
+        //    onPress={() => {setcounter_1(counter_1 + 5)}}
+size={55} color={ ! ondesiled ? white_color:'gray'}  /> 
         </TouchableOpacity>
          </View>
       
@@ -328,7 +333,10 @@ size={25} color="white"  /> */}
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Iconburgar name="bars" size={32} color="white" />
+                  {/* <Iconburgar name="bars" size={32} color="white" /> */}
+                  <Iconright name= 'arrow-left'
+        //    onPress={() => {setcounter_1(counter_1 + 5)}}
+size={40} color={ 'white'}  /> 
                 </TouchableOpacity>
                 <View style={{width: '37%', height: '100%'}}></View>
                 <TouchableOpacity
@@ -344,7 +352,8 @@ size={25} color="white"  /> */}
                     borderWidth:2,
                     borderColor:white_color
                   }}>
-                  <Iconburgar name="bars" size={32} color="white" />
+                  {/* <Iconburgar name="bars" size={32} color="white" /> */}
+                  <Iconc name="account-outline" size={45} color="white" />
                 </TouchableOpacity>
               </View>
             </Animatable.View>

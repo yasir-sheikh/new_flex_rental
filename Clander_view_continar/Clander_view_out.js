@@ -26,12 +26,13 @@ const  Clander_view_out =({route,navigation})=>{
       if(loder){
         setloder(true)
         setTimeout(() => {
-          navigation.navigate('Flatlist2')
+          // navigation.navigate('Flatlist2')
+          navigation.goBack()
         }, 2000);
       }else{
         setloder(true)
         setTimeout(() => {
-          navigation.navigate('Flatlist2')
+          navigation.goBack()
         }, 2000)
       }
     }

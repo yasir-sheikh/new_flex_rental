@@ -1,5 +1,3 @@
-
-
 import { View ,Text,Image, TextInput,FlatList,StyleSheet,ScrollView,
     Keyboard, ImageBackground, TouchableOpacity,Modal,Pressable,Button,Dimensions, StatusBar} from 'react-native';
   import Icon from 'react-native-vector-icons/MaterialIcons';

@@ -343,11 +343,15 @@ const Profile_main = ({navigation,...props}) => {
             // borderColor: white_color,
             borderWidth:1
           }}>
+            <TouchableOpacity  onPress={()=>{navigation.navigate("Try_host")}}>
+
           <Text style={{
             color:white_color,
             fontSize:Dimensions.get("screen").height/50,
             fontWeight:"bold"
           }} >Won to become a Host? Click Here</Text>
+            </TouchableOpacity>
+
         </View>
         <View
           style={{

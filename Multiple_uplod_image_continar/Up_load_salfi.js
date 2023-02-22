@@ -31,7 +31,7 @@ import {
 
 
 
-const Multiple_upload_image = ({navigation,...props}) => {
+const Up_load_salfi = ({navigation,...props}) => {
 
 
    const All_data_response_user = useSelector(state => state.authReducer.user);
@@ -55,49 +55,33 @@ const Multiple_upload_image = ({navigation,...props}) => {
       const [open_modal, setopen_modal] = useState({open_modal_view: false});
       const [disible,setdisible]=useState(true)
 
-  const [fileResponse, setFileResponse] = useState('');
+  const [fileResponse, setFileResponse] = useState([]);
   
-
-   
-
 
   const handleDocumentSelection = useCallback(async () => {
-
     try {
-      const res = await DocumentPicker.pickMultiple({
-          type: [DocumentPicker.types.images],
-          allowMultiSelection: true
-      })
-
-      // setDoc(res)
-      for (let a = 0; a <= res.length; a++) {
-          // console.log('res.length====', res)
-
-          setFileResponse(res[a].uri)
-          setdisible(false)
-          console.log(res[a].uri, res[a].name, res[a].type,'////////////')
-      }
-  } catch (error) {
-      if (DocumentPicker.isCancel(error)) {
-      } else {
-          // console.log('error====>>>',error)
-      }
-  }
-    // try {
-    //   const response = await DocumentPicker.pick({
-    //     presentationStyle: 'fullScreen',
-    //     allowMultiSelection: true,
-
-    //   });
-    //   setFileResponse(response);
-    //   console.log(response[0].name,'res.fffffile.////////////////')
-    //   setdisible(false)
-    // } catch (err) {
-    //   console.log(err);
-    // }
+      const response = await DocumentPicker.pick({
+        presentationStyle: 'fullScreen',
+      });
+      setFileResponse(response);
+      console.log(response,'res.fffffile.////////////////')
+      setdisible(false)
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
+
   
- 
+
+
+
+    // useEffect(() => {
+    //     if (image_get_redux) {
+    //       setsave(true);
+    //     } else {
+    //       setsave(false);
+    //     }
+    //   });
 
 
       
@@ -106,53 +90,19 @@ const Multiple_upload_image = ({navigation,...props}) => {
 
         <View style={{height:"100%",width:"100%",backgroundColor:"black",alignItems:"center"}}>
 
-        <View style={{height:"45%",width:"100%",backgroundColor:"black"
+        <View style={{height:"30%",width:"100%",backgroundColor:"black"
         ,alignItems:"center",justifyContent:"center",
         // borderWidth:1,borderColor:white_color
         }} >
-            <Text style={{fontWeight:"bold",color:white_color,margin:8,fontSize:16}} >Show Your Guest What Your Place Look Like !</Text>
+            {/* <Text style={{fontWeight:"bold",color:white_color,margin:8,fontSize:16}} >Show Your Guest What Your Place Look Like !</Text> */}
 
-            <Text style={{fontWeight:"bold",color:white_color}}>Cover Photos</Text>
-          <Pressable
-           onPress={()=>{setopen_modal({open_modal_view:true})}}
-          style={{height:180,width:180,borderWidth:3,alignItems:"center",borderRadius:100,margin:10,borderColor:"#ffffff"}} >
-          {fileResponse? 
-            <Image
-              resizeMode='cover'
-              // source={images}
-              source={{
-
-                uri:fileResponse,
-
-              }}
-              style={{width: '100%', height: '100%', borderRadius: 100}}
-            />:
-          <Image    
-      resizeMode="contain"
-      source={{uri:`https://flexrental.developer-hi.xyz/static/media/hotel.b7bebb584278cf86200a.jpg`}}
-      style={{width:"100%",height:"100%",borderRadius:100}}
-      />
-      }
-          </Pressable>
-          { image_get_redux ?
-             <Text style={{color:"#ffffff",fontSize:Dimensions.get("screen").height/40,
-             margin:10,fontWeight:"900"}}>Personal User Profile</Text>:
-             <Text style={{color:"#ffffff",fontSize:Dimensions.get("screen").height/40,
-             margin:10,fontWeight:"900"}}>Upload Upto 10 Photos</Text>
-          }
+            <Text style={{fontWeight:"bold",color:white_color,fontSize:Dimensions.get("screen").height/35,}}>Identity</Text>
+         
+             
+             <Text style={{color:"#ffffff",fontSize:Dimensions.get("screen").height/56,
+             margin:10,fontWeight:"900"}}>Upload Your Front, Back And Selfie With Your Id Card</Text>
          
           </View>    
-
-          {/* {  fileResponse.map((item,index)=>{
-          
-          console.log(item,'iiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
-            return(
-              <>
-              </>
-            )
-          })
-
-          } */}
             
           <View 
           
@@ -160,7 +110,7 @@ const Multiple_upload_image = ({navigation,...props}) => {
         ,alignItems:"center"
         ,justifyContent:"center",
         // borderWidth:1,borderColor:white_color,
-        justifyContent:"space-evenly"
+        justifyContent:"space-around"
         }}>
         
         <View style={{height:"20%",width:"100%",backgroundColor:"black",
@@ -173,7 +123,7 @@ const Multiple_upload_image = ({navigation,...props}) => {
 <Text style={{fontWeight:"bold",color:white_color,
            fontSize:17,textDecorationLine:"underline"
 }}>Accepted Files</Text>
- {/* {fileResponse.map((file, index) => (
+ {fileResponse.map((file, index) => (
         <Text
           key={index.toString()}
           style={styles.uri}
@@ -181,11 +131,11 @@ const Multiple_upload_image = ({navigation,...props}) => {
           ellipsizeMode={'middle'}>
           {file?.uri}
         </Text>
-      ))} */}
+      ))}
 <Text style={{fontWeight:"bold",color:white_color,
    fontSize:17,textDecorationLine:"underline"
 }}>Rejected Files</Text>
- {/* {fileResponse.map((file, index) => (
+ {fileResponse.map((file, index) => (
         <Text
           key={index.toString()}
           style={styles.uri}
@@ -193,10 +143,11 @@ const Multiple_upload_image = ({navigation,...props}) => {
           ellipsizeMode={'middle'}>
           {file?.uri}
         </Text>
-      ))} */}
+      ))}
    
         </View>
-      <View  style={{height:"15%",width:"100%",backgroundColor:"black"
+   
+      <View style={{height:"18%",width:"100%",backgroundColor:"black"
         ,alignItems:"center",
         justifyContent:"center",
         // borderWidth:1,borderColor:white_color,
@@ -204,11 +155,11 @@ const Multiple_upload_image = ({navigation,...props}) => {
         // backgroundColor:blue_color,
         borderRadius:7,
         flexDirection:"row"
-        }} >
+        }}>
        
         <TouchableOpacity
         onPress={()=>{handleDocumentSelection()}}
-        style={{height:"72%",width:"40%",backgroundColor:"black"
+        style={{height:"70%",width:"40%",backgroundColor:"black"
         ,alignItems:"center",
         justifyContent:"center",
         borderWidth:1,borderColor:white_color,
@@ -223,7 +174,7 @@ size={23} color="white"  />
         </TouchableOpacity>
         <TouchableOpacity 
          onPress={()=>{handleDocumentSelection()}}
-        style={{height:"72%",width:"40%",backgroundColor:"black"
+        style={{height:"70%",width:"40%",backgroundColor:"black"
         ,alignItems:"center",
         justifyContent:"center",
         borderWidth:1,borderColor:white_color,
@@ -235,32 +186,61 @@ size={23} color="white"  />
 <Text style={{fontWeight:"bold",color:white_color}}> Select images</Text>
 <Iconpng name= 'file-jpg-box'
 size={35} color="white"  /> 
+
         </TouchableOpacity>
         </View>
-           <TouchableOpacity
-        disabled={disible}
-         onPress={()=>{navigation.navigate("Tittle")}}
-        style={{height:"15%",width:"40%",
-        // backgroundColor:"black"
-        alignItems:"center",
+        <View        style={{height:"15%",width:"80%",backgroundColor:"black"
+        ,alignItems:"center",
         justifyContent:"center",
-        // borderWidth:1,borderColor: white_color,
-        justifyContent:"space-around",
-        // backgroundColor: disible ?  "gray": blue_color,
-        borderRadius:7
+        // borderWidth:1,borderColor:  white_color,
+        justifyContent:"space-between",
+        // backgroundColor: disible ? 'gray': blue_color,
+        borderRadius:7,
+        flexDirection:"row",
+        // margin:110
         }}>
-{/* <Text style={{fontWeight:"bold",color:white_color}}> NEXT</Text> */}
+            <TouchableOpacity
+        // disabled={disible}
+         onPress={()=>{navigation.navigate("Profile_main")}}
+        style={{height:"85%",width:"25%",backgroundColor:"black"
+        ,alignItems:"center",
+        justifyContent:"center",
+        // borderWidth:1,borderColor:  white_color,
+        // justifyContent:"flex-start",
+        flexDirection:"row",
+        backgroundColor: blue_color,
+        borderRadius:7,
+        }}>
+<Iconright name= 'arrow-with-circle-left'
+        //    onPress={() => {setcounter_1(counter_1 + 5)}}
+size={45} color={"white"}  /> 
+        </TouchableOpacity>
+
+       
+        <TouchableOpacity
+        disabled={disible}
+         onPress={()=>{navigation.navigate("Date_show")}}
+        style={{height:"85%",width:"25%",backgroundColor:"black"
+        ,alignItems:"center",
+        justifyContent:"center",
+        // borderWidth:1,borderColor:  white_color,
+        // justifyContent:"flex-end",
+        flexDirection:"row",
+        backgroundColor: disible ? 'gray': blue_color,
+        borderRadius:7,
+        }}>
 <Iconright name= 'arrow-with-circle-right'
         //    onPress={() => {setcounter_1(counter_1 + 5)}}
-size={55} color={ disible ? 'gray' : "white"}  /> 
+size={45} color={ "white"}  /> 
         </TouchableOpacity>
-         
+        </View>
+      
 
           </View>
          
 
             {/* M O D A L ... U S E R .. I M A G E .. V I E W */}
-
+{/* 
             <Modal 
           // animationType="fade"
           transparent visible={open_modal.open_modal_view}  
@@ -280,13 +260,13 @@ size={55} color={ disible ? 'gray' : "white"}  />
             onPress={()=>{setopen_modal({open_modal_view:false})}}
             style={{flex:1,justifyContent:"center",alignItems:"center"}}>
            <View style={{width:Dimensions.get("window").width/1,height:"40%"}}>
-           {fileResponse ? 
+           {image_get_redux ? 
             <Image
               resizeMode="center"
               // source={images}
               source={{
 
-                uri: fileResponse,
+                uri: `https://flexrental.developer-um.xyz/storage/${image_get_redux?.user[0]?.image}`,
 
               }}
               style={{width: '100%', height: '100%'}}
@@ -301,7 +281,7 @@ size={55} color={ disible ? 'gray' : "white"}  />
            </View>
             </Pressable>
             
-          </Modal>
+          </Modal> */}
          
         </View>
   )
@@ -331,11 +311,4 @@ const styles = StyleSheet.create({
     // removeUser,
     // removeImage
   }
-  export default connect(mapStateToProps,mapDispatchToProps) (Multiple_upload_image);
-
-
-
-
-
-
-
+  export default connect(mapStateToProps,mapDispatchToProps) (Up_load_salfi);
