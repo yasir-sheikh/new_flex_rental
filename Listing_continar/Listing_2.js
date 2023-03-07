@@ -46,7 +46,7 @@ import Iconc from 'react-native-vector-icons/MaterialCommunityIcons';
   
    const [select, setselect] = useState(null)
     // var newstate = image_get_redux.user[0].image
-   console.log('select========',select)
+  //  console.log('select========',select)
   
     const [isKeyboardVisible, setKeyboardVisible] = useState('');
   

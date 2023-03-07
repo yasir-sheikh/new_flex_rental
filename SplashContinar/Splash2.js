@@ -1,11 +1,16 @@
+import { useEffect } from "react"
 import { StatusBar } from "react-native"
 import { View ,Text , Button, ImageBackground} from "react-native"
-
+import SplashScreen from 'react-native-splash-screen'
 
 
 
 const Splash2 =(Props)=>{
 
+useEffect(()=>{
+  // SplashScreen.hide()
+  // console.log( SplashScreen.show())
+})
 
 return(
 

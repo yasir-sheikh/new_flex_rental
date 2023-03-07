@@ -185,9 +185,6 @@ justifyContent:"flex-start"}}>
                // onPress={() => {setcounter(counter - 5)}}
                size={18} color="white"  />:null
         }
-   {/* <Icondone name= { icc ? 'done':''}
-// onPress={() => {setcounter(counter - 5)}}
-size={18} color="white"  /> */}
     </TouchableOpacity>
     <Text style={{margin:10,color:white_color}}>Agree & Continue with our privacy policy</Text>
  </View>

@@ -28,6 +28,7 @@ import Iconfont from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
 import CalendarPicker from 'react-native-calendar-picker';
 import {removeUser,removeImage} from '../Main_Ridux/redux/actions/Authacion';
+
 import {
   updateUser,
   api_store_redux_data,

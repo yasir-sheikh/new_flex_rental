@@ -362,11 +362,14 @@ const Profile_main = ({navigation,...props}) => {
             // borderColor: white_color,
             borderWidth:1
           }}>
+            <TouchableOpacity >
+              
           <Text style={
             {color:white_color,
               fontSize:Dimensions.get("screen").height/50,
               fontWeight:"bold"
           }} >Post Trips</Text>
+          </TouchableOpacity>
         </View>
         <View
           style={{

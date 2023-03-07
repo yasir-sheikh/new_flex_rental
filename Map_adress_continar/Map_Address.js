@@ -21,16 +21,16 @@ import {
   } from 'react-native';
   import Icon from 'react-native-vector-icons/MaterialIcons';
   import React, {useState, useEffect, useRef, useCallback} from 'react';
-  import {blue_color, white_color} from '../Constants_continar/Constant.js';import { Marker } from 'react-native-maps';  
+  import {blue_color, white_color} from '../Constants_continar/Constant.js'
+  ;import { Circle, Marker } from 'react-native-maps';  
   import MapViewDirections from 'react-native-maps-directions';
   import MapView, { PROVIDER_GOOGLE,Callout ,Polyline} from 'react-native-maps'
-  import Icondil from 'react-native-vector-icons/FontAwesome';
+  import Icons from 'react-native-vector-icons/AntDesign';
   import * as Animatable from 'react-native-animatable';
-  import { IconButton } from 'react-native-paper';
+  // import { IconButton } from 'react-native-paper';
   import { useIsFocused } from '@react-navigation/native';
-  
   import GetLocation from 'react-native-get-location'
-  
+  import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
   
   
   const APIKEY = 'AIzaSyCIcPl9NQywQ8QwPlpq9Me_frvG4swcVJ8'
@@ -228,7 +228,19 @@ const Map_Adress = ({navigation,...props}) => {
       const [Drak,setDrak]=useState(true)
       const [animate,setanimate]=useState('fadeInUpBig')
       const [stylesss,setstyle]=useState(constommapaStale)
-      const destination = {latitude: 30.3753, longitude: 69.3451};
+      const [Search,setSearch]=useState([])
+      console.log(Search,'ffffffffffffffffffff')
+      // const destination = {latitude: 30.3753, longitude: 69.3451};
+      const [region, setRegion] = useState({
+        latitude: 24.9096082,   
+        longitude: 67.0254397,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      });
+    
+      // const onRegionChange = (region) => {
+      //   setRegion(region);
+      // };
       useEffect(()=>{
       if(Drak==true){
         setstyle(constommapaStale)
@@ -237,6 +249,24 @@ const Map_Adress = ({navigation,...props}) => {
       }
       },[Drak])
 
+
+      const onSearchResult = (data, details) => {
+        // console.log(data,'dddddddddddddddddddd')
+        const { geometry } = details;
+        const { location } = geometry;
+        console.log(location,'llllllllllllllllllllllllll')
+          
+        setRegion({
+          // latitude: location.lat,
+          // longitude: location.lng,
+          // latitudeDelta: 0.0922,
+          // longitudeDelta: 0.0421,
+          latitude: location.lat,   
+          longitude:  location.lng,  
+          latitudeDelta: 0.0922,  
+          longitudeDelta: 0.0421,  
+        });
+      };
 
       useEffect(()=>{
     
@@ -259,7 +289,6 @@ const Map_Adress = ({navigation,...props}) => {
     
     
       })
-
     return(
 
     <View
@@ -271,38 +300,57 @@ const Map_Adress = ({navigation,...props}) => {
       }}>
         <View style={{
              height:Dimensions.get("screen").height/7.4,
-             width: '100%',
+             width: Dimensions.get("window").width/1,
             //  borderWidth:1,
              justifyContent:"center",
              alignItems:"center",
              justifyContent:"space-evenly",
-             backgroundColor:"rgb(34,34,34)"}}>
+             backgroundColor:"rgb(34,34,34)"}}
+             >
 
                 <Text style={{
                     fontSize:Dimensions.get("screen").height/50,
                     fontWeight:"bold",
                     color:white_color
                     }}>Where Is Your Place Located?</Text>
-                {/* <Text style={{
-                    fontSize:Dimensions.get("screen").height/50,
-                    fontWeight:"bold",
-                    color:white_color
-                    }}>Is The Pin In The Right Spot?</Text> */}
+                
+                      <GooglePlacesAutocomplete
+                       renderLeftButton={()  => <Icons name='search1'
+                       type='evilicon' color={white_color} size={25} style={{margin:9}}/>}
+                            returnKeyType={"search"}
+                            // fetchDetails={true}
+                            name="search1"
+      placeholder='Enter your placeholder text here'
+      debounce={400}
+      textInputProps={{ placeholderTextColor: 'pink' }}
+      query={{
+        key: 'AIzaSyCIcPl9NQywQ8QwPlpq9Me_frvG4swcVJ8',
+        language: 'en'
+    }}
+    // onPress={onSearchResult}
 
-                <TextInput 
-                placeholder='Enter Your Address'
-                placeholderTextColor={white_color}
-                style={{
-                    width:"80%",borderWidth:2,
-                borderColor:white_color,
-                borderRadius:9,
-                height:Dimensions.get("screen").height/17,}}/>
+    // value={destination.searchKeyword}
+    onPress={(data, details = onSearchResult) => {
+      console.log(details,'//////////')
+      setSearch({data});
+  }}
+styles={{
+textInput: {
+backgroundColor: '#464646',
+},
+textInputContainer: {
+width:Dimensions.get("window").width/1.2,
+margin:15
+},
+// in
+}}
+    />
+  
+
+                
          </View>
         <ScrollView  contentContainerStyle={{
-            //  height:Dimensions.get("screen").height/1,
              width:Dimensions.get("window").width/1 ,
-            // backgroundColor: white_color,
-        // alignItems: 'center',
         }}>
          
          <View style={{ height:Dimensions.get("screen").height/1.5,
@@ -310,32 +358,34 @@ const Map_Adress = ({navigation,...props}) => {
             //  borderWidth:1
              }}>
                 <MapView 
+                
           style={styles.mapStyle}  
           showsUserLocation={true}  
-          //  region={Pin}
+           region={region}
         customMapStyle={stylesss}
 
           zoomEnabled={true}  
-          zoomControlEnabled={true} 
+          zoomControlEnabled={false} 
           provider={PROVIDER_GOOGLE} 
           initialRegion={{  
-            latitude: 30.3753,   
-            longitude: 69.3451,  
+            latitude: 24.9096082,   
+            longitude: 67.0254397,  
             latitudeDelta: 0.0922,  
             longitudeDelta: 0.0421,  
-          }}>  
-           
+          }}
+          >  
           <Marker  
-            coordinate={destination}
+            coordinate={region}
             draggable={true}
-            
+      
+            backgroundColor={'red'}
             pinColor="red"
             onDragStart={(e)=>{
               setanimate("")
               console.log("helo map", e.nativeEvent.coordinate)
             }}
             onDragEnd={(e)=>{
-              // setPin({
+              // setRegion({
               //     latitude: e.nativeEvent.coordinate.latitude,
               //     longitude: e.nativeEvent.coordinate.longitude
               // })
@@ -346,10 +396,9 @@ const Map_Adress = ({navigation,...props}) => {
           >
 
 
-{/* <Icondil name="map-pin" size={40} color="red" /> */}
 <MapViewDirections
-    origin={destination}
-    destination={destination}
+    origin={region}
+    destination={region}
     apikey={APIKEY}
     // strokeWidth={3}
     // strokeColor="red"
@@ -362,14 +411,38 @@ animation={animate}
 // duration={600}
 delay={400}
 iterationCount={animate=="fadeInDown"?2:1}
-direction={"alternate"} style={{width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:100,borderColor:"white",
+direction={"alternate"} style={{width:40,height:40,alignItems:"center",
+justifyContent:"center",borderRadius:100,borderColor:"white",
+shadowColor: "black",
+// backgroundColor:"black",
+
+shadowOffset: {
+  width: 4,
+  height: 12,
+},
+shadowOpacity: 0.58,
+shadowRadius: 16.00,
+
+elevation: 9,
 // borderWidth:3,
 
 
 }}>
 
          <Image
-           style={{width:"100%",height:"100%",}}
+          
+          
+           style={{width:"80%",height:"80%",    shadowColor: "#ffffff",
+          //  backgroundColor:"black",
+           
+           shadowOffset: {
+             width: 4,
+             height: 12,
+           },
+           shadowOpacity: 0.58,
+           shadowRadius: 16.00,
+           
+           elevation: 24,}}
            source={require("../assets/placeholder-filled-point.png")}
            resizeMode="contain"
         />
@@ -379,21 +452,27 @@ direction={"alternate"} style={{width:40,height:40,alignItems:"center",justifyCo
 <Callout  
 //  tooltip={true}
  style={{
-  width: 200,
-  height: 50,
+  width: 100,
+  height: 30,
   backgroundColor: 'black',
   borderRadius: 10,
-  zIndex: 10,
+  // zIndex: 10,
   justifyContent:"center",
   alignItems:"center"
 }}
 >
-         {/* <View style={{width:200,height:500,borderWidth:1}}> */}
+
           <Text style={{color:"white"}}>I M Here</Text>
-          {/* </View> */}
         </Callout>
           </Marker>
-        
+        <Circle  
+        fillColor='white'
+        zIndex={8}
+        center={{latitude: 24.9096082,   
+            longitude: -67.0254397,  }}
+             strokeColor={'#ffffff'} strokeWidth={3}
+             >   
+        </Circle>
 
         </MapView> 
              </View >
@@ -411,12 +490,12 @@ direction={"alternate"} style={{width:40,height:40,alignItems:"center",justifyCo
                 style={{
                     width:"70%",
                     height:'70%',
-                    borderWidth:2,
+                    // borderWidth:2,
                     borderColor:white_color,
                     borderRadius:7,
                     justifyContent:"center",
                     alignItems:"center",
-                    backgroundColor:"black"
+                    backgroundColor:"#464646"
 
                 }}>
                     <Text style={{
@@ -437,14 +516,27 @@ direction={"alternate"} style={{width:40,height:40,alignItems:"center",justifyCo
 const styles = StyleSheet.create({  
     MainContainer: {  
    flex:1 ,
-   justifyContent:"center"
+   justifyContent:"center",
+  //  ...StyleSheet.absoluteFillObject,
     },  
     mapStyle: {  
-     width:"100%",
-     height:"100%",
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      ...StyleSheet.absoluteFillObject,
+    //  width:"100%",
+    //  height:"100%",
     //  backgroundColor:"black"
      
     },  
+    toInputBoxStyles:{
+      width:300
+    }
+
   }); 
 
   export default Map_Adress;
+
+  

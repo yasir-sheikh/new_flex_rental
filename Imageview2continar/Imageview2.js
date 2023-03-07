@@ -11,6 +11,7 @@ import SelectList from 'react-native-dropdown-select-list';
 import * as Animatable from 'react-native-animatable';
 import Image_view_flatlist from './Image_view_flatlst';
 import { blue_color,white_color } from '../Constants_continar/Constant.js';
+import { useIsFocused } from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {
   item_redux,
@@ -34,13 +35,14 @@ import {useDispatch} from 'react-redux';
 
 function Imageview2({route,navigation}) {
   console.log(blue_color,'kkk')
-  // console.log(route.params.item.rate_per_night,'//////////')
-  const[store_rout,setstore_rout]=useState(route.params.item)
+  console.log(route.params?.fileResponse,'//////////ffffffffffffffffffffffffffffffff')
+
+  const[store_rout,setstore_rout]=useState(route.params?.item)
   const redux_api = useSelector(state => state.authReducer.redux_data);
   const item_data_image = useSelector(state => state.authReducer.new_item)
   const date_redux = useSelector(state => state.authReducer.save_date_redux)
   const save_date_redux_out_2 = useSelector(state => state.authReducer.save_date_redux_out)
-  console.log(save_date_redux_out_2,'redux_date_out>>>>>>>>>>>>>>>>>>>>>>>>>.')
+  // console.log(save_date_redux_out_2,'redux_date_out>>>>>>>>>>>>>>>>>>>>>>>>>.')
   const dispatch = useDispatch();
   const dispatch_date = useDispatch();
 
@@ -83,11 +85,50 @@ function Imageview2({route,navigation}) {
       
      })
      
-    
-  const ImagesOK = ({item}) => {
+    const use = useIsFocused()
 
+  const ImagesOK = ({item}) => {
+    
+    
+
+//  console.log(news,'nnnnnnnnnnnnnnnnnnnnnn')
+
+//  useEffect(()=>{
+//   setnews(item)
+//  },[use])
+    
     return (
       <>
+      { route.params?.fileResponse ?
+              <ImageBackground
+              resizeMode="stretch"
+              imageStyle={{
+                borderBottomLeftRadius: 60,
+                borderBottomRightRadius: 60,
+                // borderRadius:50
+
+              }
+
+              }
+                // source={{uri:`https://flexrental.developer-um.xyz/storage/${item.cover_photo}`}}
+                 source={{  uri:item.uri}}
+                style={{
+                  height: Dimensions.get("screen").height /2.2,
+                  width:  Dimensions.get("screen").width,
+                 alignItems:"center"
+                }}
+              >
+                <TouchableOpacity 
+                onPress={()=>{ setmodal_item({item_open:true,item})  ;dispatch(item_redux(item.cover_photo));}}
+                style={{
+                  height: Dimensions.get("screen").height /2.2,
+                  width:  Dimensions.get("screen").width,
+                  borderBottomLeftRadius: 60,
+                  borderBottomRightRadius: 60,
+                  }}>
+
+                </TouchableOpacity>
+              </ImageBackground>:
               <ImageBackground
               resizeMode="stretch"
               imageStyle={{
@@ -99,6 +140,7 @@ function Imageview2({route,navigation}) {
 
               }
                 source={{uri:`https://flexrental.developer-um.xyz/storage/${item.cover_photo}`}}
+                //  source={{  uri:item.uri}}
                 style={{
                   height: Dimensions.get("screen").height /2.2,
                   width:  Dimensions.get("screen").width,
@@ -116,7 +158,7 @@ function Imageview2({route,navigation}) {
 
                 </TouchableOpacity>
               </ImageBackground>
-       
+       }
       </>
     );
   };
@@ -142,7 +184,9 @@ function Imageview2({route,navigation}) {
          
 
          <FlatListSlider
-          data={redux_api}
+          // data={redux_api}
+          
+          data={route.params?.fileResponse}
           width={ Dimensions.get("screen").width}
           height={ Dimensions.get("screen").height /2.2}
           timer={5000}
@@ -730,21 +774,39 @@ direction={"alternate"}
   }}>
 
       <View style={{width:"90%",height:"45%",}} >
-    <Image
-              resizeMode="stretch"
-              imageStyle={{
-               borderRadius:20
-                // borderRadius:50
+        { route.params?.fileResponse ?
+ <Image
+ resizeMode="stretch"
+ imageStyle={{
+  borderRadius:20
+   // borderRadius:50
 
-              }
+ }
 
-              }
-                source={{uri:`https://flexrental.developer-um.xyz/storage/${item_data_image}`}}
-                style={{
-                  height:"100%",
-                  width:"100%"  
-                }}
-              />
+ }
+   source={{uri:route.params?.fileResponse.uri}}
+   style={{
+     height:"100%",
+     width:"100%"  
+   }}
+ />:
+<Image
+resizeMode="stretch"
+imageStyle={{
+ borderRadius:20
+  // borderRadius:50
+
+}
+
+}
+  source={{uri:`https://flexrental.developer-um.xyz/storage/${item_data_image}`}}
+  style={{
+    height:"100%",
+    width:"100%"  
+  }}
+/>
+   
+            }
                 </View>
     </TouchableOpacity>
    </Animatable.View>
@@ -795,7 +857,7 @@ direction={"alternate"}
                 fontWeight: 'bold',
                 fontSize:  Dimensions.get("screen").height / 40,
               }}>
-              ${store_rout.rate_per_night}/Night
+              ${store_rout?.rate_per_night}/Night
             </Text>
           </TouchableOpacity>
           <TouchableOpacity

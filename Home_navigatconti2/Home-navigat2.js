@@ -28,6 +28,7 @@ import Up_load_salfi from '../Multiple_uplod_image_continar/Up_load_salfi';
 import Date_show from '../Date_show_continar/Date_show';
 import Submit from '../Submit_continar/Submit';
 import Payment_screen from '../Scroll_continar/Scroll';
+import Header from '../HeaderCantinar/Header';
 const Stack = createNativeStackNavigator();
 
 const Homenavigat2 =()=>{
@@ -68,6 +69,7 @@ return(
   <Stack.Screen name="Date_show" component={Date_show} />
   <Stack.Screen name="Submit" component={Submit} />
   <Stack.Screen name="Payment_screen" component={Payment_screen} />
+  {/* <Stack.Screen name="Header" component={Header} /> */}
   
   
   

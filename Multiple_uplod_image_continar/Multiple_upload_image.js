@@ -246,7 +246,8 @@ size={35} color="white"  />
         </View>
            <TouchableOpacity
         disabled={disible}
-         onPress={()=>{navigation.navigate("Tittle")}}
+        //  onPress={()=>{navigation.navigate("Tittle")}}
+        onPress={()=>{navigation.navigate("Imageview2",{fileResponse})}}
         style={{height:"15%",width:"40%",
         alignItems:"center",
         justifyContent:"center",

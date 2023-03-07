@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   SafeAreaView,
@@ -20,6 +20,7 @@ import { StripeProvider } from '@stripe/stripe-react-native';
 
 const App = () => {
  
+
 
   return (
     <StripeProvider

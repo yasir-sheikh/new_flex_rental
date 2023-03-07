@@ -71,11 +71,7 @@ const Let_price = ({navigation,...props}) => {
        fontWeight:"900",color:white_color
 
        }}>Let Set A Price</Text>
-       {/* <Text style={{
-        fontSize:Dimensions.get("window").width/20,
-       fontWeight:"900",color:white_color,margin:10
-
-       }}>Pick A Price Per Night</Text> */}
+       
         </View>
         <View  style={{
             width:"90%",

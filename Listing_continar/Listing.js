@@ -46,7 +46,7 @@ import { TextInput } from 'react-native-paper';
   
 
     const items = useSelector(state => state.authReducer.item_data);
-    console.log(items,"................reduxx////////////////////xxxxxxxxxx.")
+    // console.log(items,"................reduxx////////////////////xxxxxxxxxx.")
 
    const [select, setselect] = useState(null)
    console.log('select========',select)

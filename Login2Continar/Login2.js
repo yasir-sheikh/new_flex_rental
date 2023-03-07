@@ -9,7 +9,9 @@ import { useState,useEffect } from "react";
 import {updateUser} from "../Main_Ridux/redux/actions/Authacion"
 import { useDispatch } from "react-redux";
 import { blue_color,white_color } from '../Constants_continar/Constant.js';
-import * as Animatable from 'react-native-animatable';
+import RNExitApp from 'react-native-exit-app';
+import RNRestart from 'react-native-restart';
+import moment from "moment/moment";
 import {
   BallIndicator,
   BarIndicator,
@@ -26,6 +28,16 @@ import {
 
 const Login2 =(Props)=>{
 
+  const exit_app =()=>{
+
+    RNExitApp.exitApp()
+
+   
+  }
+  // console.log()
+  const restart_app =()=>{
+    RNRestart.restart()
+  }
   
     const [onpen_eyes,setonpen_eyes]= useState(true)
 
@@ -298,6 +310,9 @@ return(
             </Text>
             <TouchableOpacity 
             onPress={()=>{Props.navigation.navigate('SignUp')}}
+            // onPress={()=>{ exit_app()}}
+            // onPress={()=>{restart_app()}}
+            
             >
             <Text style={{
          color:white_color,
@@ -306,6 +321,7 @@ return(
          textDecorationLine:"underline ",
        }}>
               CREATE AN ACCOUNT
+              {/* {moment().format('MMMM Do YYYY, h:mm:ss a')} */}
             </Text>
             </TouchableOpacity>
 
