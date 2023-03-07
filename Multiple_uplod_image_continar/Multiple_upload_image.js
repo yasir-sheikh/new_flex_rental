@@ -55,7 +55,7 @@ const Multiple_upload_image = ({navigation,...props}) => {
       const [open_modal, setopen_modal] = useState({open_modal_view: false});
       const [disible,setdisible]=useState(true)
 
-  const [fileResponse, setFileResponse] = useState('');
+  const [fileResponse, setFileResponse] = useState([]);
   
 
    
@@ -68,14 +68,21 @@ const Multiple_upload_image = ({navigation,...props}) => {
           type: [DocumentPicker.types.images],
           allowMultiSelection: true
       })
-
-      // setDoc(res)
+console.log('res==========',res);
+setFileResponse(res)
+      // setDoc///(res)
       for (let a = 0; a <= res.length; a++) {
-          // console.log('res.length====', res)
-
-          setFileResponse(res[a].uri)
+        
+          // const res_obj =[{uri:res[a],name:res[a],type:res[a] }]
+          const obj = {
+            name: res[a].fileName,
+            uri: res[a].uri,
+            type: res[a].type,
+          };
+          // setFileResponse(res[a])
           setdisible(false)
           console.log(res[a].uri, res[a].name, res[a].type,'////////////')
+          console.log(obj,'objjjjjjjjjjjjj')
       }
   } catch (error) {
       if (DocumentPicker.isCancel(error)) {
@@ -116,7 +123,7 @@ const Multiple_upload_image = ({navigation,...props}) => {
           <Pressable
            onPress={()=>{setopen_modal({open_modal_view:true})}}
           style={{height:180,width:180,borderWidth:3,alignItems:"center",borderRadius:100,margin:10,borderColor:"#ffffff"}} >
-          {fileResponse? 
+          {/* {fileResponse? 
             <Image
               resizeMode='cover'
               // source={images}
@@ -126,13 +133,13 @@ const Multiple_upload_image = ({navigation,...props}) => {
 
               }}
               style={{width: '100%', height: '100%', borderRadius: 100}}
-            />:
+            />: */}
           <Image    
       resizeMode="contain"
       source={{uri:`https://flexrental.developer-hi.xyz/static/media/hotel.b7bebb584278cf86200a.jpg`}}
       style={{width:"100%",height:"100%",borderRadius:100}}
       />
-      }
+      {/* } */}
           </Pressable>
           { image_get_redux ?
              <Text style={{color:"#ffffff",fontSize:Dimensions.get("screen").height/40,
@@ -241,20 +248,36 @@ size={35} color="white"  />
         disabled={disible}
          onPress={()=>{navigation.navigate("Tittle")}}
         style={{height:"15%",width:"40%",
-        // backgroundColor:"black"
         alignItems:"center",
         justifyContent:"center",
-        // borderWidth:1,borderColor: white_color,
         justifyContent:"space-around",
-        // backgroundColor: disible ?  "gray": blue_color,
         borderRadius:7
         }}>
-{/* <Text style={{fontWeight:"bold",color:white_color}}> NEXT</Text> */}
 <Iconright name= 'arrow-with-circle-right'
-        //    onPress={() => {setcounter_1(counter_1 + 5)}}
 size={55} color={ disible ? 'gray' : "white"}  /> 
         </TouchableOpacity>
-         
+         {/* <ScrollView contentContainerStyle={{width:300}}>
+          
+            {fileResponse?fileResponse.map((val,ind)=>{
+
+              return(
+          <View style={{width:300,height:200,borderWidth:1,}}>
+
+                  <Image
+                      resizeMode='cover'
+                      // source={images}
+                      source={{
+        
+                        uri:val.uri,
+        
+                      }}
+                      style={{width: '100%', height: '100%', borderRadius: 100}}
+                    />
+                    </View>
+              )
+            }):null}
+
+         </ScrollView> */}
 
           </View>
          
@@ -280,23 +303,13 @@ size={55} color={ disible ? 'gray' : "white"}  />
             onPress={()=>{setopen_modal({open_modal_view:false})}}
             style={{flex:1,justifyContent:"center",alignItems:"center"}}>
            <View style={{width:Dimensions.get("window").width/1,height:"40%"}}>
-           {fileResponse ? 
-            <Image
-              resizeMode="center"
-              // source={images}
-              source={{
-
-                uri: fileResponse,
-
-              }}
-              style={{width: '100%', height: '100%'}}
-            />:
+          
           <Image    
       resizeMode="contain"
       source={{uri:`https://flexrental.developer-hi.xyz/static/media/hotel.b7bebb584278cf86200a.jpg`}}
       style={{width:"100%",height:"100%",}}
       />
-      }
+      
 
            </View>
             </Pressable>

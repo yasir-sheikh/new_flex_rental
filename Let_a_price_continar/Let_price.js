@@ -58,7 +58,7 @@ const Let_price = ({navigation,...props}) => {
                 alignItems:"center"
             }}
             >
-
+           
         <View  style={{
             width:"90%",
             height:Dimensions.get("screen").height/3.5,

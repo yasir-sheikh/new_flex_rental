@@ -93,6 +93,7 @@ const Tittle_3 = ({navigation,...props}) => {
             placeholderTextColor={white_color}
             style={{width:"100%",height:"20%",borderWidth:2,
             borderColor:white_color,
+            color:"white",
             padding:10,
         borderRadius:10,fontSize:20}}
             />

@@ -27,6 +27,7 @@ import Let_price_4 from '../Let_a_price_continar/Let_price_4';
 import Up_load_salfi from '../Multiple_uplod_image_continar/Up_load_salfi';
 import Date_show from '../Date_show_continar/Date_show';
 import Submit from '../Submit_continar/Submit';
+import Payment_screen from '../Scroll_continar/Scroll';
 const Stack = createNativeStackNavigator();
 
 const Homenavigat2 =()=>{
@@ -66,6 +67,7 @@ return(
   <Stack.Screen name="Let_price_4" component={Let_price_4} />
   <Stack.Screen name="Date_show" component={Date_show} />
   <Stack.Screen name="Submit" component={Submit} />
+  <Stack.Screen name="Payment_screen" component={Payment_screen} />
   
   
   

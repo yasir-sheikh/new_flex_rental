@@ -34,7 +34,7 @@ import {useDispatch} from 'react-redux';
 
 function Imageview2({route,navigation}) {
   console.log(blue_color,'kkk')
-  console.log(route.params.item.rate_per_night,'//////////')
+  // console.log(route.params.item.rate_per_night,'//////////')
   const[store_rout,setstore_rout]=useState(route.params.item)
   const redux_api = useSelector(state => state.authReducer.redux_data);
   const item_data_image = useSelector(state => state.authReducer.new_item)
@@ -181,6 +181,7 @@ function Imageview2({route,navigation}) {
                 // borderWidth:1
               }} >
                 <TouchableOpacity >
+                
           <Icon
             name="arrow-back"
             color={'white'}
@@ -770,7 +771,7 @@ direction={"alternate"}
             // borderWidth:1
           }}>
           <TouchableOpacity
-              onPress={()=>{Alert.alert(` ${store_rout.rate_per_night}/Night`,'soon')}}
+              onPress={()=>{navigation.navigate("Payment_screen",{store_rout})}}
 
             style={{
               width: '60%',
