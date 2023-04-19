@@ -1,7 +1,5 @@
 
 
-
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Flatlist2 from '../Flatlistcontinar2/Flatlist2';
 import Imageview2 from '../Imageview2continar/Imageview2';

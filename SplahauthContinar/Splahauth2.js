@@ -13,7 +13,7 @@ const Splashauth =()=>{
 
   setTimeout(()=>{
   setpass(false)
-  },1000)
+  },500)
 return(
 
    
@@ -23,7 +23,7 @@ return(
      pass ? 
   <Stack.Screen name="Splash2" component={Splash2} />:
   <Stack.Screen name="Auth2" component={Auth2} /> 
-}
+ } 
   
 </Stack.Navigator>
 

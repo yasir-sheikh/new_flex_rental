@@ -58,6 +58,7 @@ const Try_host = ({navigation,...props}) => {
     resizeMode="contain"
     // source={images}
     source={require("../assets/new_flex_rental_icon.png")}
+    // source={require("../android/app/src/main/res/mipmap-xhdpi")}
     style={{width:"90%",height:"70%"}}
     />
 

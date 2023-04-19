@@ -6,6 +6,7 @@ import { useState,useEffect } from "react";
 import * as Animatable from 'react-native-animatable';
 import { blue_color,white_color } from '../Constants_continar/Constant.js';
 import CheckBox from '@react-native-community/checkbox';
+import { base_url } from "../BaseUrl/base_url.js";
 import {
   BallIndicator,
   BarIndicator,
@@ -41,7 +42,7 @@ const SignUp2 =(props)=>{
      //  setisloading(true);
      setLoders(true)
       console.log('Login');
-      const URL = `https://flexrental.developer-um.xyz/api/signup`;
+      const URL = `${base_url}/signup`;
       const formdata = new FormData();
       formdata.append('email', email);
       formdata.append('first_name', Name);

@@ -61,6 +61,7 @@ import {
 } from 'react-native-indicators';
 import {useSelector} from 'react-redux';
 import Flatlists from './Flatlist';
+import { base_url } from '../BaseUrl/base_url';
 
 
 // const WIDTH=Dimensions.get("screen").width;
@@ -257,7 +258,7 @@ const Flatlist2 = ({navigation, ...props}) => {
 
   const listingApI = () => {
     setloder(true);
-    fetch(`https://flexrental.developer-um.xyz/api/listning`, {
+    fetch(`${base_url}/listning`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -268,7 +269,7 @@ const Flatlist2 = ({navigation, ...props}) => {
         const data = await response.json();
         setloder(false);
         const res = data.listnings;
-        // console.log(data.listnings[0].cnic_back,'LLLLLLLLLLLLLISTTTTTTTTTTTTTTTTT................')
+        console.log(data.listnings,'LLLLLLLLLLLLLISTTTTTTTTTTTTTTTTT................==================================')
         dispatch(api_store_redux_data(res));
 
       } catch (error) {
@@ -715,7 +716,7 @@ const Flatlist2 = ({navigation, ...props}) => {
               resizeMode='cover'
               source={{
 
-                uri: `https://flexrental.developer-um.xyz/storage/${image_get_redux?.user[0]?.image}`,
+                uri: `https://flexrental.dev-um.xyz/storage/${image_get_redux?.user[0]?.image}`,
 
               }}
               style={{width: 45, height: 45,borderRadius:50}}
@@ -1355,6 +1356,20 @@ const styles = StyleSheet.create({
 });
 
 export default Flatlist2
+
+
+
+// header link youtub...
+
+//  https://www.youtube.com/watch?v=YC17-JnrYQE
+
+// header sested staky
+
+// https://www.youtube.com/watch?v=xutPT1oZL2M&t=6s
+
+// 
+
+
 
 // drawer work
 {

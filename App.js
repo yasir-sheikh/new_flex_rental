@@ -16,11 +16,13 @@ import Auth_home2 from './Auth_home_continar2/Auth_home2';
 import { Provider } from 'react-redux';
 import {store} from './Main_Ridux/redux/Store'
 import { StripeProvider } from '@stripe/stripe-react-native';
-
+import RNBootSplash from "react-native-bootsplash";
 
 const App = () => {
  
-
+useEffect(()=>{
+  RNBootSplash.hide()
+})
 
   return (
     <StripeProvider
@@ -29,8 +31,7 @@ const App = () => {
       urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
     >
     <Provider store={store}>
-    <NavigationContainer>
-   
+    <NavigationContainer >
        <StatusBar/>
        <Auth_home2/>
        </NavigationContainer>

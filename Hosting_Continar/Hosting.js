@@ -1,49 +1,45 @@
 import {
-    View,
-    Text,
-    Image,
-    TextInput,
-    FlatList,
-    StyleSheet,
-    ScrollView,
-    Keyboard,
-    ImageBackground,
-    TouchableOpacity,
-    Modal,
-    Pressable,
-    Button,
-    Dimensions,
-    StatusBar,
-    RefreshControl,
-    ActivityIndicator
-  } from 'react-native';
-  import Icon from 'react-native-vector-icons/MaterialIcons';
-  import React, {useState, useEffect, useRef, useCallback} from 'react';
-  import Iconacount from 'react-native-vector-icons/MaterialCommunityIcons';
-  import {
-    updateUser,
-    api_store_redux_data,
-    image_redux,
-  } from '../Main_Ridux/redux/actions/Authacion';
-  import {useDispatch} from 'react-redux';
-  import {connect} from 'react-redux';
-  import {
-    launchCamera,
-    launchImageLibrary,
-    remove,
-  } from 'react-native-image-picker';
-  import {blue_color, white_color} from '../Constants_continar/Constant.js';
-  import {useSelector} from 'react-redux';
- 
-  import {removeUser,removeImage} from '../Main_Ridux/redux/actions/Authacion';
+  View,
+  Text,
+  Image,
+  TextInput,
+  FlatList,
+  StyleSheet,
+  ScrollView,
+  Keyboard,
+  ImageBackground,
+  TouchableOpacity,
+  Modal,
+  Pressable,
+  Button,
+  Dimensions,
+  StatusBar,
+  RefreshControl,
+  ActivityIndicator,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
+import Iconacount from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  updateUser,
+  api_store_redux_data,
+  image_redux,
+} from '../Main_Ridux/redux/actions/Authacion';
+import {useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
+import {
+  launchCamera,
+  launchImageLibrary,
+  remove,
+} from 'react-native-image-picker';
+import {blue_color, white_color} from '../Constants_continar/Constant.js';
+import {useSelector} from 'react-redux';
+import {removeUser, removeImage} from '../Main_Ridux/redux/actions/Authacion';
 
 
 
-
-const Hosting = ({navigation,...props}) => {
-      
-    return(
-
+const Hosting = ({navigation, ...props}) => {
+  return (
     <View
       style={{
         height: '100%',
@@ -55,100 +51,101 @@ const Hosting = ({navigation,...props}) => {
         style={{
           height: '40%',
           width: '100%',
-          backgroundColor: "black",
+          backgroundColor: 'black',
           alignItems: 'center',
           justifyContent: 'center',
-        //   borderWidth:1,
+          //   borderWidth:1,
           borderColor: white_color,
         }}>
-          <View style={{
-            width:"100%",
-            height:"38%",
+        <View
+          style={{
+            width: '100%',
+            height: '38%',
             // borderWidth:1,
             alignItems: 'center',
             justifyContent: 'center',
-        
-        }}>
-      
-          <Image    
-    resizeMode="contain"
-    // source={images}
-    source={require("../assets/new_flex_rental_icon.png")}
-    style={{width:"90%",height:"70%"}}
-    />
-
-          </View>
+          }}>
+          <Image
+            resizeMode="contain"
+            // source={images}
+            source={require('../assets/new_flex_rental_icon.png')}
+            style={{width: '90%', height: '70%'}}
+          />
+        </View>
         <View
           style={{
-            height:"15%" ,
-            width: "95%",
+            height: '15%',
+            width: '95%',
             // borderWidth: 1,
             alignItems: 'center',
             borderColor: white_color,
-            justifyContent:"center",
-            borderColor:"white"
+            justifyContent: 'center',
+            borderColor: 'white',
             // borderWidth:1,
             // flexDirection:"row",
             // justifyContent:"flex-start"
           }}>
-            
-         <Text  style={{
-          fontSize:Dimensions.get("screen").height/40,
-        //  margin:25,
-         fontWeight:"bold",
-         color:white_color
-
-        
-        }}>Welcome To Host!</Text>
+          <Text
+            style={{
+              fontSize: Dimensions.get('screen').height / 40,
+              //  margin:25,
+              fontWeight: 'bold',
+              color: white_color,
+            }}>
+            Welcome To Host!
+          </Text>
         </View>
         <View
           style={{
-            height:"46%" ,
-            width: "95%",
+            height: '46%',
+            width: '95%',
             // borderWidth: 1,
             // alignItems: 'center',
             borderColor: white_color,
-            justifyContent:"center",
-            borderColor:"white",
+            justifyContent: 'center',
+            borderColor: 'white',
             // borderWidth:1,
             // flexDirection:"row",
             // justifyContent:"flex-start"
           }}>
-            
-         <Text  style={{
-          fontSize:Dimensions.get("screen").height/45,
-        //  margin:25,
-         fontWeight:"bold",
-         color:white_color
+          <Text
+            style={{
+              fontSize: Dimensions.get('screen').height / 45,
+              //  margin:25,
+              fontWeight: 'bold',
+              color: white_color,
+            }}>
+            Your Listings
+          </Text>
+          <View
+            style={{
+              height: '45%',
+              width: '100%',
+              // borderWidth: 1,
+              alignItems: 'center',
+              borderColor: white_color,
+              justifyContent: 'center',
+              borderColor: 'white',
+              // borderWidth:1,
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+            }}>
+            <Iconacount
+              name="checkbox-blank"
+              size={Dimensions.get('screen').height / 30}
+              color={'#68bc00'}
+            />
 
-        
-        }}>Your Listings</Text>
-        <View
-          style={{
-            height:"45%" ,
-            width: "100%",
-            // borderWidth: 1,
-            alignItems: 'center',
-            borderColor: white_color,
-            justifyContent:"center",
-            borderColor:"white",
-            // borderWidth:1,
-            flexDirection:"row",
-            justifyContent:"flex-start"
-          }}>
-
-<Iconacount name="checkbox-blank" 
-size={Dimensions.get("screen").height/30} color={'#68bc00'} />
-            
-         <Text  style={{
-          fontSize:Dimensions.get("screen").height/50,
-         margin:10,
-         fontWeight:"bold",
-         color:white_color
-
-        
-        }}>1 Badroom Luxuries Condo</Text>
-        </View>
+            <Text
+              style={{
+                fontSize: Dimensions.get('screen').height / 50,
+                margin: 10,
+                fontWeight: 'bold',
+                color: white_color,
+              }}>
+              1 Badroom Luxuries Condo
+            </Text>
+          </View>
         </View>
       </View>
       <View
@@ -158,7 +155,7 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
           backgroundColor: 'black',
           alignItems: 'center',
           justifyContent: 'center',
-          justifyContent:"space-evenly"
+          justifyContent: 'space-evenly',
           // borderWidth:1
         }}>
         <View
@@ -167,24 +164,30 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
             width: '95%',
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection:"row",
+            flexDirection: 'row',
             // borderColor: white_color,
-            borderWidth:1
+            borderWidth: 1,
           }}>
-            <TouchableOpacity style={{flexDirection:"row",}}
-            onPress={()=>{navigation.navigate('Try_host')}}
-            
-            >
-
-            <Iconacount name="plus" size={Dimensions.get("screen").height/33} color={white_color} />
-          <Text style={{
-            color:white_color,
-           fontSize:Dimensions.get("screen").height/50,
-           fontWeight:"bold",
-           textDecorationLine:"underline ",
-           margin:3
-          
-          }} >CREATE A NEW LISTING</Text>
+          <TouchableOpacity
+            style={{flexDirection: 'row'}}
+            onPress={() => {
+              navigation.navigate('Try_host');
+            }}>
+            <Iconacount
+              name="plus"
+              size={Dimensions.get('screen').height / 33}
+              color={white_color}
+            />
+            <Text
+              style={{
+                color: white_color,
+                fontSize: Dimensions.get('screen').height / 50,
+                fontWeight: 'bold',
+                textDecorationLine: 'underline ',
+                margin: 3,
+              }}>
+              CREATE A NEW LISTING
+            </Text>
           </TouchableOpacity>
         </View>
         <View
@@ -195,15 +198,23 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
             justifyContent: 'center',
             // borderColor: white_color,
             // borderWidth:1,
-            flexDirection:"row",
-            justifyContent:"flex-start"
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
           }}>
-            <Iconacount name="checkbox-blank" 
-size={Dimensions.get("screen").height/30} color={'#68bc00'} />
-          <Text style={{color:white_color,
-            fontSize:Dimensions.get("screen").height/45,
-            fontWeight:"bold",margin:10
-          }} >Approval Listing</Text>
+          <Iconacount
+            name="checkbox-blank"
+            size={Dimensions.get('screen').height / 30}
+            color={'#68bc00'}
+          />
+          <Text
+            style={{
+              color: white_color,
+              fontSize: Dimensions.get('screen').height / 45,
+              fontWeight: 'bold',
+              margin: 10,
+            }}>
+            Approval Listing
+          </Text>
         </View>
         <View
           style={{
@@ -213,18 +224,23 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
             justifyContent: 'center',
             // borderColor: white_color,
             // borderWidth:1
-            flexDirection:"row",
-            justifyContent:"flex-start"
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
           }}>
-                      <Iconacount name="checkbox-blank" 
-             size={Dimensions.get("screen").height/30} color={'#f44336'} />
-          <Text style={{
-            color:white_color,
-            fontSize:Dimensions.get("screen").height/50,
-            fontWeight:"bold",
-            margin:10
-
-          }} >Panding Approval Listing</Text>
+          <Iconacount
+            name="checkbox-blank"
+            size={Dimensions.get('screen').height / 30}
+            color={'#f44336'}
+          />
+          <Text
+            style={{
+              color: white_color,
+              fontSize: Dimensions.get('screen').height / 50,
+              fontWeight: 'bold',
+              margin: 10,
+            }}>
+            Panding Approval Listing
+          </Text>
         </View>
         <View
           style={{
@@ -233,19 +249,24 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
             alignItems: 'center',
             justifyContent: 'center',
             // borderColor: white_color,
-            borderWidth:1,
-            flexDirection:"row",
-            justifyContent:"flex-start",
-            
+            borderWidth: 1,
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
           }}>
-               <Iconacount name="checkbox-blank" 
-             size={Dimensions.get("screen").height/30} color={'#ffc107'} />
-          <Text style={
-            {color:white_color,
-              fontSize:Dimensions.get("screen").height/50,
-              fontWeight:"bold",
-              margin:10
-          }} >Temproraiiy Panding Approval Listing</Text>
+          <Iconacount
+            name="checkbox-blank"
+            size={Dimensions.get('screen').height / 30}
+            color={'#ffc107'}
+          />
+          <Text
+            style={{
+              color: white_color,
+              fontSize: Dimensions.get('screen').height / 50,
+              fontWeight: 'bold',
+              margin: 10,
+            }}>
+            Temproraiiy Panding Approval Listing
+          </Text>
         </View>
         <View
           style={{
@@ -254,10 +275,8 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
             // alignItems: 'center',
             justifyContent: 'center',
             // borderColor: white_color,
-            borderWidth:1
-          }}>
-         
-        </View>
+            borderWidth: 1,
+          }}></View>
         <View
           style={{
             height: '10%',
@@ -265,12 +284,9 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
             // alignItems: 'center',
             justifyContent: 'center',
             // borderColor: white_color,
-            borderWidth:1
+            borderWidth: 1,
           }}>
-            <TouchableOpacity >
-         
-            </TouchableOpacity>
-    
+          <TouchableOpacity></TouchableOpacity>
         </View>
         <View
           style={{
@@ -279,33 +295,99 @@ size={Dimensions.get("screen").height/30} color={'#68bc00'} />
             alignItems: 'center',
             justifyContent: 'center',
             // borderColor: white_color,
-            borderWidth:1
+            borderWidth: 1,
           }}>
-
-              <TouchableOpacity 
-              onPress={()=>{navigation.navigate('Flatlist2')}}
-              style={{
-                height: '65%',
-                width: '60%',
-                backgroundColor: blue_color,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderColor: white_color,
-                // borderWidth:2,
-                borderRadius:9
-              }}>
-             <Text style={{color:white_color,fontWeight:"bold",fontSize:15}} >SWITCH TO USER</Text>
-              </TouchableOpacity>
-
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Flatlist2');
+            }}
+            style={{
+              height: '65%',
+              width: '60%',
+              backgroundColor: blue_color,
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderColor: white_color,
+              // borderWidth:2,
+              borderRadius: 9,
+            }}>
+            <Text
+              style={{color: white_color, fontWeight: 'bold', fontSize: 15}}>
+              SWITCH TO USER
+            </Text>
+          </TouchableOpacity>
         </View>
-
-
-
       </View>
     </View>
-  )
+  );
+};
 
-}
+export default Hosting;
 
 
-  export default Hosting;
+
+
+
+// .........................
+// message code .....
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import { View, FlatList, TextInput, Button } from 'react-native';
+// import Massage from './Massage';
+// const Hosting = ({navigation, ...props}) => {
+
+
+//   const [messages, setMessages] = useState([]); // State to store messages
+//   const [inputText, setInputText] = useState(''); // State to store input text
+
+//   // Function to handle sending a message
+//   const sendMessage = () => {
+//     if (inputText !== '') {
+//       const newMessage = {
+//         id: Date.now().toString(),
+//         sender: 'user1', // Sender ID or name
+//         content: inputText,
+//         timestamp: new Date().toISOString(), // Timestamp of the message
+//       };
+//       setMessages([...messages, newMessage]); // Add new message to messages state
+//       setInputText(''); // Clear input text
+//     }
+//   };
+//   const delet = ()=>{
+//     setMessages("")
+//   }
+
+//   return (
+//     <View style={{ flex: 1 }}>
+//       {/* Render the list of messages */}
+//       <FlatList
+//         data={messages}
+//         keyExtractor={(item) => item.id}
+//         renderItem={({ item }) => (
+//           < Massage
+//             sender={item.sender}
+//             content={item.content}
+//             timestamp={item.timestamp}
+//             delete={messages}
+//           />
+//         )}
+//       />
+//       {/* Render the input field for sending messages */}
+//       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+//         <TextInput
+//           style={{ flex: 1, padding: 10,backgroundColor:"black" }}
+//           value={inputText}
+//           onChangeText={setInputText}
+//           placeholder="Type a message..."
+//           placeholderTextColor={'black'}
+//         />
+//         <Button title="Send" onPress={sendMessage} />
+//       </View>
+//     </View>
+//   );
+// }
+// export default Hosting;
+// .........................
+// message code .....

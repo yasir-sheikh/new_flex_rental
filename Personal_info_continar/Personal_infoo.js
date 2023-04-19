@@ -81,7 +81,7 @@ const Personal_infoo = ({navigation,...props}) => {
               // source={images}
               source={{
 
-                uri: `https://flexrental.developer-um.xyz/storage/${image_get_redux?.user[0]?.image}`,
+                uri: `https://flexrental.dev-um.xyz/storage/${image_get_redux?.user[0]?.image}`,
 
               }}
               style={{width: '100%', height: '100%', borderRadius: 100}}
@@ -201,7 +201,7 @@ const Personal_infoo = ({navigation,...props}) => {
               // source={images}
               source={{
 
-                uri: `https://flexrental.developer-um.xyz/storage/${image_get_redux?.user[0]?.image}`,
+                uri: `https://flexrental.dev-um.xyz/storage/${image_get_redux?.user[0]?.image}`,
 
               }}
               style={{width: '100%', height: '100%'}}
